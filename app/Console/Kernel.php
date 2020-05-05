@@ -2,8 +2,6 @@
 
 namespace App\Console;
 
-use App\Jobs\ProvidersUpdateFleet;
-use App\Jobs\UpdateRequestCity;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -34,11 +32,6 @@ class Kernel extends ConsoleKernel
 //        $schedule->command('cronjob:providers')
 //                ->everyMinute();
 
-        $schedule->job(new ProvidersUpdateFleet())
-            ->everyMinute();
-
-//        $schedule->job(new UpdateRequestCity())
-//            ->everyMinute();
 
         $schedule->call('App\Http\Controllers\AdminController@DBbackUp')->everyMinute();
     }

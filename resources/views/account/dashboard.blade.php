@@ -8,7 +8,7 @@
 
 @section('content')
 
-<div class="content-area py-1">
+<div>
 <div class="container-fluid">
     	<div class="row row-md">
 			<div class="col-lg-3 col-md-6 col-xs-12">
@@ -68,15 +68,6 @@
 					<div class="t-content">
 						<h6 class="text-uppercase mb-1">Provider Cancelled Count</h6>
 						<h1 class="mb-1">{{$provider_cancelled}}</h1>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-3 col-md-6 col-xs-12">
-				<div class="box box-block bg-white tile tile-1 mb-2">
-					<div class="t-icon right"><span class="bg-warning"></span><i class="ti-rocket"></i></div>
-					<div class="t-content">
-						<h6 class="text-uppercase mb-1">No. of Fleets</h6>
-						<h1 class="mb-1">{{$fleet}}</h1>
 					</div>
 				</div>
 			</div>

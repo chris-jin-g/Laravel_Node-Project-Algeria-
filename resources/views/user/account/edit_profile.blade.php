@@ -28,26 +28,26 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label>@lang('user.profile.first_name')</label>
-                    <input type="text" class="form-control" name="first_name" required placeholder="@lang('user.profile.first_name')" value="{{Auth::user()->first_name}}" data-validation="alphanumeric" data-validation-allowing=" -" data-validation-error-msg="First Name can only contain alphanumeric characters and . - spaces">
+                    <input type="text" class="form-control" name="first_name" required placehold="@lang('user.profile.first_name')" value="{{Auth::user()->first_name}}" data-validation="alphanumeric" data-validation-allowing=" -" data-validation-error-msg="First Name can only contain alphanumeric characters and . - spaces">
                 </div>
                 <div class="form-group col-md-6">
                     <label>@lang('user.profile.last_name')</label>
-                    <input type="text" class="form-control" name="last_name" required placeholder="@lang('user.profile.last_name')" value="{{Auth::user()->last_name}}" data-validation-allowing=" -" data-validation-error-msg="Last Name can only contain alphanumeric characters and . - spaces">
+                    <input type="text" class="form-control" name="last_name" required placehold="@lang('user.profile.last_name')" value="{{Auth::user()->last_name}}" data-validation-allowing=" -" data-validation-error-msg="Last Name can only contain alphanumeric characters and . - spaces">
                 </div>
 
                 <div class="form-group col-md-12">
                     <label>@lang('user.profile.email')</label>
-                    <input type="email" class="form-control" placeholder="@lang('user.profile.email')" readonly value="{{Auth::user()->email}}">
+                    <input type="email" class="form-control" placehold="@lang('user.profile.email')" readonly value="{{Auth::user()->email}}">
                 </div>
 
                 <div class="row no-margin">
                     <div class="prof-sub-col col-sm-6 col-xs-12">
                         <div class="form-group">
                             <label>@lang('user.profile.mobile')</label>
-                            <input type="text" class="form-control" id="phone_number" required placeholder="Contact Number" name="mobile" value="{{ Auth::user()->mobile }}" data-validation="custom length" data-validation-length="10-15" data-validation-regexp="^([0-9\+]+)$" data-validation-error-msg="Incorrect phone number" disabled="disabled">
+                            <input type="text" class="form-control" id="phone_number" required placehold="Contact Number" name="mobile" value="{{ Auth::user()->mobile }}" data-validation="custom length" data-validation-length="10-15" data-validation-regexp="^([0-9\+]+)$" data-validation-error-msg="Incorrect phone number" disabled="disabled">
                             <div id="phone_number_container" style="display: none;">
                                 <div class="prof-sub-col col-sm-3 no-left-padding">
-                                <input type="text" class="form-control col-sm-2"  name="country_code" value="" placeholder="+55" >
+                                <input type="text" class="form-control col-sm-2"  name="country_code" value="" placehold="+55" >
                                 </div>
                                 <div class="prof-sub-col col-sm-9 no-left-padding">
                                 <input type="text" class="form-control col-sm-2"  name="phone_number" value="" >

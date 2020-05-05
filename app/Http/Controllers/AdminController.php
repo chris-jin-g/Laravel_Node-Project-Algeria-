@@ -14,10 +14,8 @@ use App\Http\Controllers\SendPushNotification;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProviderResources\TripController;
 use App\User;
-use App\Fleet;
 use App\Admin;
 use App\Provider;
-use App\FleetCities;
 use App\UserPayment;
 use App\ServiceType;
 use App\UserRequests;
@@ -27,7 +25,6 @@ use App\UserRequestPayment;
 use App\CustomPush;
 use App\AdminWallet;
 use App\ProviderWallet;
-use App\FleetWallet;
 use App\WalletRequests;
 use App\ProviderDocument;
 use ZipArchive;
@@ -86,44 +83,6 @@ class AdminController extends Controller {
         try {
 
             Session::put('user', Auth::User());
-
-            /* $UserRequest = UserRequests::with('service_type')->with('provider')->with('payment')->findOrFail(83);
-
-              echo "<pre>";
-              print_r($UserRequest->toArray());exit;
-
-              return view('emails.invoice',['Email' => $UserRequest]); */
-
-            if($request->has('city')){                
-                $rides = UserRequests::whereHas('user', function ($query) use ($request) {
-                    $query->where('city_id', $request->get('city'));
-                })->orderBy('id', 'desc')->limit(35)->get();
-                
-                $totalRides = UserRequests::whereHas('user', function ($query) use ($request) {
-                    $query->where('city_id', $request->get('city'));
-                })->get()->count();
-                
-                $cancel_rides = UserRequests::whereHas('user', function ($query) use ($request) {
-                    $query->where('city_id', $request->get('city'));
-                })->where('status', 'CANCELLED')->get()->count();
-                
-                $user_cancelled = UserRequests::whereHas('user', function ($query) use ($request) {
-                    $query->where('city_id', $request->get('city'));
-                })->where('status', 'CANCELLED')->where('cancelled_by', 'USER')->get()->count();
-                
-                $provider_cancelled = UserRequests::whereHas('user', function ($query) use ($request) {
-                    $query->where('city_id', $request->get('city'));
-                })->where('status', 'CANCELLED')->where('cancelled_by', 'PROVIDER')->get()->count();
-                
-                $users = User::where('city_id',$request->get('city'))->get()->count();
-                $provider = Provider::where('city_id',$request->get('city'))->get()->count();
-                
-                //Consulta franquia da cidade
-                $FleetCity = Fleet::where("city_id", $request->city)->first();
-                if($FleetCity){
-                    $revenue = UserRequestPayment::where("fleet_id", $FleetCity->id)->sum('total');
-                }
-            }else{
                 $rides = UserRequests::has('user')->orderBy('id', 'desc')->limit(35)->get();
                 $totalRides = UserRequests::has('user')->get()->count();
                 $cancel_rides = UserRequests::where('status', 'CANCELLED');
@@ -132,23 +91,17 @@ class AdminController extends Controller {
                 $provider = Provider::count();
                 $provider_cancelled = UserRequests::where('status', 'CANCELLED')->where('cancelled_by', 'PROVIDER')->count();
                 $revenue = UserRequestPayment::sum('total');
-            }
+            
 
             $scheduled_rides = UserRequests::where('status', 'SCHEDULED')->count();
-            $fleet = Fleet::count();            
-            $fleetCities = DB::table('fleet_cities')
-                ->join('fleets', 'fleets.city_id', '=', 'fleet_cities.city_id')
-                ->select('fleet_cities.*')
-                ->get();
+          
             
             $wallet['tips'] = UserRequestPayment::sum('tips');
             $providers = Provider::take(10)->orderBy('rating', 'desc')->get();
             $wallet['admin'] = AdminWallet::sum('amount');
             $wallet['provider_debit'] = Provider::select(DB::raw('SUM(CASE WHEN wallet_balance<0 THEN wallet_balance ELSE 0 END) as total_debit'))->get()->toArray();
             $wallet['provider_credit'] = Provider::select(DB::raw('SUM(CASE WHEN wallet_balance>=0 THEN wallet_balance ELSE 0 END) as total_credit'))->get()->toArray();
-            $wallet['fleet_debit'] = Fleet::select(DB::raw('SUM(CASE WHEN wallet_balance<0 THEN wallet_balance ELSE 0 END) as total_debit'))->get()->toArray();
-            $wallet['fleet_credit'] = Fleet::select(DB::raw('SUM(CASE WHEN wallet_balance>=0 THEN wallet_balance ELSE 0 END) as total_credit'))->get()->toArray();
-
+            
             $wallet['admin_tax'] = AdminWallet::where('transaction_type', 9)->sum('amount');
             $wallet['admin_commission'] = AdminWallet::where('transaction_type', 1)->sum('amount');
             $wallet['admin_discount'] = AdminWallet::where('transaction_type', 10)->sum('amount');
@@ -157,9 +110,9 @@ class AdminController extends Controller {
             $wallet['peak_commission'] = AdminWallet::where('transaction_type', 14)->sum('amount');
             $wallet['waiting_commission'] = AdminWallet::where('transaction_type', 15)->sum('amount');
 
-            return view('admin.dashboard', compact('providers', 'fleet', 'provider', 'scheduled_rides', 'users', 'fleetCities', 'rides', 'totalRides', 'user_cancelled', 'provider_cancelled', 'cancel_rides', 'revenue', 'wallet'));
+            return view('admin.dashboard', compact('providers', 'provider', 'scheduled_rides', 'users', 'rides', 'totalRides', 'user_cancelled', 'provider_cancelled', 'cancel_rides', 'revenue', 'wallet'));
         } catch (Exception $e) {
-            return redirect()->route('admin.user.index')->with('flash_error', 'Algo correu mal com o Painel!');
+            return redirect()->route('admin.user.index')->with('flash_error', 'Something went wrong with the Dashboard!');
         }
     }
 
@@ -223,7 +176,7 @@ class AdminController extends Controller {
 
             return response()->json(['providers' => $providers, 'locations' => $locations]);
         } catch (Exception $e) {
-            return response()->json(['error' => 'Algo deu errado!']);
+            return response()->json(['error' => 'Something Went Wrong with Dashboard!']);
         }
     }
 
@@ -299,7 +252,7 @@ class AdminController extends Controller {
 					'site_logo' => '',
 					'site_email_logo' => '',
 					'site_icon' => '',
-					'site_copyright' => '© 2019 Moob Urban',
+					'site_copyright' => '© 2019 Thinkin Cab',
 					'provider_select_timeout' => '60',
 					'provider_search_radius' => '100',
 					'base_price' => '50',
@@ -351,9 +304,9 @@ class AdminController extends Controller {
 					'google_client_secret' => '',
 					'cash' => '1',
 					'card' => '0',
-                                        'debit_machine' => '1',
-                                        'menu_skin' => '1',
-                                        'voucher' => '1',
+                    'debit_machine' => '1',
+                    'menu_skin' => '1',
+                    'voucher' => '1',
 					'stripe_secret_key' => '',
 					'stripe_publishable_key' => '',
                     'stripe_currency' => 'USD',
@@ -391,8 +344,7 @@ class AdminController extends Controller {
                     'paytm_industry_type' => 'Retail',
                     'minimum_negative_balance' => '-10',
 					'ride_otp' => '0',
-                                        'ride_toll' => '0',
-					'fleet_commission_percentage' => '0',
+                    'ride_toll' => '0',
 					'provider_commission_percentage' => '0',
 					'per_page' => '10',
 					'send_email' => '0',
@@ -510,7 +462,7 @@ class AdminController extends Controller {
 
         file_put_contents($config, $change_content);
 
-        return back()->with('flash_success', 'Configurações atualizadas com sucesso!');
+        return back()->with('flash_success', 'Settings updated successfully!');
     }
 
     /**
@@ -629,7 +581,7 @@ class AdminController extends Controller {
             //TODO ALLAN - Alterações débito na máquina e voucher
             if (($request->has('cash') == 0 && $request->has('card') == 0) && $request->has('payumoney') == 0 && $request->has('voucher') == 0 && $request->has('debit_machine') == 0 && $request->has('paypal') == 0 && $request->has('paypal_adaptive') == 0 && $request->has('braintree') == 0 && $request->has('paytm') == 0) {
 
-                return back()->with('flash_error', 'Pelo menos um modo de pagamento deve ser ativado.');
+                return back()->with('flash_error', 'At least one payment mode must be enabled.');
             }
         }
 
@@ -660,7 +612,7 @@ class AdminController extends Controller {
 
         file_put_contents($config, $change_content);
 
-        return redirect('/admin/settings/payment')->with('flash_success', 'Configurações atualizadas com sucesso!');
+        return redirect('/admin/settings/payment')->with('flash_success', 'Settings updated successfully!');
     }
 
     /**
@@ -700,9 +652,9 @@ class AdminController extends Controller {
 
             Session::put('user', Auth::User());
 
-            return redirect()->back()->with('flash_success', 'Perfil Atualizado!');
+            return redirect()->back()->with('flash_success', 'Profile Updated!');
         } catch (Exception $e) {
-            return back()->with('flash_error', 'Algo deu errado!');
+            return back()->with('flash_error', 'Something Went Wrong with Dashboard!');
         }
     }
 
@@ -737,10 +689,10 @@ class AdminController extends Controller {
                 $Admin->password = bcrypt($request->password);
                 $Admin->save();
 
-                return redirect()->back()->with('flash_success', 'Senha atualizada!');
+                return redirect()->back()->with('flash_success', 'Password Updated!');
             }
         } catch (Exception $e) {
-            return back()->with('flash_error', 'Algo deu errado!');
+            return back()->with('flash_error', 'Something Went Wrong with Dashboard!');
         }
     }
 
@@ -763,7 +715,7 @@ class AdminController extends Controller {
 
             return view('admin.payment.payment-history', compact('payments', 'pagination'));
         } catch (Exception $e) {
-            return back()->with('flash_error', 'Algo deu errado!');
+            return back()->with('flash_error', 'Something Went Wrong with Dashboard!');
         }
     }
 
@@ -779,7 +731,7 @@ class AdminController extends Controller {
             $Data = json_decode($str, true);
             return view('admin.help', compact('Data'));
         } catch (Exception $e) {
-            return back()->with('flash_error', 'Algo deu errado!');
+            return back()->with('flash_error', 'Something Went Wrong with Dashboard!');
         }
     }
 
@@ -794,7 +746,7 @@ class AdminController extends Controller {
             $pagination = (new Helper)->formatPagination($Reviews);
             return view('admin.review.user_review', compact('Reviews', 'pagination'));
         } catch (Exception $e) {
-            return redirect()->route('admin.setting')->with('flash_error', 'Algo deu errado!');
+            return redirect()->route('admin.setting')->with('flash_error', 'Something Went Wrong with Dashboard!');
         }
     }
 
@@ -809,7 +761,7 @@ class AdminController extends Controller {
             $pagination = (new Helper)->formatPagination($Reviews);
             return view('admin.review.provider_review', compact('Reviews', 'pagination'));
         } catch (Exception $e) {
-            return redirect()->route('admin.setting')->with('flash_error', 'Algo deu errado!');
+            return redirect()->route('admin.setting')->with('flash_error', 'Something Went Wrong with Dashboard!');
         }
     }
 
@@ -824,7 +776,7 @@ class AdminController extends Controller {
             ProviderService::find($id)->delete();
             return back()->with('message', 'Serviço excluído com sucesso!');
         } catch (Exception $e) {
-            return back()->with('flash_error', 'Algo deu errado!');
+            return back()->with('flash_error', 'Something Went Wrong with Dashboard!');
         }
     }
 
@@ -851,7 +803,7 @@ class AdminController extends Controller {
             ProviderService::find($request->id)->delete();
             return back()->with('message', 'Serviço excluído com sucesso!');
         } catch (Exception $e) {
-            return back()->with('flash_error', 'Algo deu errado!');
+            return back()->with('flash_error', 'Something Went Wrong with Dashboard!');
         }
     }
 
@@ -879,7 +831,7 @@ class AdminController extends Controller {
         Setting::set($request->types, $request->get('content'));
         Setting::save();
 
-        return back()->with('flash_success', 'Conteúdo atualizado!');
+        return back()->with('flash_success', 'updated content!');
     }
 
     public function pagesearch($request) {
@@ -897,8 +849,7 @@ class AdminController extends Controller {
         //  print_r($request->all());exit;
         try {
             if ((isset($request->provider_id) && $request->provider_id != null) ||
-                    (isset($request->user_id) && $request->user_id != null) ||
-                    (isset($request->fleet_id) && $request->fleet_id != null)) {
+                    (isset($request->user_id) && $request->user_id != null)) {
                 $pages = trans('admin.include.overall_ride_statments');
                 $listname = trans('admin.include.overall_ride_earnings');
                 if ($type == 'individual') {
@@ -942,30 +893,7 @@ class AdminController extends Controller {
                                     'SUM(total) as overall'
                     ));
                     $page = $user->first_name . " - " . $pages;
-                } else {
-                    $id = $request->fleet_id;
-                    $statement_for = "fleet";
-                    
-                    $Fleet = Fleet::where('id', $id)->first();
-                    
-                    $rides = UserRequests::whereHas('user', function ($query) use ($Fleet) {
-                        $query->where('city_id', $Fleet->city_id);
-                    })->orderBy('id', 'desc');
-
-                    $cancel_rides = UserRequests::whereHas('user', function ($query) use ($Fleet) {
-                        $query->where('city_id', $Fleet->city_id);
-                    })->where('status', 'CANCELLED');
-
-
-                    $revenue = UserRequestPayment::where('fleet_id', $id)
-                        ->select(\DB::raw(
-                            'SUM(total) as overall, SUM(provider_pay) as commission'
-                        ));
-                    
-                    
-                    
-                    $page = $Fleet->name . " - " . $pages;
-                }
+                } 
             } else {
                 $id = '';
                 $statement_for = "";
@@ -1071,7 +999,7 @@ class AdminController extends Controller {
             return view('admin.providers.statement', compact('rides', 'cancel_rides', 'Provider', 'revenue', 'pagination', 'dates', 'id', 'statement_for'))
                             ->with('page', $page)->with('listname', $listname);
         } catch (Exception $e) {
-            return back()->with('flash_error', 'Algo deu errado!');
+            return back()->with('flash_error', 'Something Went Wrong with Dashboard!');
         }
     }
 
@@ -1145,7 +1073,7 @@ class AdminController extends Controller {
 
             return view('admin.providers.provider-statement', compact('Providers', 'pagination'))->with('page', 'Providers Statement');
         } catch (Exception $e) {
-            return back()->with('flash_error', 'Algo deu errado!');
+            return back()->with('flash_error', 'Something Went Wrong with Dashboard!');
         }
     }
 
@@ -1173,35 +1101,7 @@ class AdminController extends Controller {
 
             return view('admin.providers.user-statement', compact('Users', 'pagination'))->with('page', 'Users Statement');
         } catch (Exception $e) {
-            return back()->with('flash_error', 'Algo deu errado!');
-        }
-    }
-
-    public function statement_fleet() {
-
-        try {
-
-            $Fleets = Fleet::paginate($this->perpage);
-
-            $pagination = (new Helper)->formatPagination($Fleets);
-
-            foreach ($Fleets as $index => $Fleet) {
-                
-                $Rides = UserRequests::whereHas('user', function ($query) use ($Fleet) {
-                    $query->where('city_id', $Fleet->city_id);
-                })->get()->pluck('id');
-
-                $Fleets[$index]->rides_count = $Rides->count();
-
-                $Fleets[$index]->payment = UserRequestPayment::where('fleet_id', $Fleet->id)
-                                ->select(\DB::raw(
-                                                'SUM(total) as overall'
-                                ))->get();
-            }
-
-            return view('admin.providers.fleet-statement', compact('Fleets', 'pagination'))->with('page', 'Fleets Statement');
-        } catch (Exception $e) {
-            return back()->with('flash_error', 'Algo deu errado!');
+            return back()->with('flash_error', 'Something Went Wrong with Dashboard!');
         }
     }
 
@@ -1216,7 +1116,7 @@ class AdminController extends Controller {
         try {
             return view('admin.translation');
         } catch (Exception $e) {
-            return back()->with('flash_error', 'Algo deu errado!');
+            return back()->with('flash_error', 'Something Went Wrong with Dashboard!');
         }
     }
 
@@ -1232,7 +1132,7 @@ class AdminController extends Controller {
             $Pushes = CustomPush::orderBy('id', 'desc')->get();
             return view('admin.push', compact('Pushes'));
         } catch (Exception $e) {
-            return back()->with('flash_error', 'Algo deu errado!');
+            return back()->with('flash_error', 'Something Went Wrong with Dashboard!');
         }
     }
 
@@ -1304,9 +1204,9 @@ class AdminController extends Controller {
                 $this->SendCustomPush($CustomPush->id);
             }
 
-            return back()->with('flash_success', 'Mensagem enviada para todos ' . $request->segment);
+            return back()->with('flash_success', 'Message sent to everyone ' . $request->segment);
         } catch (Exception $e) {
-            return back()->with('flash_error', 'Algo deu errado!');
+            return back()->with('flash_error', 'Something Went Wrong with Dashboard!');
         }
     }
 
@@ -1422,7 +1322,7 @@ class AdminController extends Controller {
                 }
             }
         } catch (Exception $e) {
-            return back()->with('flash_error', 'Algo deu errado!');
+            return back()->with('flash_error', 'Something Went Wrong with Dashboard!');
         }
     }
 
@@ -1446,15 +1346,10 @@ class AdminController extends Controller {
 
         $croute = Route::currentRouteName();
 
-        if ($croute == 'admin.fleettransfer')
-            $type = 'fleet';
-        else
             $type = 'provider';
 
         $pendinglist = WalletRequests::where('request_from', $type)->where('status', 0);
-        if ($croute == 'admin.fleettransfer')
-            $pendinglist = $pendinglist->with('fleet');
-        else
+
             $pendinglist = $pendinglist->with('provider');
 
         $pendinglist = $pendinglist->get();
@@ -1510,8 +1405,6 @@ class AdminController extends Controller {
                 ->orWhere('id',$term)
                 ->take(5)
                 ->get();
-        else
-            $queries = Fleet::where('name', 'LIKE', $term . '%')->take(5)->get();
 
         foreach ($queries as $query) {
             $results[] = $query;
@@ -1574,10 +1467,7 @@ class AdminController extends Controller {
     public function transferstore(Request $request) {
 
         try {
-            if ($request->stype == 1)
                 $type = 'provider';
-            else
-                $type = 'fleet';
 
             $nextid = Helper::generate_request_id($type);
 
@@ -1603,7 +1493,7 @@ class AdminController extends Controller {
             //create the settlement transactions
             (new TripController)->settlements($amountRequest->id);
 
-            return back()->with('flash_success', 'Liquidação processada com sucesso!');
+            return back()->with('flash_success', 'Settlement successfully processed!');
         } catch (Exception $e) {
             return back()->with('flash_error', $e->getMessage());
         }
@@ -1655,7 +1545,7 @@ class AdminController extends Controller {
 
         return redirect()
                         ->route('admin.provider.document.index', $id)
-                        ->with('flash_error', 'Falha ao baixar documentos.');
+                        ->with('flash_error', 'Failed to download documents.                        ');
     }
 
     /* DataBase BackUp */

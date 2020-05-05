@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\AdminWallet;
 use App\Card;
-use App\Fleet;
 use App\Helpers\PaytmLibrary;
 use App\Http\Controllers\ProviderResources\TripController;
 use App\Http\Controllers\SendPushNotification;
@@ -120,7 +119,7 @@ class PaymentController extends Controller
                         "currency" => config('constants.stripe_currency'),
                         "customer" => Auth::user()->stripe_cust_id,
                         "card" => $Card->card_id,
-                        "description" => "Pagamento de viagem " . Auth::user()->email,
+                        "description" => "Request Payment" . Auth::user()->email,
                         "receipt_email" => Auth::user()->email,
                     ]);
 
@@ -443,7 +442,7 @@ class PaymentController extends Controller
     }
 
     /**
-     * send money to provider or fleet.
+     * send money to provider.
      *
      * @return \Illuminate\Http\Response
      */
@@ -458,10 +457,6 @@ class PaymentController extends Controller
                 $provider = Provider::find($Requests->from_id);
                 $stripe_cust_id = $provider->stripe_cust_id;
                 $email = $provider->email;
-            } else {
-                $fleet = Fleet::find($Requests->from_id);
-                $stripe_cust_id = $fleet->stripe_cust_id;
-                $email = $fleet->email;
             }
 
             if (empty($stripe_cust_id)) {
@@ -474,9 +469,9 @@ class PaymentController extends Controller
 
             $tranfer = \Stripe\Transfer::create(array(
                 "amount" => $StripeCharge,
-                "currency" => "brl",
+                "currency" => "inr",
                 "destination" => $stripe_cust_id,
-                "description" => "Liquidação de pagamento para " . $email
+                "description" => "Payment Settlement for" . $email
             ));
 
             //create the settlement transactions

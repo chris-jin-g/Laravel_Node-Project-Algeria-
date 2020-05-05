@@ -1,24 +1,27 @@
 <!--//TODO ALLAN - Alterações débito na máquina e voucher-->
 @extends('admin.layout.base')
 
-@section('title', 'Detalhes da Viagem ')
+@section('title', __('admin.request.request_details') )
 
 @section('content')
-<div class="content-area py-1">
+
     <div class="container-fluid">
-        <div class="box box-block bg-white">
-            <h4>@lang('admin.request.request_details')</h4>
+        <div class="card">
+            <div class="card-header card-header-primary">
+                <h4 class="card-title">@lang('admin.request.request_details')</h4>
             <a href="{{ URL::previous() }}" class="btn btn-default pull-right">
                 <i class="fa fa-angle-left"></i> @lang('admin.back')
             </a>
+        </div>
+        <div class="card-body">
             <div class="row">
                 <div class="col-md-6">
                     <dl class="row">
                         <dt class="col-sm-4">@lang('admin.request.Booking_ID')</dt>
                         <dd class="col-sm-8">{{ $request->booking_id }}</dd>
                         
-                        <dt class="col-sm-4">@lang('admin.request.os_id')</dt>
-                        <dd class="col-sm-8">{{ $request->os_id? $request->os_id:'N/A' }}</dd>
+                        {{-- <dt class="col-sm-4">@lang('admin.request.os_id')</dt>
+                        <dd class="col-sm-8">{{ $request->os_id? $request->os_id:'N/A' }}</dd> --}}
 
                         <dt class="col-sm-4">@lang('admin.request.User_Name')</dt>
                         <dd class="col-sm-8">{{ $request->user->first_name }}</dd>
@@ -31,7 +34,7 @@
                         @endif
 
                         <dt class="col-sm-4">@lang('admin.request.total_distance')</dt>
-                        <dd class="col-sm-8">{{ $request->distance ? $request->distance : '0' }}{{$request->unit}}</dd>
+                        <dd class="col-sm-8">{{ $request->distance ? $request->distance : '0' }} {{$request->unit}}</dd>
 
                         @if($request->status == 'SCHEDULED')
                         <dt class="col-sm-4">@lang('admin.request.ride_scheduled_time')</dt>
@@ -97,9 +100,6 @@
                         @endif
                         <dt class="col-sm-4">@lang('admin.request.commission')</dt>
                         <dd class="col-sm-8">{{ currency($request->payment->commision) }}</dd>
-
-                        <dt class="col-sm-4">@lang('admin.request.fleet_commission')</dt>
-                        <dd class="col-sm-8">{{ currency($request->payment->fleet) }}</dd>
 
                         <dt class="col-sm-4">@lang('admin.request.discount_price')</dt>
                         <dd class="col-sm-8">{{ currency($request->payment->discount) }}</dd>
@@ -167,23 +167,23 @@
                         <dt class="col-sm-4">@lang('admin.request.ride_status')</dt>
                         <dd class="col-sm-8">
                             @if($request->status == "COMPLETED")
-                            <span class="tag tag-success">CONCLUÍDA</span>
+                            <span class="tag tag-success">COMPLETED</span>
                             @elseif($request->status == "CANCELLED")
-                            <span class="tag tag-danger">CANCELADA</span>
+                            <span class="tag tag-danger">CANCELLED</span>
                             @elseif($request->status == "ARRIVED")
-                            <span class="tag tag-info">EM ANDAMENTO</span>
+                            <span class="tag tag-info">ARRIVED</span>
                             @elseif($request->status == "SEARCHING")
-                            <span class="tag tag-info">PESQUISANDO</span>
+                            <span class="tag tag-info">SEARCHING</span>
                             @elseif($request->status == "ACCEPTED")
-                            <span class="tag tag-info">MOTORISTA A CAMINHO</span>
+                            <span class="tag tag-info">ACCEPTED</span>
                             @elseif($request->status == "STARTED")
-                            <span class="tag tag-info">VIAGEM INICIADA</span>
+                            <span class="tag tag-info">STARTED</span>
                             @elseif($request->status == "DROPPED")
-                            <span class="tag tag-info">NO DESTINO</span>
+                            <span class="tag tag-info">DROPPED</span>
                             @elseif($request->status == "PICKEDUP")
-                            <span class="tag tag-info">INICIANDO</span>
+                            <span class="tag tag-info">PICKEDUP</span>
                             @elseif($request->status == "SCHEDULED")
-                            <span class="tag tag-info">AGENDADA</span>
+                            <span class="tag tag-info">SCHEDULED</span>
                             @endif
                             <br /> {{ $request->cancel_reason }}
                         </dd>
@@ -230,8 +230,9 @@
                 </div>
             </div>
         </div>
+        </div>
     </div>
-</div>
+
 @endsection
 
 @section('styles')

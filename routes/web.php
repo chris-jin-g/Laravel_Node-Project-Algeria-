@@ -82,24 +82,6 @@ Route::group(['prefix' => 'dispatcher'], function () {
 
 /*
 |--------------------------------------------------------------------------
-| Fleet Authentication Routes
-|--------------------------------------------------------------------------
-*/
-
-
-Route::group(['prefix' => 'fleet'], function () {
-    Route::get('/login', 'FleetAuth\LoginController@showLoginForm');
-    Route::post('/login', 'FleetAuth\LoginController@login');
-    Route::post('/logout', 'FleetAuth\LoginController@logout');
-
-    Route::post('/password/email', 'FleetAuth\ForgotPasswordController@sendResetLinkEmail');
-    Route::post('/password/reset', 'FleetAuth\ResetPasswordController@reset');
-    Route::get('/password/reset', 'FleetAuth\ForgotPasswordController@showLinkRequestForm');
-    Route::get('/password/reset/{token}', 'FleetAuth\ResetPasswordController@showResetForm');
-});
-
-/*
-|--------------------------------------------------------------------------
 | Account Authentication Routes
 |--------------------------------------------------------------------------
 */

@@ -11,11 +11,11 @@
 
 <!--        <div id="first_step">
             <div class="col-md-4">
-                <input value="+55" type="text" placeholder="+55" id="country_code" name="country_code" />
+                <input value="+55" type="text" placehold="+55" id="country_code" name="country_code" />
             </div> 
             
             <div class="col-md-8">
-                <input type="phone" autofocus id="phone_number" class="form-control" placeholder="@lang('provider.signup.enter_phone')" name="phone_number" value="{{ old('phone_number') }}" data-stripe="number" maxlength="11" onkeypress="return isNumberKey(event);"/>
+                <input type="phone" autofocus id="phone_number" class="form-control" placehold="@lang('provider.signup.enter_phone')" name="phone_number" value="{{ old('phone_number') }}" data-stripe="number" maxlength="11" onkeypress="return isNumberKey(event);"/>
             </div>
 
             <div class="col-md-8">
@@ -36,7 +36,7 @@
         <div id="second_step">
             <input value="+55" type="hidden" id="country_code" name="country_code" />
             <div>
-                <input id="fname" type="text" class="form-control" name="first_name" value="{{ old('first_name') }}" placeholder="@lang('provider.profile.first_name')" autofocus data-validation="alphanumeric" data-validation-allowing=" -" data-validation-error-msg="@lang('provider.profile.first_name') can only contain alphanumeric characters and . - spaces">
+                <input id="fname" type="text" class="form-control" name="first_name" value="{{ old('first_name') }}" placehold="@lang('provider.profile.first_name')" autofocus data-validation="alphanumeric" data-validation-allowing=" -" data-validation-error-msg="@lang('provider.profile.first_name') can only contain alphanumeric characters and . - spaces">
                 @if ($errors->has('first_name'))
                     <span class="help-block">
                         <strong>{{ $errors->first('first_name') }}</strong>
@@ -44,7 +44,7 @@
                 @endif
             </div>
             <div>
-                <input id="lname" type="text" class="form-control" name="last_name" value="{{ old('last_name') }}" placeholder="@lang('provider.profile.last_name')"data-validation="alphanumeric" data-validation-allowing=" -" data-validation-error-msg="@lang('provider.profile.last_name') can only contain alphanumeric characters and . - spaces">            
+                <input id="lname" type="text" class="form-control" name="last_name" value="{{ old('last_name') }}" placehold="@lang('provider.profile.last_name')"data-validation="alphanumeric" data-validation-allowing=" -" data-validation-error-msg="@lang('provider.profile.last_name') can only contain alphanumeric characters and . - spaces">            
                 @if ($errors->has('last_name'))
                     <span class="help-block">
                         <strong>{{ $errors->first('last_name') }}</strong>
@@ -52,7 +52,7 @@
                 @endif
             </div>
             <div>
-                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="@lang('provider.signup.email_address')" data-validation="email">            
+                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" placehold="@lang('provider.signup.email_address')" data-validation="email">            
                 @if ($errors->has('email'))
                     <span class="help-block">
                         <strong>{{ $errors->first('email') }}</strong>
@@ -60,16 +60,16 @@
                 @endif
             </div>
 <!--            <div class="col-md-4">
-                <input value="+55" type="text" placeholder="+55" id="country_code" name="country_code" />
+                <input value="+55" type="text" placehold="+55" id="country_code" name="country_code" />
             </div> -->
             
             <div>
-                <input type="phone" id="phone_number" class="form-control form_tel" placeholder="@lang('provider.signup.enter_phone')" name="phone_number" value="{{ old('phone_number') }}" data-stripe="number" maxlength="11" onkeypress="return isNumberKey(event);"/>
+                <input type="phone" id="phone_number" class="form-control form_tel" placehold="@lang('provider.signup.enter_phone')" name="phone_number" value="{{ old('phone_number') }}" data-stripe="number" maxlength="11" onkeypress="return isNumberKey(event);"/>
             </div>
 
             <div>
-                <label class="checkbox"><input type="radio" name="gender" value="MALE" data-validation="required"  data-validation-error-msg="Por favor, selecione um gênero">@lang('provider.signup.male')</label>
-                <label class="checkbox"><input type="radio" name="gender" value="FEMALE" data-validation-error-msg="Por favor, selecione um gênero">@lang('provider.signup.female')</label>
+                <label class="checkbox"><input type="radio" name="gender" value="MALE" data-validation="required"  data-validation-error-msg="Please select a gender">@lang('provider.signup.male')</label>
+                <label class="checkbox"><input type="radio" name="gender" value="FEMALE" data-validation-error-msg="Please select a gender">@lang('provider.signup.female')</label>
                 @if ($errors->has('gender'))
                     <span class="help-block">
                         <strong>{{ $errors->first('gender') }}</strong>
@@ -77,7 +77,7 @@
                 @endif
             </div>                        
             <div>
-                <input id="password" type="password" class="form-control" name="password" placeholder="@lang('provider.signup.password')" data-validation="length" data-validation-length="min6" data-validation-error-msg="Password should not be less than 6 characters">
+                <input id="password" type="password" class="form-control" name="password" placehold="@lang('provider.signup.password')" data-validation="length" data-validation-length="min6" data-validation-error-msg="Password should not be less than 6 characters">
 
                 @if ($errors->has('password'))
                     <span class="help-block">
@@ -86,7 +86,7 @@
                 @endif
             </div>    
             <div>
-                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="@lang('provider.signup.confirm_password')" data-validation="confirmation" data-validation-confirm="password" data-validation-error-msg="Confirm Passsword is not matched">
+                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placehold="@lang('provider.signup.confirm_password')" data-validation="confirmation" data-validation-confirm="password" data-validation-error-msg="Confirm Passsword is not matched">
 
                 @if ($errors->has('password_confirmation'))
                     <span class="help-block">
@@ -96,7 +96,7 @@
             </div>  
             @if (config('constants.paypal_adaptive') == 1)
             <div>
-                <input id="service-model" type="text" class="form-control" name="paypal_email" value="{{ old('paypal_email') }}" placeholder="@lang('provider.profile.paypal_email')" data-validation="email">
+                <input id="service-model" type="text" class="form-control" name="paypal_email" value="{{ old('paypal_email') }}" placehold="@lang('provider.profile.paypal_email')" data-validation="email">
                 
                 @if ($errors->has('paypal_email'))
                     <span class="help-block">
@@ -123,7 +123,7 @@
                 @endif
             </div>
             <div>
-                <input id="service-number" type="text" class="form-control" name="service_number" value="{{ old('service_number') }}" placeholder="@lang('provider.profile.car_number')" data-validation="alphanumeric" data-validation-allowing=" -" data-validation-error-msg="@lang('provider.profile.car_number') can only contain alphanumeric characters and - spaces">
+                <input id="service-number" type="text" class="form-control" name="service_number" value="{{ old('service_number') }}" placehold="@lang('provider.profile.car_number')" data-validation="alphanumeric" data-validation-allowing=" -" data-validation-error-msg="@lang('provider.profile.car_number') can only contain alphanumeric characters and - spaces">
                 
                 @if ($errors->has('service_number'))
                     <span class="help-block">
@@ -132,7 +132,7 @@
                 @endif
             </div>
             <div>
-                <input id="service-model" type="text" class="form-control" name="service_model" value="{{ old('service_model') }}" placeholder="@lang('provider.profile.car_model')" data-validation="alphanumeric" data-validation-allowing=" -" data-validation-error-msg="@lang('provider.profile.car_model') can only contain alphanumeric characters and - spaces">
+                <input id="service-model" type="text" class="form-control" name="service_model" value="{{ old('service_model') }}" placehold="@lang('provider.profile.car_model')" data-validation="alphanumeric" data-validation-allowing=" -" data-validation-error-msg="@lang('provider.profile.car_model') can only contain alphanumeric characters and - spaces">
                 
                 @if ($errors->has('service_model'))
                     <span class="help-block">
@@ -142,7 +142,7 @@
             </div>
             @if(config('constants.referral') == 1)
                 <div>
-                    <input type="text" placeholder="Referral Code (Optional)" class="form-control" name="referral_code" >
+                    <input type="text" placehold="Referral Code (Optional)" class="form-control" name="referral_code" >
 
                     @if ($errors->has('referral_code'))
                         <span class="help-block">
@@ -231,7 +231,7 @@
     }
     else if (response.status === "NOT_AUTHENTICATED") {
       // handle authentication failure
-      $('#mobile_verfication').html("<p class='helper'> * Falha na autenticação </p>");
+      $('#mobile_verfication').html("<p class='helper'> * Authentication failed </p>");
     }
     else if (response.status === "BAD_PARAMS") {
       // handle bad parameters

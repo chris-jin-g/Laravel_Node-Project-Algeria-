@@ -9,21 +9,6 @@
         <div class="side-menu">
              <ul>
                 <li><a href="{{url('dashboard')}}">@lang('user.dashboard')</a></li>
-                <!-- <li class="dropdown"><a class="dropdown-toggle">@lang('user.profile.settings')</a>
-                  <ul class="dropdown-menu">
-                      <li><a href="#">Home</a></li>
-                      <li><a href="#">Last Destination</a></li>
-                      <li><a style="background-color: black;color: #fff;">Choose Language</a>
-                              <ul >
-                                  <li><a><input type="radio" name="lange" value="en"> ENGLISH</a></li>
-                                  <li><a><input type="radio" name="lange" value="ar"> AERABIC</a></li>
-                                  <li><a><input type="radio" name="lange" value="fr"> FRENCH</a></li>
-                                  <li><a><input type="radio" name="lange" value="pr"> PORTUGESE</a></li>
-                              </ul>
-                      </li>
-                  </ul>
-
-                </li> -->
                 <li><a href="{{ url('/notifications') }}">@lang('user.notifications')</a></li>
                 <li><a href="{{url('trips')}}">@lang('user.my_trips')</a></li>
                 <li><a href="{{url('upcoming/trips')}}">@lang('user.upcoming_trips')</a></li>

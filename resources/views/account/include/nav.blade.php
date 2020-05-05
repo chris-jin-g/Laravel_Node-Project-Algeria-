@@ -27,30 +27,6 @@
 					<span class="s-text">@lang('admin.include.user_statement')</span>
 				</a>
 			</li>
-			<li>
-				<a href="{{ route('account.ride.statement.fleet') }}" class="waves-effect waves-light">
-					<span class="s-icon"><i class="ti-target"></i></span>
-					<span class="s-text">@lang('admin.include.fleet_statement')</span>
-				</a>
-			</li>
-			<!-- <li>
-				<a href="{{ route('account.ride.statement.today') }}" class="waves-effect waves-light">
-					<span class="s-icon"><i class="ti-target"></i></span>
-					<span class="s-text">@lang('admin.include.daily_statement')</span>
-				</a>
-			</li>
-			<li>
-				<a href="{{ route('account.ride.statement.monthly') }}" class="waves-effect waves-light">
-					<span class="s-icon"><i class="ti-target"></i></span>
-					<span class="s-text">@lang('admin.include.monthly_statement')</span>
-				</a>
-			</li>
-			<li>
-				<a href="{{ route('account.ride.statement.yearly') }}" class="waves-effect waves-light">
-					<span class="s-icon"><i class="ti-target"></i></span>
-					<span class="s-text">@lang('admin.include.yearly_statement')</span>
-				</a>
-			</li> -->
 			<li class="menu-title">@lang('admin.include.account')</li>
 			<li>
 				<a href="{{ route('account.profile') }}" class="waves-effect  waves-light">

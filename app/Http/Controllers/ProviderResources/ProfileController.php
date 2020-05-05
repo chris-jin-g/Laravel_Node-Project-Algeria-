@@ -21,8 +21,6 @@ use App\Provider;
 use App\ProviderProfile;
 use App\UserRequests;
 use App\ProviderService;
-use App\Fleet;
-use App\FleetCities;
 use App\RequestFilter;
 use App\Document;
 use App\Reason;
@@ -57,7 +55,6 @@ class ProfileController extends Controller
             Auth::user()->service = ProviderService::where('provider_id',Auth::user()->id)
                                             ->with('service_type')
                                             ->first();
-            Auth::user()->fleet = Fleet::find(Auth::user()->fleet);
             Auth::user()->currency = config('constants.currency', '$');
             Auth::user()->sos = config('constants.sos_number', '911');
             Auth::user()->measurement = config('constants.distance', 'Kms');
@@ -134,7 +131,6 @@ class ProfileController extends Controller
         $this->validate($request, [
                 'first_name' => 'required|max:255',
                 'last_name' => 'required|max:255',
-                'cpf' => 'max:255',
                 'avatar' => 'mimes:jpeg,bmp,png',
                 'language' => 'max:255',
                 'address' => 'max:255',
@@ -154,9 +150,6 @@ class ProfileController extends Controller
             if($request->has('last_name'))
                 $Provider->last_name = $request->last_name;
 
-            if($request->has('cpf'))
-                $Provider->cpf = $request->cpf;
-
             if ($request->has('mobile'))
             {
                 $Provider->mobile = $request->mobile;
@@ -166,14 +159,6 @@ class ProfileController extends Controller
 					"country_code":'.'"'.$request->country_code.'"'.',
 					"phone_number":'.'"'.$request->mobile.'"'.'
 					}');
-                // $file=QrCode::format('png')->size(200)->margin(20)->phoneNumber($request->country_code.$request->mobile);
-                 
-                //Registra motorista na franquia se existir na cidade informada
-                $FleetCities = FleetCities::where('city_id', $Provider->city_id)->first();
-                if($FleetCities->city_id){
-                   $Provider->fleet = $FleetCities->fleet_id;
-                }
-                 
                 $fileName = Helper::upload_qrCode($request->mobile,$file);
                 $Provider->qrcode_url = $fileName;
             }
@@ -258,7 +243,6 @@ class ProfileController extends Controller
         $this->validate($request, [
                 'first_name' => 'required|max:255',
                 'last_name' => 'required|max:255',
-                'cpf' => 'max:255',
                 'avatar' => 'mimes:jpeg,bmp,png',
                 'language' => 'max:255',
                 'address' => 'max:255',
@@ -277,9 +261,6 @@ class ProfileController extends Controller
 
             if($request->has('last_name'))
                 $Provider->last_name = $request->last_name;
-
-            if($request->has('cpf'))
-                $Provider->cpf = $request->cpf;
 
             if ($request->has('mobile') && $request->mobile != null)
                 $Provider->mobile = $request->mobile;

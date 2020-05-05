@@ -10,7 +10,7 @@
     <meta name="author" content="">
 
     <!-- Title -->
-    <title>{{ config('constants.site_title', 'Moob Urban') }}</title>
+    <title>{{ config('constants.site_title', 'Thinkin Cab') }}</title>
     <link rel="shortcut icon" type="image/png" href="{{ config('constants.site_icon') }}"/>
 
     <!-- Vendor CSS -->
@@ -43,18 +43,8 @@
         <script type="text/javascript" src="{{asset('main/vendor/jquery/jquery-1.12.3.min.js')}}"></script>
         <script type="text/javascript" src="{{asset('main/vendor/tether/js/tether.min.js')}}"></script>
         <script type="text/javascript" src="{{asset('main/vendor/bootstrap4/js/bootstrap.min.js')}}"></script>
-<!--        @if(Setting::get('demo_mode', 0) == 1)
-             Start of LiveChat (www.livechatinc.com) code 
-            <script type="text/javascript">
-                window.__lc = window.__lc || {};
-                window.__lc.license = 8256261;
-                (function() {
-                    var lc = document.createElement('script'); lc.type = 'text/javascript'; lc.async = true;
-                    lc.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.livechatinc.com/tracking.js';
-                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(lc, s);
-                })();
-            </script>
-             End of LiveChat code 
-        @endif-->
+        @if(Setting::get('demo_mode', 0) == 1)
+            {{-- you can add the chat support here --}}
+        @endif
     </body>
 </html>

@@ -15,7 +15,6 @@ use App\Provider;
 use App\ServiceType;
 use App\ProviderService;
 use App\ProviderDocument;
-use App\Fleet;
 use App\Helpers\Helper;
 
 class ProviderDocumentResource extends Controller
@@ -38,10 +37,8 @@ class ProviderDocumentResource extends Controller
             $backurl=$request->session()->get('providerpage');
             $Provider = Provider::findOrFail($provider);
             $ProviderService = ProviderService::where('provider_id',$provider)->with('service_type')->get();
-            $ProviderFleet = Fleet::where("city_id", $Provider->city_id)->first();
-            //            $ServiceTypes = ServiceType::all();
-            $ServiceTypes = ServiceType::where('fleet_id', $Provider->fleet)->get();
-            return view('admin.providers.document.index', compact('Provider', 'ServiceTypes','ProviderService', 'ProviderFleet', 'backurl'));
+
+            return view('admin.providers.document.index', compact('Provider', 'ServiceTypes','ProviderService', 'backurl'));
         } catch (ModelNotFoundException $e) {
             return redirect()->route('admin.index');
         }
@@ -84,18 +81,8 @@ class ProviderDocumentResource extends Controller
                     ]);
             }else{
                 $Provider = Provider::where('id', $provider)->first();
-                $ProviderFleet = ServiceType::where('id', $request->service_type)->where('fleet_id', $Provider->fleet)->first();
-                if($ProviderFleet){
-                     ProviderService::create([
-                        'provider_id' => $provider,
-                        'service_type_id' => $request->service_type,
-                        'status' => 'active',
-                        'service_number' => $request->service_number,
-                        'service_model' => $request->service_model,
-                    ]);
-                }else{
-                    return redirect()->route('admin.provider.document.index', $provider)->with('flash_error', "O serviço não pertence a cidade de cadastro do motorista. Por favor, selecione um serviço da mesma franquia do motorista.");
-                }
+                    return redirect()->route('admin.provider.document.index', $provider)->with('flash_error', "The service does not belong to the driver's registration city. Please select a service.");
+                
             }
             
 
@@ -104,18 +91,7 @@ class ProviderDocumentResource extends Controller
 
         } catch (ModelNotFoundException $e) {
             $Provider = Provider::where('id', $provider)->first();
-            $ProviderFleet = ServiceType::where('id', $request->service_type)->where('fleet_id', $Provider->fleet)->first();
-                if($ProviderFleet){
-                     ProviderService::create([
-                    'provider_id' => $provider,
-                    'service_type_id' => $request->service_type,
-                    'status' => 'offline',
-                    'service_number' => $request->service_number,
-                    'service_model' => $request->service_model,
-                ]);
-                }else{
-                    return redirect()->route('admin.provider.document.index', $provider)->with('flash_error', "O serviço não pertence a cidade de cadastro do motorista. Por favor, selecione um serviço da mesma franquia do motorista.");
-                }
+
         }
 
         return redirect()->route('admin.provider.document.index', $provider)->with('flash_success', trans('admin.provider_msgs.provider_service_update'));

@@ -49,13 +49,13 @@
                         <div class="clearfix form-row">
                             <div class="form-group col-md-10">
                                 <label for="exampleInputEmail1">E-mail</label>
-                                <input type="email" class="form-control" id="inviteEmail" aria-describedby="emailHelp" placeholder="Infome seu E-mail">
+                                <input type="email" class="form-control" id="inviteEmail" aria-describedby="emailHelp" placehold="Infome seu E-mail">
                             </div>
                         </div>
                         <div class="form-row clearfix">
                             <div class="form-group col-md-4">
                                 <label for="exampleInputEmail1"></label>
-                                <a id="invite" href="mailto:testmail?subject=Convido você se juntar ao {{config('constants.site_title','Moob Urban')}}&body=Hi,%0A%0A Eu participo deste site e achei que você poderia gostar. Use meu código de referência({{\Auth::user()->referral_unique_id}}) e faça seu cadastro.%0A%0A Site: {{url('/')}}/provider/login %0A Código Referência: {{\Auth::user()->referral_unique_id}}" class="btn btn-invite">Convidar</a> 
+                                <a id="invite" href="mailto:testmail?subject=Convido você se juntar ao {{config('constants.site_title','Thinkin Cab')}}&body=Hi,%0A%0A Eu participo deste site e achei que você poderia gostar. Use meu código de referência({{\Auth::user()->referral_unique_id}}) e faça seu cadastro.%0A%0A Site: {{url('/')}}/provider/login %0A Código Referência: {{\Auth::user()->referral_unique_id}}" class="btn btn-invite">Convidar</a> 
                             </div>
                         </div>
                     </form>

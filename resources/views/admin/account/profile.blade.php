@@ -1,33 +1,36 @@
 @extends('admin.layout.base')
 
-@section('title', 'Atualizar Perfil ')
+@section('title', __('admin.account.update_profile'))
 
 @section('content')
 
-<div class="content-area py-1">
+<div>
     <div class="container-fluid">
-        <div class="box box-block bg-white">
-
-            <h5 style="margin-bottom: 2em;">@lang('admin.account.update_profile')</h5>
-
+        <div class="card">
+            <div class="card-header card-header-primary">
+              <h4 class="card-title pull-left">@lang('admin.account.update_profile')</h4>
+                <a href="{{ URL::previous() }}" class="btn pull-right"><i
+                    class="fa fa-angle-left"></i> @lang('admin.back')</a>
+            </div>
+            <div class="card-body">
             <form class="form-horizontal" action="{{route('admin.profile.update')}}" method="POST" enctype="multipart/form-data" role="form">
                 {{csrf_field()}}
 
-                <div class="form-group row">
-                    <label for="name" class="col-xs-2 col-form-label">@lang('admin.name')</label>
+                <div class="form-group">
+                    <label for="name" class="bmd-label-floating">@lang('admin.name')</label>
                     <div class="col-xs-10">
-                        <input class="form-control" type="text" value="{{ Auth::guard('admin')->user()->name }}" name="name" required id="name" placeholder=" @lang('admin.name')">
+                        <input class="form-control" type="text" value="{{ Auth::guard('admin')->user()->name }}" name="name" required id="name" placehold=" @lang('admin.name')">
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label for="email" class="col-xs-2 col-form-label">@lang('admin.email')</label>
+                <div class="form-group">
+                    <label for="email" class="bmd-label-floating">@lang('admin.email')</label>
                     <div class="col-xs-10">
-                        <input class="form-control" type="email" required name="email" value="{{ isset(Auth::guard('admin')->user()->email) ? Auth::guard('admin')->user()->email : '' }}" id="email" placeholder="@lang('admin.email')">
+                        <input class="form-control" type="email" required name="email" value="{{ isset(Auth::guard('admin')->user()->email) ? Auth::guard('admin')->user()->email : '' }}" id="email" placehold="@lang('admin.email')">
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label class="col-xs-2 col-form-label">@lang('user.profile.language')</label>
+                <div class="form-group">
+                    <label class="bmd-label-floating">@lang('user.profile.language')</label>
                     <div class="col-xs-10">
                         @php($language=get_all_language())
                         <select class="form-control" name="language" id="language">
@@ -37,8 +40,8 @@
                         </select>
                     </div>    
                 </div>
-                <div class="form-group row">
-                    <label for="picture" class="col-xs-2 col-form-label">@lang('admin.picture')</label>
+                <div class="input-group row">
+                    <label for="picture" class="bmd-label-floating">@lang('admin.picture')</label>
                     <div class="col-xs-10">
                         @if(isset(Auth::guard('admin')->user()->picture))
                         <img style="height: 90px; margin-bottom: 15px; border-radius:2em;" src="{{Auth::guard('admin')->user()->picture}}">
@@ -47,8 +50,8 @@
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label for="zipcode" class="col-xs-2 col-form-label"></label>
+                <div class="form-group">
+                    <label for="zipcode" class="bmd-label-floating"></label>
                     <div class="col-xs-10">
                         <button type="submit" class="btn btn-primary">@lang('admin.account.update_profile')</button>
                     </div>

@@ -13,7 +13,6 @@ use Exception;
 use \Carbon\Carbon;
 
 use App\User;
-use App\Fleet;
 use App\Account;
 use App\Provider;
 use App\UserPayment;
@@ -55,11 +54,10 @@ class AccountController extends Controller
             $provider_cancelled = $cancel_rides->where('cancelled_by','PROVIDER')->count();
             $cancel_rides = $cancel_rides->count();
             $service = ServiceType::count();
-            $fleet = Fleet::count();
             $revenue = UserRequestPayment::sum('total');
             $providers = Provider::take(10)->orderBy('rating','desc')->get();
 
-            return view('account.dashboard',compact('providers','fleet','scheduled_rides','service','rides','user_cancelled','provider_cancelled','cancel_rides','revenue'));
+            return view('account.dashboard',compact('providers','scheduled_rides','service','rides','user_cancelled','provider_cancelled','cancel_rides','revenue'));
         }
         catch(Exception $e){
             return redirect()->route('account.user.index')->with('flash_error', trans('admin.something_wrong_dashboard'));
@@ -359,30 +357,4 @@ class AccountController extends Controller
         }
     }
 
-    public function statement_fleet(){
-
-        try{
-
-            $Fleets = Fleet::paginate($this->perpage);
-
-            $pagination=(new Helper)->formatPagination($Fleets);
-
-            foreach($Fleets as $index => $Fleet){
-
-                $Rides = UserRequestPayment::where('fleet_id',$Fleet->id)->get()->pluck('id');
-
-                $Fleets[$index]->rides_count = $Rides->count();
-
-                $Fleets[$index]->payment = UserRequestPayment::where('fleet_id', $Fleet->id)
-                                ->select(\DB::raw(
-                                   'SUM(fleet) as overall' 
-                                ))->get();                                  
-            }
-
-            return view('account.providers.fleet-statement', compact('Fleets','pagination'))->with('page','Fleets Statement');
-
-        } catch (Exception $e) {
-            return back()->with('flash_error','Something Went Wrong!');
-        }
-    }
 }

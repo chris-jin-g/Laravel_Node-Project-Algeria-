@@ -1,7 +1,7 @@
 @extends('admin.layout.base')
 <!-- @section('title', 'Dispatcher ') -->
 @section('content')
-<div class="content-area py-1">
+<div>
     <div class="container-fluid">
         <h4>Dispatcher</h4>
         <div class="dispatch-head">
@@ -9,7 +9,7 @@
                 <button class="navbar-toggler hidden-md-up" data-toggle="collapse" data-target="#process-filters" aria-controls="process-filters" aria-expanded="false" aria-label="Toggle Navigation"></button>
                 <form class="form-inline navbar-item ml-1 float-xs-right">
                     <div class="input-group">
-                        <input type="text" class="form-control b-a" placeholder="Search for...">
+                        <input type="text" class="form-control b-a" placehold="Search for...">
                         <span class="input-group-btn">
                         		<button type="submit" class="btn btn-primary b-a"><i class="ti-search"></i></button>
                         	</span>
@@ -42,43 +42,43 @@
                                 <div class="col-xs-6">
                                 <div class="form-group">
                                 <label for="first_name">First Name</label>
-                                <input type="text" class="form-control" name="first_name" id="first_name" placeholder="First Name" required="">
+                                <input type="text" class="form-control" name="first_name" id="first_name" placehold="First Name" required="">
                             </div>
                         </div>
                         <div class="col-xs-6">
                             <div class="form-group">
                                 <label for="last_name">Last Name</label>
-                                <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Last Name" required="">
+                                <input type="text" class="form-control" name="last_name" id="last_name" placehold="Last Name" required="">
                             </div>
                         </div>
                         <div class="col-xs-6">
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    <input type="email" class="form-control" name="email" id="email" placeholder="Email" required="">
+                                    <input type="email" class="form-control" name="email" id="email" placehold="Email" required="">
                                 </div>
                             </div>
                             <div class="col-xs-6">
                                 <div class="form-group">
                                     <label for="mobile">Phone</label>
-                                    <input type="text" class="form-control" name="mobile" id="mobile" placeholder="Phone" required="">
+                                    <input type="text" class="form-control" name="mobile" id="mobile" placehold="Phone" required="">
                                 </div>
                             </div>
                             <div class="col-xs-12">
                                 <div class="form-group">
                                     <label for="s_address">Pickup Address</label>
-                                    <input type="text" name="s_address" class="form-control" id="s_address" placeholder="Pickup Address" required="" autocomplete="off">
+                                    <input type="text" name="s_address" class="form-control" id="s_address" placehold="Pickup Address" required="" autocomplete="off">
                                     <input type="hidden" name="s_latitude" id="s_latitude" value="">
                                     <input type="hidden" name="s_longitude" id="s_longitude" value=""></div>
                                     <div class="form-group">
                                         <label for="d_address">Dropoff Address</label>
-                                        <input type="text" name="d_address" class="form-control" id="d_address" placeholder="Dropoff Address" required="" autocomplete="off">
+                                        <input type="text" name="d_address" class="form-control" id="d_address" placehold="Dropoff Address" required="" autocomplete="off">
                                         <input type="hidden" name="d_latitude" id="d_latitude" value="">
                                         <input type="hidden" name="d_longitude" id="d_longitude" value="">
                                         <input type="hidden" name="distance" id="distance" value="">
                                     </div>
                                     <div class="form-group">
                                         <label for="schedule_time">Schedule Date</label>
-                                        <input type="text" class="form-control" id="datepicker-autoclose" placeholder="mm/dd/yyyy">
+                                        <input type="text" class="form-control" id="datepicker-autoclose" placehold="mm/dd/yyyy">
 
                                     </div>
                                     <div class="form-group">

@@ -64,12 +64,6 @@ class PermissionTableSeeder extends Seeder
             ['name' => 'dispatcher-edit', 'display_name' => 'Edit Dispatcher', 'guard_name' => 'admin', 'group_name' => 'Dispatcher'],
             ['name' => 'dispatcher-delete', 'display_name' => 'Delete Dispatcher', 'guard_name' => 'admin', 'group_name' => 'Dispatcher'],
 
-            ['name' => 'fleet-list', 'display_name' => 'Fleet Owner list', 'guard_name' => 'admin', 'group_name' => 'Fleet Owner'],
-            ['name' => 'fleet-create', 'display_name' => 'Create Fleet Owner', 'guard_name' => 'admin', 'group_name' => 'Fleet Owner'],
-            ['name' => 'fleet-edit', 'display_name' => 'Edit Fleet Owner', 'guard_name' => 'admin', 'group_name' => 'Fleet Owner'],
-            ['name' => 'fleet-delete', 'display_name' => 'Delete Fleet Owner', 'guard_name' => 'admin', 'group_name' => 'Fleet Owner'],
-            ['name' => 'fleet-providers', 'display_name' => 'Fleet Owner\'s Providers list', 'guard_name' => 'admin', 'group_name' => 'Fleet Owner'],
-
             ['name' => 'account-manager-list', 'display_name' => 'Account Manager list', 'guard_name' => 'admin', 'group_name' => 'Account Manager'],
             ['name' => 'account-manager-create', 'display_name' => 'Create Account Manager', 'guard_name' => 'admin', 'group_name' => 'Account Manager'],
             ['name' => 'account-manager-edit', 'display_name' => 'Edit Account Manager', 'guard_name' => 'admin', 'group_name' => 'Account Manager'],
@@ -168,14 +162,6 @@ class PermissionTableSeeder extends Seeder
         foreach ($admin_permissions as $admin_permission) {
             $permission[] = $admin_permission->id;
         }
-
-
-        $fleet = Role::where('name', 'FLEET')->first();
-
-        $fleet->permissions()->detach();
-
-        $fleet->permissions()->attach( $permission );
-
 
         $dispatcher = Role::where('name', 'DISPATCHER')->first();
 

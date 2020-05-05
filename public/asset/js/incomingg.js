@@ -276,10 +276,10 @@ class TripArrivedButton extends React.Component {
         }
         var textareahtml=[];
         if(optionshtml.length>0){
-            textareahtml.push(<textarea className="form-control cancel_hide" id="cancel_text" name="cancel_reason1" placeholder="Cancel Reason"></textarea>);
+            textareahtml.push(<textarea className="form-control cancel_hide" id="cancel_text" name="cancel_reason1" placehold="Cancel Reason"></textarea>);
         }
         else{
-            textareahtml.push(<textarea className="form-control" id="cancel_text" name="cancel_reason1" placeholder="Cancel Reason"></textarea>);
+            textareahtml.push(<textarea className="form-control" id="cancel_text" name="cancel_reason1" placehold="Cancel Reason"></textarea>);
         }        
         return (
             <div>
@@ -339,10 +339,10 @@ class TripPickedButton extends React.Component {
         }
         var textareahtml=[];
         if(optionshtml.length>0){
-            textareahtml.push(<textarea className="form-control cancel_hide" id="cancel_text" name="cancel_reason1" placeholder="Cancel Reason"></textarea>);
+            textareahtml.push(<textarea className="form-control cancel_hide" id="cancel_text" name="cancel_reason1" placehold="Cancel Reason"></textarea>);
         }
         else{
-            textareahtml.push(<textarea className="form-control" id="cancel_text" name="cancel_reason1" placeholder="Cancel Reason"></textarea>);
+            textareahtml.push(<textarea className="form-control" id="cancel_text" name="cancel_reason1" placehold="Cancel Reason"></textarea>);
         } 
         var otp=[];
         //   console.log(this.props);
@@ -459,7 +459,7 @@ class TripRatingButton extends React.Component {
                         <input type="hidden" value="1" id="rateip" name="rating" className="rating" />
                     </div>
                     <label>Your Comments</label>
-                    <textarea className="form-control" id="ratecmt" name="comment" placeholder="Write Comment" />
+                    <textarea className="form-control" id="ratecmt" name="comment" placehold="Write Comment" />
                 </div>
                 <button type="submit" className="full-primary-btn fare-btn" onClick={this._submit.bind(this)}>SUBMIT REVIEW</button>   
             </div>

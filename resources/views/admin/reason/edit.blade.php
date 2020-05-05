@@ -3,35 +3,36 @@
 @section('title', 'Atualizar Motivo de Cancelamento ')
 
 @section('content')
-<div class="content-area py-1">
+
     <div class="container-fluid">
-    	<div class="box box-block bg-white">
-    	    <a href="{{ URL::previous() }}" class="btn btn-default pull-right"><i class="fa fa-angle-left"></i> @lang('admin.back')</a>
-
-			<h5 style="margin-bottom: 2em;">@lang('admin.reason.update_reason')</h5>
-
+    	<div class="card">
+            <div class="card-header card-header-primary">
+              <h5 class="card-title">@lang('admin.reason.update_reason')</h5>
+              <a href="{{ URL::previous() }}" class="btn btn-default pull-right"><i class="fa fa-angle-left"></i> @lang('admin.back')</a>
+            </div>
+            <div class="card-body">
             <form class="form-horizontal" action="{{route('admin.reason.update', $reason->id )}}" method="POST" enctype="multipart/form-data" role="form">
             	{{csrf_field()}}
             	<input type="hidden" name="_method" value="PATCH">
-				<div class="form-group row">
-					<label for="type" class="col-xs-2 col-form-label">@lang('admin.reason.type')</label>
+				<div class="form-group">
+					<label for="type" class="bmd-label-floating">@lang('admin.reason.type')</label>
 					<div class="col-xs-10">
 						<select class="form-control" name="type" id="type">
-							<option value="USER" @if($reason->type=='USER')selected @endif>PASSAGEIRO</option>
-							<option value="PROVIDER" @if($reason->type=='PROVIDER')selected @endif>MOTORISTA</option>
+							<option value="USER" @if($reason->type=='USER')selected @endif>User</option>
+							<option value="PROVIDER" @if($reason->type=='PROVIDER')selected @endif>Driver</option>
 						</select>
 					</div>
 				</div>
 				
-				<div class="form-group row">
-					<label for="reason" class="col-xs-2 col-form-label">@lang('admin.reason.reason')</label>
+				<div class="form-group">
+					<label for="reason" class="bmd-label-floating">@lang('admin.reason.reason')</label>
 					<div class="col-xs-10">
-						<input class="form-control" autocomplete="off"  type="text" value="{{ $reason->reason }}" name="reason" required id="reason" placeholder="@lang('admin.reason.reason')">
+						<input class="form-control" autocomplete="off"  type="text" value="{{ $reason->reason }}" name="reason" required id="reason" placehold="@lang('admin.reason.reason')">
 					</div>
 				</div>
 				
-				<div class="form-group row">
-					<label for="max_amount" class="col-xs-2 col-form-label">@lang('admin.reason.status')</label>
+				<div class="form-group">
+					<label for="max_amount" class="bmd-label-floating">@lang('admin.reason.status')</label>
 					<div class="col-xs-10">
 						<select class="form-control" name="status" id="status">
 							<option value="1" @if($reason->status==1)selected @endif>Ativo</option>
@@ -42,8 +43,8 @@
 
 
 				
-				<div class="form-group row">
-					<label for="" class="col-xs-2 col-form-label"></label>
+				<div class="form-group">
+					<label for="" class="bmd-label-floating"></label>
 					<div class="col-xs-10">
 						<button type="submit" class="btn btn-primary">@lang('admin.reason.update_reason')</button>
 						<a href="{{route('admin.reason.index')}}" class="btn btn-default">@lang('admin.cancel')</a>

@@ -39,7 +39,7 @@
                                                 <div class="form-group">
                                                     <label>@lang('provider.amount')</label>
                                                     <input type="hidden" name='type' value='provider'/> 
-                                                    <input type="text" class="form-control" placeholder="@lang('provider.amount')" name="amount" value="" required="">
+                                                    <input type="text" class="form-control" placehold="@lang('provider.amount')" name="amount" value="" required="">
                                                 </div>
                                             </div>
                                             <div class="prof-sub-col col-sm-3 col-xs-12 no-right-padding">

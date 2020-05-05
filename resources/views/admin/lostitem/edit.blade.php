@@ -11,33 +11,35 @@
         display: table-cell;
     }
 </style>
-<div class="content-area py-1">
-    <div class="container-fluid">
-        <div class="box box-block bg-white">
-            <a href="{{ URL::previous() }}" class="btn btn-default pull-right"><i class="fa fa-angle-left"></i> @lang('admin.back')</a>
 
-            <h5 style="margin-bottom: 2em;">@lang('admin.lostitem.update')</h5>
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header card-header-primary">
+              <h5 class="card-title">@lang('admin.lostitem.update')</h5>
+              <a href="{{ URL::previous() }}" class="btn btn-default pull-right"><i class="fa fa-angle-left"></i> @lang('admin.back')</a>
+            </div>
+            <div class="card-body">
 
             <form class="form-horizontal" action="{{route('admin.lostitem.update', $lostitem->id)}}" method="POST" enctype="multipart/form-data" role="form">
                 {{csrf_field()}}
                 <input type="hidden" name="_method" value="PATCH">
 
-                <div class="form-group row">
-                    <label for="lost_item_name" class="col-xs-2 col-form-label">@lang('admin.lostitem.lost_item')</label>
+                <div class="form-group">
+                    <label for="lost_item_name" class="bmd-label-floating">@lang('admin.lostitem.lost_item')</label>
                     <div class="col-xs-5">
-                        <textarea class="form-control" name="lost_item_name" required id="lost_item_name" placeholder="@lang('admin.lostitem.lost_item')">{{ $lostitem->lost_item_name }}</textarea>
+                        <textarea class="form-control" name="lost_item_name" required id="lost_item_name" placehold="@lang('admin.lostitem.lost_item')">{{ $lostitem->lost_item_name }}</textarea>
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label for="comments" class="col-xs-2 col-form-label">@lang('admin.lostitem.lost_comments')</label>
+                <div class="form-group">
+                    <label for="comments" class="bmd-label-floating">@lang('admin.lostitem.lost_comments')</label>
                     <div class="col-xs-5">
-                        <textarea class="form-control" name="comments" required id="comments" placeholder="@lang('admin.lostitem.lost_comments')">{{ $lostitem->comments }}</textarea>
+                        <textarea class="form-control" name="comments" required id="comments" placehold="@lang('admin.lostitem.lost_comments')">{{ $lostitem->comments }}</textarea>
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label for="status" class="col-xs-2 col-form-label">@lang('admin.lostitem.lost_status')</label>
+                <div class="form-group">
+                    <label for="status" class="bmd-label-floating">@lang('admin.lostitem.lost_status')</label>
                     <div class="col-xs-5">
                         <select class="form-control" name="status" required id="status">
                             <option @if($lostitem->status == 'open') required='required' @endif value="open">Open</option>
@@ -46,8 +48,8 @@
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label for="" class="col-xs-2 col-form-label"></label>
+                <div class="form-group">
+                    <label for="" class="bmd-label-floating"></label>
                     <div class="col-xs-5">
                         <input type="hidden" name="comments_by" value="admin" />
                         <button type="submit" class="btn btn-primary">@lang('admin.lostitem.update')</button>

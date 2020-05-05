@@ -3,24 +3,28 @@
 @section('title', 'Admin ')
 
 @section('content')
-<div class="content-area py-1">
+
     <div class="container-fluid">
-        <div class="box box-block bg-white">
-           @if(Setting::get('demo_mode', 0) == 1)
-        <div class="col-md-12" style="height:50px;color:red;">
-                    ** Demo Mode : @lang('admin.demomode')
-                </div>
-                @endif
-            <h5 class="mb-1">
-                @lang('admin.users.Users')
+        <div class="card">
+            <div class="card-header card-header-primary">
                 @if(Setting::get('demo_mode', 0) == 1)
-                <span class="pull-right">(*personal information hidden in demo)</span>
-                @endif
-            </h5>
-            @can('sub-admin-create')
-            <a href="{{ route('admin.sub-admins.create') }}" style="margin-left: 1em;" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Adicionar Administrador</a>
-            @endcan
-            <table class="table table-striped table-bordered dataTable" id="table-5">
+                <div class="col-md-12" style="height:50px;color:red;">
+                            ** Demo Mode : @lang('admin.demomode')
+                        </div>
+                        @endif
+                    <h5 class="card-title ">
+                        @lang('admin.users.Users')
+                        @if(Setting::get('demo_mode', 0) == 1)
+                        <span class="pull-right">(*personal information hidden in demo)</span>
+                        @endif               
+                    </h5>
+                    @can('role-create')
+                    <a href="{{ route('admin.sub-admins.create') }}" style="margin-left: 1em;" class="btn pull-right"><i class="fa fa-plus"></i> Add Administrator</a>
+                    @endcan
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+            <table class="table ">
                 <thead>
                     <tr>
                         <th>@lang('admin.id')</th>
@@ -46,7 +50,7 @@
                                 <a href="{{ route('admin.sub-admins.edit', $user->id) }}" class="btn btn-info"><i class="fa fa-pencil"></i> @lang('admin.edit')</a>
                                 @endcan
                                 @can('sub-admin-delete')
-                                <button class="btn btn-danger" onclick="return confirm('Você tem certeza?')"><i class="fa fa-trash"></i> @lang('admin.delete')</button>
+                                <button class="btn btn-danger" onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i> @lang('admin.delete')</button>
                                 @endcan
                                 @endif
                             </form>

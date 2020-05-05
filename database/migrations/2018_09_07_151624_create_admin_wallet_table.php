@@ -18,7 +18,7 @@ class CreateAdminWalletTable extends Migration
             $table->integer('transaction_id');
             $table->string('transaction_alias')->nullable();
             $table->string('transaction_desc')->nullable();
-            $table->integer('transaction_type')->nullable()->comment('1-commission,2-userrecharge,3-tripdebit,4-providerrecharge,5-providersettle,6-fleetrecharge,7-fleetcommission,8-fleetsettle,9-taxcredit,10-discountdebit,11-discountrecharge,12-userreferral,13-providerreferral,14-peakcommission,15-waitingcommission,16-userdispute,17-providerdispute');
+            $table->integer('transaction_type')->nullable()->comment('1-commission,2-userrecharge,3-tripdebit,4-providerrecharge,5-providersettle,9-taxcredit,10-discountdebit,11-discountrecharge,12-userreferral,13-providerreferral,14-peakcommission,15-waitingcommission,16-userdispute,17-providerdispute');
             $table->enum('type', [
                     'C',
                     'D',

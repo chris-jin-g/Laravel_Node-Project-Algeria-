@@ -47,7 +47,7 @@ ____________________________________________________
 
  var options = { series: { curvedLines: {  active: true }}};
 
- $.plot($("#placeholder"), [{data: d1, lines: { show: true}, curvedLines: {apply: true}}], options);
+ $.plot($("#placehold"), [{data: d1, lines: { show: true}, curvedLines: {apply: true}}], options);
 
  _____________________________________________________
 
@@ -333,7 +333,7 @@ ____________________________________________________
 					var minX = points[0];
 					var maxX = points[points.length - ps];
 					fpDist = (maxX - minX) / (500 * 100);
-					//x range / (estimated pixel length of placeholder * factor)
+					//x range / (estimated pixel length of placehold * factor)
 				} else {
 					//use user defined value
 					fpDist = Number(curvedLinesOptions.fitPointDist);

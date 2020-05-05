@@ -15,8 +15,6 @@ use App\Helpers\Helper;
 use App\Http\Controllers\SendPushNotification;
 use App\User;
 use App\Provider;
-use App\Fleet;
-use App\FleetCities;
 use App\Admin;
 use App\Promocode;
 use App\UserRequests;
@@ -28,8 +26,6 @@ use App\UserRequestRating;
 use App\UserRequestPayment;
 use App\ServiceType;
 use App\WalletPassbook;
-use App\State;
-use App\City;
 use App\RequestCurrentProvider;
 use Location\Coordinate;
 use App\RequestWaitingTime;
@@ -42,7 +38,6 @@ use App\AdminTransactions;
 use App\AdminWallet;
 use App\UserWallet;
 use App\ProviderWallet;
-use App\FleetWallet;
 use App\WalletRequests;
 use App\Reason;
 use App\PeakHour;
@@ -106,28 +101,6 @@ class TripController extends Controller
 
                 //update provider service hold status
                 DB::table('provider_services')->where('provider_id', $Provider->id)->where('status', 'hold')->update(['status' => 'active']);
-                
-                //Atualiza cidade do motorista pegando pela latitude e longitude
-                $ProviderUpdate = Provider::where("id", $provider)->where("city_id", null)->first();
-                if($ProviderUpdate){
-                    $locationService = new LocationService();
-                    $geocode = $locationService->geocode($request->latitude, $request->longitude);
-
-                    $State = State::where("letter", $geocode['state'])->first();
-                    $City = City::where("title", $geocode['city'])->where("state_id", $State->id)->first();
-
-                    Provider::where('id', $provider)->update(['city_id' => $City->id]);
-                }
-                
-                //Registra motorista na franquia se existir na cidade informada
-                if(!is_null($Provider->city_id)){
-                    $FleetCities = FleetCities::where('city_id', $Provider->city_id)->first();
-                    if($FleetCities){
-                       $fleet = $FleetCities->fleet_id;
-                       Provider::where('id', $provider)->update(['fleet' => $fleet]);
-                    }
-                }
-
             }
 
             if (config('constants.manual_request', 0) == 0) {
@@ -714,7 +687,6 @@ class TripController extends Controller
                 RequestFilter::where('request_id', $UserRequest->id)->where('provider_id', Auth::user()->id)->update(['status' => 2]);
 
                 $UserRequest->status = "SCHEDULED";
-                $UserRequest->city_id = Auth::user()->city_id;
                 $UserRequest->save();
             } else {
                 
@@ -737,7 +709,7 @@ class TripController extends Controller
                         "currency" => config('constants.stripe_currency'),
                         "customer" => $User->stripe_cust_id,
                         "card" => $Card->card_id,
-                        "description" => "Verificação de cartão " . $User->email,
+                        "description" => "Card Verification " . $User->email,
                         "receipt_email" => $User->email,
                     ];
 
@@ -765,59 +737,57 @@ class TripController extends Controller
                        
                         $paymentId = $Charge['id'];
 
-                        //Se a transação for bem sucedida extorna o valor pago para o passageiro
+                        // If the transaction is successful, the amount paid to the passenger will be extinguished.
                         $refund = \Stripe\Refund::create([
                             'charge' => $paymentId,
                         ]);
-
                       }catch(\Stripe\Error\Card $e) { 
                         // Send Push Notification to User
-                        (new SendPushNotification)->sendPushToProvider(Auth::user()->id, "Falha no cartão do passageiro! Viagem cancelada.");
-                        (new SendPushNotification)->sendPushToUser($UserRequest->user_id, "Falha ao processar pagamento! Por favor, verifique seu cartão.");
+                        (new SendPushNotification) -> sendPushToProvider (Auth ::user() -> id, "Passenger card failure! Trip canceled.");
+                        (new SendPushNotification) -> sendPushToUser ($UserRequest->user_id, "Failed to process payment! Please check your card.");
                         $this->cancel($request);
-                        return response()->json(['error' => "Falha no cartão do passageiro! Viagem cancelada."], 422);
+                        return response()->json(['error' => "Passenger card failed! Trip canceled."], 422);
                       }catch (\Stripe\Error\RateLimit $e) {
                         // Send Push Notification to User
-                        (new SendPushNotification)->sendPushToProvider(Auth::user()->id, "Falha no cartão do passageiro! Viagem cancelada.");
-                        (new SendPushNotification)->sendPushToUser($UserRequest->user_id, "Falha ao processar pagamento! Por favor, verifique seu cartão.");
+                        (new SendPushNotification) -> sendPushToProvider (Auth :: user () -> id, "Passenger card failed! Trip canceled.");
+                        (new SendPushNotification) -> sendPushToUser ($UserRequest-> user_id, "Failed to process payment! Please check your card.");
                         $this->cancel($request);
-                        return response()->json(['error' => "Falha no cartão do passageiro! Viagem cancelada."], 422);
+                        return response()->json(['error' => "Passenger card failed! Trip canceled."], 422);
                       } catch (\Stripe\Error\InvalidRequest $e) {
                         // Send Push Notification to User
-                        (new SendPushNotification)->sendPushToProvider(Auth::user()->id, "Falha no cartão do passageiro! Viagem cancelada.");
-                        (new SendPushNotification)->sendPushToUser($UserRequest->user_id, "Falha ao processar pagamento! Por favor, verifique seu cartão.");
+                        (new SendPushNotification)->sendPushToProvider(Auth::user()->id, "Passenger card failed! Trip canceled.");
+                        (new SendPushNotification)->sendPushToUser($UserRequest->user_id, "Failed to process payment! Please check your card.");
                         $this->cancel($request);
-                        return response()->json(['error' => "Falha no cartão do passageiro! Viagem cancelada."], 422);
+                        return response()->json(['error' => "Passenger card failed! Trip canceled."], 422);
                       } catch (\Stripe\Error\Authentication $e) {
                         // Send Push Notification to User
-                        (new SendPushNotification)->sendPushToProvider(Auth::user()->id, "Falha no cartão do passageiro! Viagem cancelada.");
-                        (new SendPushNotification)->sendPushToUser($UserRequest->user_id, "Falha ao processar pagamento! Por favor, verifique seu cartão.");
+                        (new SendPushNotification)->sendPushToProvider(Auth::user()->id, "Passenger card failed! Trip canceled.");
+                        (new SendPushNotification)->sendPushToUser($UserRequest->user_id, "Failed to process payment! Please check your card.");
                         $this->cancel($request);
-                        return response()->json(['error' => "Falha no cartão do passageiro! Viagem cancelada."], 422);
+                        return response()->json(['error' => "Passenger card failed! Trip canceled."], 422);
                       } catch (\Stripe\Error\ApiConnection $e) {
                         // Send Push Notification to User
-                        (new SendPushNotification)->sendPushToProvider(Auth::user()->id, "Falha no cartão do passageiro! Viagem cancelada.");
-                        (new SendPushNotification)->sendPushToUser($UserRequest->user_id, "Falha ao processar pagamento! Por favor, verifique seu cartão.");
+                        (new SendPushNotification)->sendPushToProvider(Auth::user()->id, "Passenger card failed! Trip canceled.");
+                        (new SendPushNotification)->sendPushToUser($UserRequest->user_id, "Failed to process payment! Please check your card.");
                         $this->cancel($request);
-                        return response()->json(['error' => "Falha no cartão do passageiro! Viagem cancelada."], 422);
+                        return response()->json(['error' => "Passenger card failed! Trip canceled."], 422);
                       } catch (\Stripe\Error\Base $e) {
                         // Send Push Notification to User
-                        (new SendPushNotification)->sendPushToProvider(Auth::user()->id, "Falha no cartão do passageiro! Viagem cancelada.");
-                        (new SendPushNotification)->sendPushToUser($UserRequest->user_id, "Falha ao processar pagamento! Por favor, verifique seu cartão.");
+                        (new SendPushNotification)->sendPushToProvider(Auth::user()->id, "Passenger card failed! Trip canceled.");
+                        (new SendPushNotification)->sendPushToUser($UserRequest->user_id, "Failed to process payment! Please check your card.");
                         $this->cancel($request);
-                        return response()->json(['error' => "Falha no cartão do passageiro! Viagem cancelada."], 422);
+                        return response()->json(['error' => "Passenger card failed! Trip canceled."], 422);
                       } catch (Exception $e) {
                         // Send Push Notification to User
-                        (new SendPushNotification)->sendPushToProvider(Auth::user()->id, "Falha no cartão do passageiro! Viagem cancelada.");
-                        (new SendPushNotification)->sendPushToUser($UserRequest->user_id, "Falha ao processar pagamento! Por favor, verifique seu cartão.");
+                        (new SendPushNotification)->sendPushToProvider(Auth::user()->id, "Passenger card failed! Trip canceled.");
+                        (new SendPushNotification)->sendPushToUser($UserRequest->user_id, "Failed to process payment! Please check your card.");
                         $this->cancel($request);
-                        return response()->json(['error' => "Falha no cartão do passageiro! Viagem cancelada."], 422);
+                        return response()->json(['error' => "Passenger card failed! Trip canceled."], 422);
                       }
 
                 }
 
                 $UserRequest->status = "STARTED";
-                $UserRequest->city_id = Auth::user()->city_id;
                 $UserRequest->save();
 
                 ProviderService::where('provider_id', $UserRequest->provider_id)->update(['status' => 'riding']);
@@ -890,7 +860,7 @@ class TripController extends Controller
                 (new SendPushNotification)->Complete($UserRequest);
             } else if ($request->status == 'COMPLETED') {
                 
-                //Processa pagamento com cartão de crédito
+                
                 if($request->payment_mode == "CARD"){
                     if ($UserRequest->status == 'COMPLETED') {
                         //for off cross clicking on change payment issue on mobile
@@ -951,7 +921,7 @@ class TripController extends Controller
                             "currency" => config('constants.stripe_currency'),
                             "customer" => $User->stripe_cust_id,
                             "card" => $Card->card_id,
-                            "description" => "Pagamento de viagem " . $User->email,
+                            "description" => "Request Payment" . $User->email,
                             "receipt_email" => $User->email,
                         ]);
                         
@@ -1311,7 +1281,6 @@ class TripController extends Controller
 
             $Payment->user_id = $UserRequest->user_id;
             $Payment->provider_id = $UserRequest->provider_id;
-            $Payment->fleet_id = $UserRequest->provider->fleet;
 
             //check peakhours and waiting charges
             $total_waiting_time = $total_waiting_amount = $peakamount = $peak_comm_amount = $waiting_comm_amount = 0;
@@ -1666,7 +1635,6 @@ class TripController extends Controller
       check the payment status is completed or not
       if its completed check the below logics
       Check the request table if user have any commission
-      check the request table if provider have any fleet
       check the user, applied any discount
       check the payment mode is cash, card, wallet, partial
       check whether provider have any negative balance
@@ -1687,8 +1655,6 @@ class TripController extends Controller
 
             $provider = Provider::where('id', $paymentsRequest->provider_id)->first();
 
-            $fleet_amount = $discount = $admin_commision = $credit_amount = $balance_provider_credit = $provider_credit = 0;
-
             if ($paymentsRequest->is_partial == 1) {
                 //partial payment
                 if ($paymentsRequest->payment_mode == "CASH") {
@@ -1706,30 +1672,16 @@ class TripController extends Controller
             }
 
 
-            //admin,fleet,provider calculations
+            //admin,provider calculations
             if (!empty($paymentsRequest->commision_per)) {
 
                 $admin_commision = $paymentsRequest->commision;
-
-                if (!empty($paymentsRequest->fleet_id)) {
-                    //get the percentage of fleet owners
-                    $fleet = Fleet::where('id', $paymentsRequest->fleet_id)->first();
-                    $fleet_per = $fleet->commission;
-                    $fleet_amount = ($admin_commision) * ($fleet_per / 100);
-                    $admin_commision = $admin_commision;
-                }
-
                 //check the user applied discount
                 if (!empty($paymentsRequest->discount)) {
                     $balance_provider_credit = $paymentsRequest->discount;
                 }
             } else {
 
-                if (!empty($paymentsRequest->fleet_id)) {
-                    $fleet_per = (int)config('constants.fleet_commission_percentage');
-                    $fleet_amount = ($paymentsRequest->total) * ($fleet_per / 100);
-                    $admin_commision = $fleet_amount;
-                }
                 if (!empty($paymentsRequest->discount)) {
                     $balance_provider_credit = $paymentsRequest->discount;
                 }
@@ -1740,13 +1692,6 @@ class TripController extends Controller
                 $this->adminCommission($admin_commision, $paymentsRequest, $UserRequest);
             }
 
-            if (!empty($paymentsRequest->fleet_id) && !empty($fleet_amount)) {
-                $paymentsRequest->fleet = $fleet_amount;
-                $paymentsRequest->fleet_per = $fleet_per;
-                $paymentsRequest->save();
-                //create the amount to fleet account and deduct the amount to admin wallet, update the fleet wallet amount to fleet table
-                $this->fleetCommission($fleet_amount, $paymentsRequest, $UserRequest);
-            }
             if (!empty($balance_provider_credit)) {
                 //debit the amount to admin wallet and add the amount to provider wallet, update the provider wallet amount to provider table
                 $this->providerDiscountCredit($balance_provider_credit, $paymentsRequest, $UserRequest);
@@ -1878,38 +1823,6 @@ class TripController extends Controller
         return $providerWallet;
     }
 
-    protected function createFleetWallet($request)
-    {
-
-        $fleet = Fleet::findOrFail($request['id']);
-
-        $fleetWallet = new FleetWallet;
-        $fleetWallet->fleet_id = $request['id'];
-        $fleetWallet->transaction_id = $request['transaction_id'];
-        $fleetWallet->transaction_alias = $request['transaction_alias'];
-        $fleetWallet->transaction_desc = $request['transaction_desc'];
-        $fleetWallet->type = $request['type'];
-        $fleetWallet->amount = $request['amount'];
-
-        if (empty($fleet->wallet_balance))
-            $fleetWallet->open_balance = 0;
-        else
-            $fleetWallet->open_balance = $fleet->wallet_balance;
-
-        if (empty($fleet->wallet_balance))
-            $fleetWallet->close_balance = $request['amount'];
-        else
-            $fleetWallet->close_balance = $fleet->wallet_balance + ($request['amount']);
-
-        $fleetWallet->save();
-
-        //update the fleet wallet amount to fleet table
-        $fleet->wallet_balance = $fleet->wallet_balance + ($request['amount']);
-        $fleet->save();
-
-        return true;
-    }
-
     protected function adminCommission($amount, $paymentsRequest, $UserRequest)
     {
         $ipdata = array();
@@ -1930,40 +1843,6 @@ class TripController extends Controller
         $ipdata['type'] = 'D';
         $ipdata['amount'] = $provider_det_amt;
         $this->createProviderWallet($ipdata);
-    }
-
-    protected function fleetCommission($amount, $paymentsRequest, $UserRequest)
-    {
-
-        $ipdata = array();
-        $admin_det_amt = -1 * abs($amount);
-        $ipdata['transaction_id'] = $UserRequest->id;
-        $ipdata['transaction_alias'] = $UserRequest->booking_id;
-        $ipdata['transaction_desc'] = trans('api.transaction.fleet_debit');
-        $ipdata['transaction_type'] = 7;
-        $ipdata['type'] = 'D';
-        $ipdata['amount'] = $admin_det_amt;
-        $this->createAdminWallet($ipdata);
-
-        $ipdata = array();
-        $ipdata['transaction_id'] = $UserRequest->id;
-        $ipdata['transaction_alias'] = $UserRequest->booking_id;
-        $ipdata['transaction_desc'] = trans('api.transaction.fleet_add');
-        $ipdata['id'] = $paymentsRequest->fleet_id;
-        $ipdata['type'] = 'C';
-        $ipdata['amount'] = $amount;
-        $this->createFleetWallet($ipdata);
-
-        $ipdata = array();
-        $ipdata['transaction_id'] = $UserRequest->id;
-        $ipdata['transaction_alias'] = $UserRequest->booking_id;
-        $ipdata['transaction_desc'] = trans('api.transaction.fleet_recharge');
-        $ipdata['transaction_type'] = 6;
-        $ipdata['type'] = 'C';
-        $ipdata['amount'] = $amount;
-        $this->createAdminWallet($ipdata);
-
-        return true;
     }
 
     protected function providerDiscountCredit($amount, $paymentsRequest, $UserRequest)
@@ -2539,7 +2418,6 @@ class TripController extends Controller
             $ipdata['id'] = $request_data->from_id;
             $ipdata['type'] = $settle_type;
             $ipdata['amount'] = $settle_amt;
-            $this->createFleetWallet($ipdata);
             $transaction_type = 8;
         }
 

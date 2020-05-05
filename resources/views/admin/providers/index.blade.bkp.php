@@ -3,16 +3,16 @@
 @section('title', 'Motoristas ')
 
 @section('content')
-<div class="content-area py-1">
+<div>
     <div class="container-fluid">
-        <div class="box box-block bg-white">
+        <div class="card">
             <h5 class="mb-1">
                 @lang('admin.provides.providers')
             </h5>
             @can('provider-create')
             <a href="{{ route('admin.provider.create') }}" style="margin-left: 1em;" class="btn btn-primary pull-right"><i class="fa fa-plus"></i>@lang('admin.provides.add_new_provider')</a>
             @endcan
-            <table class="table table-striped table-bordered dataTable" id="table-5">
+            <table class="table ">
                 <thead>
                     <tr>
                         <th>@lang('admin.id')</th>
@@ -54,7 +54,7 @@
                             @if($provider->active_documents() == $total_documents && $provider->service != null)
                                  <a class="btn btn-success btn-block" href="{{route('admin.provider.document.index', $provider->id )}}">Verificado</a>
                             @else
-                                <a class="btn btn-danger btn-block label-right" href="{{route('admin.provider.document.index', $provider->id )}}">Pendente <span class="btn-label">{{ $provider->pending_documents() }}</span></a>
+                                <a class="btn btn-danger btn-block label-right" href="{{route('admin.provider.document.index', $provider->id )}}">Attention! <span class="btn-label">{{ $provider->pending_documents() }}</span></a>
                             @endif
                         </td>
                         @endcan
@@ -108,7 +108,7 @@
                                             {{ csrf_field() }}
                                             <input type="hidden" name="_method" value="DELETE">
                                             @if( Setting::get('demo_mode', 0) == 0)
-                                            <button class="btn btn-default look-a-like" onclick="return confirm('Você tem certeza?')"><i class="fa fa-trash"></i>@lang('admin.delete')</button>
+                                            <button class="btn btn-default look-a-like" onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i>@lang('admin.delete')</button>
                                             @endif
                                         </form>
                                     </li>

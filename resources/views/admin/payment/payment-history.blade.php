@@ -1,14 +1,17 @@
 @extends('admin.layout.base')
 
-@section('title', 'Histórico de Pagamentos ')
+@section('title', 'Payment History')
 
 @section('content')
 
-    <div class="content-area py-1">
         <div class="container-fluid">
-            <div class="box box-block bg-white">
-                <h5 class="mb-1">@lang('admin.payment.payment_history')</h5>
-                <table class="table table-striped table-bordered dataTable" id="table-4">
+            <div class="card">
+                <div class="card-header card-header-primary">
+                <h5 class="card-title">@lang('admin.payment.payment_history')</h5>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table">
                     <thead>
                         <tr>
                             <th>@lang('admin.payment.request_id')</th>
@@ -34,9 +37,9 @@
                             <td>{{$payment->payment_mode == "CASH" ? "DINHEIRO" : "CARTÃO"}}</td>
                             <td>
                                 @if($payment->paid)
-                                    Pago
+                                    Paid
                                 @else
-                                    Não pago
+                                    Not Paid
                                 @endif
                             </td>
                             <td>
@@ -46,7 +49,7 @@
                                 </button>
                                 <div class="dropdown-menu">
                                     <a href="{{ route('admin.requests.show', $payment->id) }}" class="dropdown-item">
-                                        <i class="fa fa-search"></i> Mais detalhes
+                                        <i class="fa fa-search"></i> More details
                                     </a>
                                 </div>
                             </div>

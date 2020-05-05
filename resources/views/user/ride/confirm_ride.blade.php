@@ -179,9 +179,9 @@
       <div class="modal-body">
         
         <label>@lang('user.schedule_date')</label>
-        <input value="{{date('m/d/Y')}}" type="text" id="datepicker" placeholder="Date" name="schedule_date">
+        <input value="{{date('m/d/Y')}}" type="text" id="datepicker" placehold="Date" name="schedule_date">
         <label>@lang('user.schedule_time')</label>
-        <input value="{{date('H:i')}}" type="text" id="timepicker" placeholder="Time" name="schedule_time">
+        <input value="{{date('H:i')}}" type="text" id="timepicker" placehold="Time" name="schedule_time">
 
       </div>
       <div class="modal-footer">

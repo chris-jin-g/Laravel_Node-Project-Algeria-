@@ -1,7 +1,7 @@
 @extends('admin.layout.auth')
 
 @section('content')
-<!--<div class="sign-form">
+{{--<div class="sign-form">
     <div class="row">
         <div class="col-md-4 offset-md-4 px-3">
             <div class="box b-a-0">
@@ -11,7 +11,7 @@
                 <form class="form-material mb-1" role="form" method="POST" action="{{ url('/admin/login') }}" >
                 {{ csrf_field() }}
                     <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
-                        <input type="email" name="email" required="true" class="form-control" id="email" placeholder="@lang('admin.email')">
+                        <input type="email" name="email" required="true" class="form-control" id="email" placehold="@lang('admin.email')">
                         @if ($errors->has('email'))
                             <span class="help-block" style="margin-left: 55px;color: red;">
                                 <strong>{{ $errors->first('email') }}</strong>
@@ -19,7 +19,7 @@
                         @endif
                     </div>
                     <div class="form-group {{ $errors->has('password') ? ' has-error' : '' }}">
-                        <input type="password" name="password" required="true" class="form-control" id="password" placeholder="@lang('admin.password')">
+                        <input type="password" name="password" required="true" class="form-control" id="password" placehold="@lang('admin.password')">
                         @if ($errors->has('password'))
                             <span class="help-block" style="margin-left: 55px;color: red;">
                                 <strong>{{ $errors->first('password') }}</strong>
@@ -40,7 +40,7 @@
             </div>
         </div>
     </div>
-</div>-->
+</div>--}}
  <div class="container">
             <div class="col-lg-8 col-lg-offset-2 col-md-6 col-md-offset-3 col-md-8 col-md-offset-2">
                 <div class="row">
@@ -54,10 +54,9 @@
                 <div id="userform">
                     <ul class="nav nav-tabs nav-justified" role="tablist">
                         <li id="last-button" @if (!$errors->has('login_type')) class="active" @endif @if ($errors->has('login_type') && $errors->first('login_type') == 'admin')  class="active" @endif><a href="#signup" role="tab" data-toggle="tab">Admin</a></li>
-                        <li @if ($errors->has('login_type') && $errors->first('login_type') == 'dispatcher')  class="active" @endif><a href="#dispatcher" role="tab" data-toggle="tab">Expedidor</a></li>
-                        <li @if ($errors->has('login_type') && $errors->first('login_type') == 'fleet')  class="active" @endif><a href="#fleet" role="tab" data-toggle="tab">Franquia</a></li>
-                        <li @if ($errors->has('login_type') && $errors->first('login_type') == 'account')  class="active" @endif><a href="#account" role="tab" data-toggle="tab">Conta</a></li>
-                        <li id="first-button" @if ($errors->has('login_type') && $errors->first('login_type') == 'dispute')  class="active" @endif><a href="#dispute" role="tab" data-toggle="tab">Disputa</a></li>
+                        <li @if ($errors->has('login_type') && $errors->first('login_type') == 'dispatcher')  class="active" @endif><a href="#dispatcher" role="tab" data-toggle="tab">Dispatcher</a></li>
+                        <li @if ($errors->has('login_type') && $errors->first('login_type') == 'account')  class="active" @endif><a href="#account" role="tab" data-toggle="tab">Account</a></li>
+                        <li id="first-button" @if ($errors->has('login_type') && $errors->first('login_type') == 'dispute')  class="active" @endif><a href="#dispute" role="tab" data-toggle="tab">Dispute</a></li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane fade @if (!$errors->has('login_type')) active @endif @if ($errors->has('login_type') && $errors->first('login_type') == 'admin') active @endif in" id="signup">
@@ -65,20 +64,20 @@
                             <form id="signup" role="form" method="POST" action="{{ url('/admin/login') }}">
                                 {{ csrf_field() }}
                                 <div class="form-group">
-                                    <input type="email" name="email" placeholder="E-mail" class="form-control" id="email" required data-validation-required-message="Informe o endereço de e-mail" autocomplete="off" @if(Setting::get('demo_mode', 0)==1)value="admin@demo.com"@endif>
+                                    <input type="email" name="email" placehold="E-mail" class="form-control" id="email" required data-validation-required-message="Informe o endereço de e-mail" autocomplete="off" @if(Setting::get('demo_mode', 0)==1)value="admin@demo.com"@endif>
                                     @if ($errors->has('email'))
                                         <p class="help-block text-danger">{{ $errors->first('email') }}</p>
                                     @endif
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" name="password" placeholder="Senha" class="form-control" id="password" required data-validation-required-message="Informe sua senha" autocomplete="off" @if(Setting::get('demo_mode', 0)==1)value="123456"@endif>
+                                    <input type="password" name="password" placehold="Password" class="form-control" id="password" required data-validation-required-message="Informe sua Password" autocomplete="off" @if(Setting::get('demo_mode', 0)==1)value="123456"@endif>
                                     @if ($errors->has('password'))
                                         <p class="help-block text-danger">{{ $errors->first('password') }}</p>
                                     @endif
                                 </div>
                                 <div class="mrgn-30-top">
                                     <input type="hidden" name="login_type" value="admin">
-                                    <button type="submit" class="btn btn-larger btn-block" /> Entrar
+                                    <button type="submit" class="btn btn-larger btn-block" /> Login
                                     </button>
                                 </div>
                             </form>
@@ -96,24 +95,24 @@
                             </div>
                         </div>
                         <div class="tab-pane fade @if ($errors->has('login_type') && $errors->first('login_type') == 'dispatcher') active @endif in" id="dispatcher">
-                            <!--<h2 class="text-uppercase text-center">Expedidor</h2>-->
+                            <!--<h2 class="text-uppercase text-center">Dispatcher</h2>-->
                             <form id="login" role="form" method="POST" action="{{ url('/admin/login') }}">
                              {{ csrf_field() }}
                                 <div class="form-group">
-                                    <input type="email" name="email" placeholder="E-mail" class="form-control" id="email" required data-validation-required-message="Informe o endereço de e-mail" autocomplete="off" @if(Setting::get('demo_mode', 0)==1)value="dispatcher@demo.com"@endif>
+                                    <input type="email" name="email" placehold="E-mail" class="form-control" id="email" required data-validation-required-message="Informe o endereço de e-mail" autocomplete="off" @if(Setting::get('demo_mode', 0)==1)value="dispatcher@demo.com"@endif>
                                     @if ($errors->has('email'))
                                         <p class="help-block text-danger">{{ $errors->first('email') }}</p>
                                     @endif
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" name="password" placeholder="Senha" class="form-control" id="password" required data-validation-required-message="Informe sua senha" autocomplete="off" @if(Setting::get('demo_mode', 0)==1)value="123456"@endif>
+                                    <input type="password" name="password" placehold="Password" class="form-control" id="password" required data-validation-required-message="Informe sua Password" autocomplete="off" @if(Setting::get('demo_mode', 0)==1)value="123456"@endif>
                                     @if ($errors->has('password'))
                                         <p class="help-block text-danger">{{ $errors->first('password') }}</p>
                                     @endif
                                 </div>
                                 <div class="mrgn-30-top">
                                     <input type="hidden" name="login_type" value="dispatcher">
-                                    <button type="submit" class="btn btn-larger btn-block" /> Entrar
+                                    <button type="submit" class="btn btn-larger btn-block" /> Login
                                     </button>
                                 </div>
                             </form>
@@ -130,42 +129,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Fleet -->
-                        <div class="tab-pane fade @if ($errors->has('login_type') && $errors->first('login_type') == 'fleet')  active @endif in" id="fleet">
-                            <!--<h2 class="text-uppercase text-center">Frotas</h2>-->
-                            <form id="login" role="form" method="POST" action="{{ url('/fleet/login') }}">
-                             {{ csrf_field() }}
-                                <div class="form-group">
-                                        <input type="email" name="email" placeholder="E-mail" class="form-control" id="email" required data-validation-required-message="Informe o endereço de e-mail" autocomplete="off" @if(Setting::get('demo_mode', 0)==1)value="fleet@demo.com"@endif>
-                                        @if ($errors->has('email'))
-                                            <p class="help-block text-danger">{{ $errors->first('email') }}</p>
-                                        @endif
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" name="password" placeholder="Senha" class="form-control" id="password" required data-validation-required-message="Informe sua senha" autocomplete="off" @if(Setting::get('demo_mode', 0)==1)value="123456"@endif>
-                                    @if ($errors->has('password'))
-                                        <p class="help-block text-danger">{{ $errors->first('password') }}</p>
-                                    @endif
-                                </div>
-                                <div class="mrgn-30-top">
-                                    <input type="hidden" name="login_type" value="fleet">
-                                    <button type="submit" class="btn btn-larger btn-block" /> Entrar
-                                    </button>
-                                </div>
-                            </form>
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-12">
-                                    <div class="details">
-                                    @if(Setting::get('demo_mode', 0)==1)
-                                        <h4 class="text-captilize text-left">Using below detail for demo version</h4>
-                                        <h5><strong>User Name : </strong><span>fleet@demo.com</span></h5>
-                                        <h5><strong>Password  : </strong><span>123456</span></h5>
-                                        <p>Super Administrator can manage whole system and other user's rights too.</p>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
                          <!-- Fleet -->
                         <div class="tab-pane fade @if ($errors->has('login_type') && $errors->first('login_type') == 'account')  active @endif in" id="account">
@@ -173,20 +136,20 @@
                             <form id="login" role="form" method="POST" action="{{ url('/admin/login') }}">
                              {{ csrf_field() }}
                                 <div class="form-group">
-                                        <input type="email" name="email" placeholder="E-mail" class="form-control" id="email" required data-validation-required-message="Informe o endereço de e-mail" autocomplete="off" @if(Setting::get('demo_mode', 0)==1)value="account@demo.com"@endif>
+                                        <input type="email" name="email" placehold="E-mail" class="form-control" id="email" required data-validation-required-message="Informe o endereço de e-mail" autocomplete="off" @if(Setting::get('demo_mode', 0)==1)value="account@demo.com"@endif>
                                         @if ($errors->has('email'))
                                             <p class="help-block text-danger">{{ $errors->first('email') }}</p>
                                         @endif
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" name="password" placeholder="Senha" class="form-control" id="password" required data-validation-required-message="Informe sua senha" autocomplete="off" @if(Setting::get('demo_mode', 0)==1)value="123456"@endif>
+                                    <input type="password" name="password" placehold="Password" class="form-control" id="password" required data-validation-required-message="Informe sua Password" autocomplete="off" @if(Setting::get('demo_mode', 0)==1)value="123456"@endif>
                                     @if ($errors->has('password'))
                                         <p class="help-block text-danger">{{ $errors->first('password') }}</p>
                                     @endif
                                 </div>
                                 <div class="mrgn-30-top">
                                     <input type="hidden" name="login_type" value="account">
-                                    <button type="submit" class="btn btn-larger btn-block" /> Entrar
+                                    <button type="submit" class="btn btn-larger btn-block" /> Login
                                     </button>
                                 </div>
                             </form>
@@ -205,24 +168,24 @@
                         </div>
 
                         <div class="tab-pane fade @if ($errors->has('login_type') && $errors->first('login_type') == 'dispute')  active @endif in" id="dispute">
-                            <!--<h2 class="text-uppercase text-center">Disputa</h2>-->
+                            <!--<h2 class="text-uppercase text-center">Dispute</h2>-->
                             <form id="login" role="form" method="POST" action="{{ url('/admin/login') }}">
                              {{ csrf_field() }}
                                 <div class="form-group">
-                                        <input type="email" name="email" placeholder="E-mail" class="form-control" id="email" required data-validation-required-message="Informe o endereço de e-mail" autocomplete="off" @if(Setting::get('demo_mode', 0)==1)value="dispute@demo.com"@endif>
+                                        <input type="email" name="email" placehold="E-mail" class="form-control" id="email" required data-validation-required-message="Informe o endereço de e-mail" autocomplete="off" @if(Setting::get('demo_mode', 0)==1)value="dispute@demo.com"@endif>
                                         @if ($errors->has('email'))
                                             <p class="help-block text-danger">{{ $errors->first('email') }}</p>
                                         @endif
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" name="password" placeholder="Senha" class="form-control" id="password" required data-validation-required-message="Informe sua senha" autocomplete="off" @if(Setting::get('demo_mode', 0)==1)value="123456"@endif>
+                                    <input type="password" name="password" placehold="Password" class="form-control" id="password" required data-validation-required-message="Informe sua Password" autocomplete="off" @if(Setting::get('demo_mode', 0)==1)value="123456"@endif>
                                     @if ($errors->has('password'))
                                         <p class="help-block text-danger">{{ $errors->first('password') }}</p>
                                     @endif
                                 </div>
                                 <div class="mrgn-30-top">
                                     <input type="hidden" name="login_type" value="dispute">
-                                    <button type="submit" class="btn btn-larger btn-block" /> Entrar
+                                    <button type="submit" class="btn btn-larger btn-block" /> Login
                                     </button>
                                 </div>
                             </form>

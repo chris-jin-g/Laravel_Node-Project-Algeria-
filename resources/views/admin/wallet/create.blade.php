@@ -8,9 +8,6 @@
 if ($type == 1) {
     $title = Lang::get('admin.prd_settle');
     $back_route = "admin.providertransfer";
-} else {
-    $title = Lang::get('admin.flt_settle');
-    $back_route = "admin.fleettransfer";
 }
 ?>
 <style>
@@ -21,24 +18,24 @@ if ($type == 1) {
         display: table-cell;
     }
 </style>
-<div class="content-area py-1">
-    <div class="container-fluid">
-        <div class="box box-block bg-white">
-            <a href="{{route($back_route)}}" class="btn btn-default pull-right"><i class="fa fa-angle-left"></i> @lang('admin.back')</a>
 
-            <h5 style="margin-bottom: 2em;">{{$title}}</h5>
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header card-header-primary">
+              <h5 class="card-title">{{$title}}</h5>
+              <a href="{{ URL::previous() }}" class="btn btn-default pull-right"><i class="fa fa-angle-left"></i> @lang('admin.back')</a>
+            </div>
+            <div class="card-body">
 
             <form class="form-horizontal" action="{{route('admin.transferstore')}}" method="POST" enctype="multipart/form-data" role="form" autocomplete="off">
                 {{csrf_field()}}
-                <div class="form-group row">
+                <div class="form-group">
                     @if($type==1)
-                    <label for="namesearch" class="col-xs-2 col-form-label">@lang('admin.service.Provider_Name')</label>
-                    @else
-                    <label for="namesearch" class="col-xs-2 col-form-label">@lang('admin.fleet.fleet_name')</label>
+                    <label for="namesearch" class="bmd-label-floating">@lang('admin.service.Provider_Name')</label>
                     @endif
                     <div class="col-xs-5">
                         <div class="input-group">
-                            <input class="form-control" type="text" value="{{ old('name') }}" name="name" required id="namesearch" placeholder="Procurar por Nome" required="" aria-describedby="basic-addon2">
+                            <input class="form-control" type="text" value="{{ old('name') }}" name="name" required id="namesearch" placehold="Procurar por Nome" required="" aria-describedby="basic-addon2">
                             <span class="input-group-addon fa fa-search"  id="basic-addon2"></span>
                         </div>
                         <input type="hidden" name="stype" value="{{$type}}">
@@ -46,10 +43,10 @@ if ($type == 1) {
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label for="amount" class="col-xs-2 col-form-label">@lang('admin.amount')</label>
+                <div class="form-group">
+                    <label for="amount" class="bmd-label-floating">@lang('admin.amount')</label>
                     <div class="col-xs-5">
-                        <input class="form-control" type="text" value="{{ old('amount') }}" name="amount" id="amount" placeholder="Informe o valor" required="" min="1">
+                        <input class="form-control" type="text" value="{{ old('amount') }}" name="amount" id="amount" placehold="Informe o valor" required="" min="1">
                     </div>
                     <div class="col-xs-5">
 
@@ -61,8 +58,8 @@ if ($type == 1) {
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label for="type" class="col-xs-2 col-form-label">@lang('admin.type')</label>
+                <div class="form-group">
+                    <label for="type" class="bmd-label-floating">@lang('admin.type')</label>
                     <div class="col-xs-5">
                         <select class="form-control" name="type">
                             <option value="C">Crédito</option>
@@ -71,8 +68,8 @@ if ($type == 1) {
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label for="send_by" class="col-xs-2 col-form-label">@lang('admin.by')</label>
+                <div class="form-group">
+                    <label for="send_by" class="bmd-label-floating">@lang('admin.by')</label>
                     <div class="col-xs-5">
                         <select class="form-control" name="send_by">
                             <option value="online">Online</option>
@@ -81,8 +78,8 @@ if ($type == 1) {
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label for="zipcode" class="col-xs-2 col-form-label"></label>
+                <div class="form-group">
+                    <label for="zipcode" class="bmd-label-floating"></label>
                     <div class="col-xs-5">
                         <button type="submit" class="btn btn-primary">@lang('admin.settle')</button>
                         <a href="{{route($back_route)}}" class="btn btn-default">@lang('admin.cancel')</a>

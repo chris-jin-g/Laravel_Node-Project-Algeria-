@@ -1,10 +1,15 @@
 <?php
 
 return array (
+  'active'=>'Active',
+  'inactive'=>'In Active',
+  'user'=>'User',
+  'provider'=>'Provider',
+  'country_code' => 'Country Code',
   'back' => 'Back',
   'db_backup' => 'DB Backup',
   'db_backup_btn' => 'DB Backup Download',
-  'demomode'=>'"CRUD Feature" has been disabled on the Demo Admin Panel. This feature will be enabled on your product which you will be purchasing, meahwhile if you have any queries feel free to contact our 24/7 support at info@appdupe.com.',
+  'demomode'=>'"CRUD Feature" has been disabled on the Demo Mode. This feature will be enabled on your product which you will be purchasing.',
   'fleet' => 
   array (
     'fleet_owners' => 'Fleet Owners',
@@ -64,6 +69,7 @@ return array (
   ),
   'setting' => 
   array (
+    'site_skin' =>'Color Scheme',
     'map_key' => 'Google Map Key',
     'fb_app_version' => 'FB App Version',
     'fb_app_id' => 'FB App ID',
@@ -215,6 +221,7 @@ return array (
   ),
   'provides' => 
   array (
+    'created_at' => 'Created on',
     'download' => 'Download',
     'providers' => 'Providers',
     'provider_name' => 'Provider Name',
@@ -458,8 +465,8 @@ return array (
   'users' => 
   array (
     'Users' => 'Users',
-    'Add_User' => 'Add User',
-    'Update_User' => 'Update User',
+    'add_user' => 'Add User',
+    'update_user' => 'Update User',
     'Rating' => 'Rating',
     'Wallet_Amount' => 'Wallet Amount',
     'User_Details' => 'User Details',
@@ -468,6 +475,27 @@ return array (
     'Total_Spending' => 'Total Spending',
     'Joined_at' => 'Joined at',
     'Details' => 'Details',
+    'name' => 'Name',
+  'first_name' => 'First Name',
+  'last_name' => 'Last Name',
+  'picture' => 'Picture',
+  'mobile' => 'Mobile',
+  'cancel' => 'Cancel',
+  'view' => 'View',
+  'delete' => 'Delete',
+  'update' => 'Update',
+  'id' => 'ID',
+  'gender' => 'Gender',
+  'address' => 'Address',
+  'action' => 'Action',
+  'Enable' => 'Enable',
+  'Disable' => 'Disable',
+  'type' => 'Type',
+  'status' => 'Status',
+  'message' => 'Message',
+  'amount' => 'Amount',
+  'company' => 'Company',
+  'logo' => 'Logo',
   ),
   'fleets' => 
   array (    
@@ -581,6 +609,22 @@ return array (
     'over_earning' => 'Over All Earning',
     'over_commission' => 'Over All Commission',
     'total' => 'Total',
+    'passengers' =>'Passengers',
+    'wallet_summary' => 'Wallet Summary',
+    'wallet_summary_admin_credit' => 'Admin Credit',
+    'wallet_summary_provider_credit' => 'Provider Credit',
+    'wallet_summary_provider_debit' => 'Provider Debit	',
+    'wallet_summary_fleet_credit' => 'Fleet Credit',
+    'wallet_summary_fleet_debit' => 'Fleet Debit',
+    'wallet_summary_commission' => 'Commission',
+    'wallet_summary_peak_commission' => 'Peak Commission',
+    'wallet_summary_waitining_commission' => 'Waiting Commission',
+    'wallet_summary_discount' => 'Discount',
+    'wallet_summary_tax_amount' => 'Tax Amount',
+    'wallet_summary_tips' => 'Tips',
+    'wallet_summary_referrals' => 'Referrals',
+    'wallet_summary_disputes' => 'Disputes',
+    '' => '',
   ),
   'heatmap' => 
   array (
@@ -663,8 +707,8 @@ return array (
   array (
     'user_saved' => 'Sub Admin Saved Successfully',
     'user_not_found' => 'Sub Admin Not Found',
-    'Add_User' => 'Add Admin',
-    'update_User' => 'Update Admin',
+    'add_user' => 'Add Admin',
+    'update_user' => 'Update Admin',
     'user_delete' => 'Sub Admin Deleted Successfully',
     'role_not_found' => 'Role Not Found',
 
@@ -761,7 +805,7 @@ return array (
     'role_not_found' => 'Role Not Found',
     'role_update' => 'Role Updated Successfully',
     'role_delete' => 'Role Deleted Successfully',
-    'role_name' => 'Role',
+    'role_name' => 'Role Lable',
     'add_role' => 'Add Role',
     'update_role' => 'Update Role',
   ),

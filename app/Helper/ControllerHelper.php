@@ -72,7 +72,7 @@ class Helper
 		$site_details=Setting::all();
 
 		Mail::send('emails.welcome', ['user' => $user], function ($mail) use ($user) {
-		   // $mail->from('harapriya@appoets.com', 'Your Application');
+		   // $mail->from('harapriya@Thinkin Cab.com', 'Your Application');
 
 			//$mail->to('tamilvanan@blockchainappfactory.com')->subject('Invoice');
 

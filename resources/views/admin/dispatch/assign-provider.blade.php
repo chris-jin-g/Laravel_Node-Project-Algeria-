@@ -1,7 +1,7 @@
 @extends('admin.layout.base')
 <!-- @section('title', 'Dispatcher ') -->
 @section('content')
-<div class="content-area py-1">
+<div>
     <div class="container-fluid">
         <h4>Dispatcher</h4>
         <div class="dispatch-head">
@@ -9,7 +9,7 @@
                 <button class="navbar-toggler hidden-md-up" data-toggle="collapse" data-target="#process-filters" aria-controls="process-filters" aria-expanded="false" aria-label="Toggle Navigation"></button>
                 <form class="form-inline navbar-item ml-1 float-xs-right">
                     <div class="input-group">
-                        <input type="text" class="form-control b-a" placeholder="Search for...">
+                        <input type="text" class="form-control b-a" placehold="Search for...">
                         <span class="input-group-btn">
                         		<button type="submit" class="btn btn-primary b-a"><i class="ti-search"></i></button>
                         	</span>

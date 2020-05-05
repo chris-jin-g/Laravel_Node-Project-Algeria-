@@ -38,9 +38,6 @@ use App\PromocodeUsage;
 use App\WalletPassbook;
 use App\ProviderService;
 use Location\Coordinate;
-use App\State;
-use App\City;
-use App\FleetCities;
 use App\UserRequestRating;
 use App\PromocodePassbook;
 use App\UserRequestDispute;
@@ -55,8 +52,6 @@ use App\PaymentLog;
 
 class UserApiController extends Controller
 {
-
-    private $city_id = 0;
 
     /**
      * Verifica a disponiblidade do Email e Telefone para o usuário
@@ -191,11 +186,8 @@ class UserApiController extends Controller
             'login_by' => 'required|in:manual,facebook,google',
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
-            'cpf' => 'max:255',
             'email' => 'required|email|max:255',
             'country_code' => 'required',
-            //'state_id' => 'required',
-            //'city_id' => 'required',
             'mobile' => 'required',
             'password' => 'required|min:6',
         ]);
@@ -268,12 +260,8 @@ class UserApiController extends Controller
             $User = $currentUser;
             $User->first_name = $request->first_name;
             $User->last_name = $request->last_name;
-            $User->cpf = ($request->cpf ? $request->cpf : null);
             $User->email = $request->email;
             $User->country_code = $request->country_code;
-            if ($request->city_id != '') {
-                $User->city_id = $request->city_id;
-            }
             $User->mobile = $request->mobile;
             $User->password = bcrypt($request->password);
             $User->login_by = 'manual';
@@ -317,7 +305,7 @@ class UserApiController extends Controller
     }
 
     /**
-     * Altera senha do usuário
+     * Change password
      *
      * @return \Illuminate\Http\Response
      * @throws \Illuminate\Validation\ValidationException
@@ -525,7 +513,6 @@ class UserApiController extends Controller
         $this->validate($request, [
             'first_name' => 'required|max:255',
             'last_name' => 'max:255',
-            'cpf' => 'max:255',
             'email' => 'email|unique:users,email,' . Auth::user()->id,
             'picture' => 'mimes:jpeg,bmp,png',
         ]);
@@ -540,10 +527,6 @@ class UserApiController extends Controller
 
             if ($request->has('last_name')) {
                 $user->last_name = $request->last_name;
-            }
-
-            if ($request->has('cpf')) {
-                $user->cpf = $request->cpf;
             }
 
             if ($request->has('country_code')) {
@@ -616,18 +599,12 @@ class UserApiController extends Controller
      */
     public function services(Request $request)
     {
-        //TODO ALLAN - Consulta serviços da franquia existente na cidade de pesquisa do passageiro
-        $locationService = new LocationService();
-        $idCity = $locationService->getByLatLong(Auth()->user()->latitude, Auth()->user()->longitude);
-        $serviceList = ServiceType::whereHas('fleet', function ($query) use ($idCity) {
-            $query->where('city_id', $idCity);
-        })->get();
+        $serviceList = ServiceType::all();
         
         $ActiveProviders = ProviderService::where('status', 'active')
             ->get()->pluck('provider_id');
 
         $Providers = Provider::with('service')->whereIn('id', $ActiveProviders)
-            ->where('city_id', $idCity)
             ->where('status', 'approved')
             ->get();
                 
@@ -636,7 +613,7 @@ class UserApiController extends Controller
         } else {
             
             if(Auth()->user()->latitude){
-               //TODO ALLAN - Consulta serviços de não existir franquia na cidade do passageiro e existir motorista de outra cidade no local
+                
                 $distance = config('constants.provider_search_radius', '10');
                 $ActiveProviders = ProviderService::where('status', 'active')
                     ->get()->pluck('provider_id');
@@ -648,9 +625,7 @@ class UserApiController extends Controller
 
                 if($Providers->count() != null){
                     foreach($Providers as $Provider){
-                        $serviceList = ServiceType::whereHas('fleet', function ($query) use ($Provider) {
-                            $query->where('city_id', $Provider->city_id);
-                        })->get();  
+                        $serviceList = ServiceType::all();  
                     }
                     return $serviceList;
                 }else{
@@ -677,7 +652,7 @@ class UserApiController extends Controller
                 'd_latitude' => 'numeric|numeric',
                 'd_longitude' => 'numeric',
                 'service_type' => 'required|numeric|exists:service_types,id',
-                //'promo_code' => 'exists:promocodes,promo_code',
+                'promo_code' => 'exists:promocodes,promo_code',
                 'distance' => 'required|numeric',
                 'use_wallet' => 'numeric',
                 
@@ -762,7 +737,7 @@ class UserApiController extends Controller
             }
         }
 
-        try {
+        //try {
 
             $details = "https://maps.googleapis.com/maps/api/directions/json?origin=" . $request->s_latitude . "," . $request->s_longitude . "&destination=" . $request->d_latitude . "," . $request->d_longitude . "&mode=driving&key=" . config('constants.map_key');
 
@@ -805,8 +780,6 @@ class UserApiController extends Controller
             $UserRequest->promocode_id = $request->promocode_id ?: 0;
 
             $UserRequest->status = 'SEARCHING';
-
-            $UserRequest->city_id = $this->city_id;
 
             $UserRequest->s_address = $request->s_address ?: "";
             $UserRequest->d_address = $request->d_address ?: "";
@@ -909,13 +882,13 @@ class UserApiController extends Controller
                 }
                 return redirect('dashboard');
             }
-        } catch (Exception $e) {
-            if ($request->ajax()) {
-                return response()->json(['error' => trans('api.something_went_wrong')], 500);
-            } else {
-                return back()->with('flash_error', trans('api.something_went_wrong'));
-            }
-        }
+        // } catch (Exception $e) {
+        //     if ($request->ajax()) {
+        //         return response()->json(['error' => trans('api.something_went_wrong')], 500);
+        //     } else {
+        //         return back()->with('flash_error', trans('api.something_went_wrong'));
+        //     }
+        // }
     }
 
     /**
@@ -1475,13 +1448,7 @@ class UserApiController extends Controller
     public function list_promocode(Request $request)
     {
         try {
-            $locationService = new LocationService();
-            $idCity = $locationService->getByLatLong(Auth()->user()->latitude, Auth()->user()->longitude);
-
             $promo_list = Promocode::where('expiration', '>=', date("Y-m-d H:i"))
-                ->whereHas('fleet', function ($query) use ($idCity) {
-                    $query->where('city_id', $idCity);
-                })
                 ->whereDoesntHave('promousage', function ($query) {
                     $query->where('user_id', Auth::user()->id);
                 })
@@ -1653,20 +1620,7 @@ class UserApiController extends Controller
             'service' => 'numeric|exists:service_types,id',
         ]);
         
-        //TODO ALLAN - Atualiza cidade do passageiro pegando pela latitude e longitude
-        $User = User::where("id", Auth::user()->id)->where("city_id", null)->first();
-        if($User){
-            
-            $locationService = new LocationService();
-            $geocode = $locationService->geocode($request->latitude, $request->longitude);
-            
-            $State = State::where("letter", $geocode['state'])->first();
-            $City = City::where("title", $geocode['city'])->where("state_id", $State->id)->first();
-            
-            User::where('id', Auth::user()->id)->update(['city_id' => $City->id]);
-        }
-        
-        //TODO ALLAN - Atualiza latitude e longitude do passageiro no banco de dados
+        // TODO ALLAN - Update passenger latitude and longitude in database
         User::where('id', Auth::user()->id)->update(['latitude' => $request->latitude, 'longitude' => $request->longitude]);
 
         try {
@@ -1730,7 +1684,7 @@ class UserApiController extends Controller
             Notification::send($user, new ResetPasswordOTP($otp));
 
             return response()->json([
-                'message' => 'Senha enviada para o seu E-mail!',
+                'message' => 'Password sent to your Email!',
                 'user' => $user
             ]);
         } catch (Exception $e) {
@@ -2065,52 +2019,6 @@ class UserApiController extends Controller
         \Braintree_Configuration::merchantId(config('constants.braintree_merchant_id'));
         \Braintree_Configuration::publicKey(config('constants.braintree_public_key'));
         \Braintree_Configuration::privateKey(config('constants.braintree_private_key'));
-    }
-    
-    public function states()
-    {
-        $states = DB::table('states')
-            ->join('fleet_cities', 'states.letter', '=', 'fleet_cities.estate_name')
-            ->select('states.id', 'states.title')
-            ->get();
-
-        $collection = collect($states);
-        $unique_data = $collection->unique()->values()->all(); 
-
-        if ($unique_data) {
-                return $unique_data;
-        } else {
-            $states = State::all(['id','title']);
-            if($states){
-                return $states;
-            }else{
-                return response()->json(['error' => trans('api.states_not_found')], 422);
-            }
-        }
-    }
-
-    public function city(Request $request){
-	if($request->has('state_id')){
-            $state = State::find($request->get('state_id'));
-
-            $cities = DB::table('cities')
-                ->join('fleets', 'cities.id', '=', 'fleets.city_id')
-                ->where('state_id', '=', $request->get('state_id'))
-                ->select('cities.id','cities.state_id','cities.title')
-                ->get();
-
-            if ($cities) {
-                    return $cities;
-            } else {
-                $cities = $state->cities()->getQuery()->get(['id','state_id','title']);
-                if($cities){
-                    return $cities;
-                }else{
-                    return response()->json(['error' => trans('api.cities_not_found')], 422);
-                }
-            }
-	}
-	return null;
     }
 
 }

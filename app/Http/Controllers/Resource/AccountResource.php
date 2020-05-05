@@ -144,12 +144,12 @@ class AccountResource extends Controller
             $user->email = $request->email;
             $user->mobile = $request->mobile;
             if($request->password && !$request->password_confirm){
-                return back()->with('flash_error', 'Por favor, informe a senha de confirmação!');
+                return back()->with('flash_error', 'Please enter the confirmation password!                ');
             }elseif($request->password && $request->password_confirm){
                 if($request->password == $request->password_confirm){
                     $user->password = bcrypt($request->password);
                 }else{
-                    return back()->with('flash_error', 'As senhas não conferem!');
+                    return back()->with('flash_error', 'Passwords do not match!');
                 }
             }
             $user->save();

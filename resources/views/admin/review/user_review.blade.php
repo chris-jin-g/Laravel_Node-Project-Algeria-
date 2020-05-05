@@ -1,15 +1,18 @@
 @extends('admin.layout.base')
 
-@section('title', 'Avaliação de Passageiros ')
+@section('title', 'User Review')
 
 @section('content')
 
-    <div class="content-area py-1">
         <div class="container-fluid">
             
-            <div class="box box-block bg-white">
-                <h5 class="mb-1">@lang('admin.review.User_Reviews')</h5>
-                <table class="table table-striped table-bordered dataTable" id="table-4">
+            <div class="card">
+                <div class="card-header card-header-primary">
+                  <h5 class="card-title ">@lang('admin.review.User_Reviews')</h5>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                <table class="table">
                     <thead>
                         <tr>
                             <th>@lang('admin.id')</th>
@@ -41,11 +44,11 @@
                             <td>
                             <div class="btn-group" role="group">
                                 <button type="button" class="btn btn-primary waves-effect dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                    Ação
+                                    Action
                                 </button>
                                 <div class="dropdown-menu">
                                     <a href="{{ route('admin.requests.show', $review->request_id) }}" class="dropdown-item">
-                                        <i class="fa fa-search"></i> Mais detalhes
+                                        <i class="fa fa-search"></i> More details
                                     </a>
                                 </div>
                             </div>
@@ -68,7 +71,7 @@
                 </table>
                  @include('common.pagination')
             </div>
-            
+                </div>
         </div>
     </div>
 @endsection

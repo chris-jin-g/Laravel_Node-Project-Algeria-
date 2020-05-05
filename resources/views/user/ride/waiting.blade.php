@@ -62,8 +62,8 @@
 				</div>
 				<div class="modal-body">
 					<form action="{{url('confirm/ride')}}" method="GET" onkeypress="return disableEnterKey(event);">
-					 <input type="text" class="form-control" id="origin-input" name="s_address"  placeholder="Enter pickup location" value="" disabled="">
-					 <input type="text" class="form-control" id="destination-input" name="d_address"  placeholder="Enter drop location" >
+					 <input type="text" class="form-control" id="origin-input" name="s_address"  placehold="Enter pickup location" value="" disabled="">
+					 <input type="text" class="form-control" id="destination-input" name="d_address"  placehold="Enter drop location" >
 			        <input type="hidden" name="s_latitude" id="origin_latitude" value="{{$request->s_latitude}}">
                     <input type="hidden" name="s_longitude" id="origin_longitude" value="{{$request->s_longitude}}">
                     <input type="hidden" name="d_latitude" id="destination_latitude">
@@ -423,7 +423,7 @@
 										@endif	
 										<option value="ot">Others</option>
 									</select>	
-									<textarea className="form-control @if($request->reasons) cancel_hide @endif" id="cancel_text" name="cancel_reason_opt" placeholder="@lang('user.ride.cancel_reason')" row="5"></textarea>
+									<textarea className="form-control @if($request->reasons) cancel_hide @endif" id="cancel_text" name="cancel_reason_opt" placehold="@lang('user.ride.cancel_reason')" row="5"></textarea>
 								</div>
 								<div className="modal-footer">
 									<button type="submit" className="full-primary-btn fare-btn">@lang('user.ride.cancel_request')</button>
@@ -757,7 +757,7 @@
                         </div>
 						<input type="hidden" name="request_id" value={this.props.checkState.id} />
                         <label>@lang('user.ride.comment')</label>
-                        <textarea className="form-control" name="comment" placeholder="Write Comment"></textarea>
+                        <textarea className="form-control" name="comment" placehold="Write Comment"></textarea>
                     </div>
                     <button type="submit" className="full-primary-btn fare-btn">SUBMIT</button>   
                 </form>

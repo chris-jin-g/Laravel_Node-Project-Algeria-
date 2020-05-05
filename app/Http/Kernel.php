@@ -50,8 +50,6 @@ class Kernel extends HttpKernel
     protected $routeMiddleware = [
         'account' => \App\Http\Middleware\RedirectIfNotAccount::class,
         'account.guest' => \App\Http\Middleware\RedirectIfAccount::class,
-        'fleet' => \App\Http\Middleware\RedirectIfNotFleet::class,
-        'fleet.guest' => \App\Http\Middleware\RedirectIfFleet::class,
         'dispatcher' => \App\Http\Middleware\RedirectIfNotDispatcher::class,
         'dispatcher.guest' => \App\Http\Middleware\RedirectIfDispatcher::class,
         'provider' => \App\Http\Middleware\RedirectIfNotProvider::class,
@@ -68,7 +66,6 @@ class Kernel extends HttpKernel
         'language' => \App\Http\Middleware\LanguageMiddleware::class,
         'provider.language' => \App\Http\Middleware\ProviderLanguageMiddleware::class,        
         'admin.language' => \App\Http\Middleware\AdminLanguageMiddleware::class,        
-        'fleet.language' => \App\Http\Middleware\FleetLanguageMiddleware::class,        
         'account.language' => \App\Http\Middleware\AccountLanguageMiddleware::class,        
         'dispatcher.language' => \App\Http\Middleware\DispatcherLanguageMiddleware::class,        
         'jwt.auth' => 'Tymon\JWTAuth\Middleware\GetUserFromToken',

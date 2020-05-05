@@ -16,7 +16,7 @@
         {{ csrf_field() }}
 
         <div class="col-md-12">
-            <input type="email" class="form-control" name="email" placeholder="@lang('provider.signup.email_address')" value="{{ old('email') }}">
+            <input type="email" class="form-control" name="email" placehold="@lang('provider.signup.email_address')" value="{{ old('email') }}">
 
             @if ($errors->has('email'))
                 <span class="help-block">

@@ -19,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'city_id','first_name', 'last_name', 'cpf', 'gender', 'email', 'mobile', 'picture', 'password', 'device_type','device_token','login_by', 'payment_mode','social_unique_id','device_id','wallet_balance','referral_unique_id', 'user_type','qrcode_url','country_code'
+        'first_name', 'last_name', 'gender', 'email', 'mobile', 'picture', 'password', 'device_type','device_token','login_by', 'payment_mode','social_unique_id','device_id','wallet_balance','referral_unique_id', 'user_type','qrcode_url','country_code'
     ];
 
     /**
@@ -38,11 +38,6 @@ class User extends Authenticatable
     public function trips()
     {
         return $this->hasMany('App\UserRequests','user_id','id');
-    }
-
-    public function city()
-    {
-        return $this->belongsTo(City::class);
     }
 
     public function getFirstNameAttribute($value)

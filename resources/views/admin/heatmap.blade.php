@@ -1,25 +1,25 @@
 @extends('admin.layout.base')
 
-@section('title', 'Mapa de Calor ')
+@section('title', 'Heat Map')
 
 @section('content')
 <?php $diff = ['-success', '-info', '-warning', '-danger']; ?>
 
-<div class="content-area py-1">
+<div>
     <div class="container-fluid">
-        <div class="box box-block bg-white">
-            <div class="clearfix mb-1">
-                <h5 class="float-xs-left">@lang('admin.heatmap.Ride_Heatmap')</h5>
+        <div class="card">
+            <div class="card-header card-header-primary">
+                <h5 class="card-title">@lang('admin.heatmap.Ride_Heatmap')</h5>
                 <div class="float-xs-right">
                 </div>
             </div>
-            <div class="row">
+            <div class="card-body">
                 <div class="col-md-12">
                     <div id="floating-panel">
-                        <button class="btn btn-primary" onclick="toggleHeatmap(event)">Alternar Mapa de Calor</button>
-                        <button class="btn" onclick="changeGradient(event)">Alterar Gradiente</button>
-                        <button class="btn btn-primary" onclick="changeRadius(event)">Mudar Raio</button>
-                        <button class="btn btn-primary" onclick="changeOpacity(event)">Mudar Transparência</button>
+                        <button class="btn btn-primary" onclick="toggleHeatmap(event)">Toggle Heat Map</button>
+                        <button class="btn" onclick="changeGradient(event)">Change Gradient</button>
+                        <button class="btn btn-primary" onclick="changeRadius(event)">Change Radius</button>
+                        <button class="btn btn-primary" onclick="changeOpacity(event)">Change Transparency</button>
                     </div> <br>
 
                     <div id="map" style="width:100%;height:530px;background:#ccc"></div>

@@ -3,10 +3,13 @@
 @section('title', 'Request details ')
 
 @section('content')
-<div class="content-area py-1">
+
     <div class="container-fluid">
-        <div class="box box-block bg-white">
-            <h4>@lang('admin.request.request_details')</h4>
+        <div class="card">
+            <div class="card-header card-header-primary">
+              <h4 class="card-title">@lang('admin.request.request_details')</h4>
+            </div>
+            <div class="card-body">
             <div class="row">
                 <div class="col-md-6">
                     <dl class="row">
@@ -90,9 +93,6 @@
                         @endif                           
                         <dt class="col-sm-4">@lang('admin.request.commission') :</dt>
                         <dd class="col-sm-8">{{ currency($request->payment->commision) }}</dd>
-
-                        <dt class="col-sm-4">@lang('admin.request.fleet_commission') :</dt>
-                        <dd class="col-sm-8">{{ currency($request->payment->fleet) }}</dd>
 
                         <dt class="col-sm-4">@lang('admin.request.discount_price') :</dt>
                         <dd class="col-sm-8">{{ currency($request->payment->discount) }}</dd>

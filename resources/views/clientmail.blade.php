@@ -34,22 +34,22 @@
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label for="password">Nome</label>
-                            <input type="text" name="first_name" class="form-control" id="first_name" placeholder="Nome">
+                            <input type="text" name="first_name" class="form-control" id="first_name" placehold="Nome">
                         </div>
 
                         <div class="form-group">
                             <label for="password">Sobrenome</label>
-                            <input type="text" name="last_name" class="form-control" id="last_name" placeholder="Sobrenome">
+                            <input type="text" name="last_name" class="form-control" id="last_name" placehold="Sobrenome">
                         </div>
 
                         <div class="form-group">
                             <label for="password">E-mail</label>
-                            <input type="text" name="email" class="form-control" id="email" placeholder="E-mail">
+                            <input type="text" name="email" class="form-control" id="email" placehold="E-mail">
                         </div>
 
                         <div class="form-group">
                             <label for="password">Telefone</label>
-                            <input type="text" name="mobile" class="form-control" id="mobile" placeholder="Telefone">
+                            <input type="text" name="mobile" class="form-control" id="mobile" placehold="Telefone">
                         </div>
 
                     </form>
@@ -93,11 +93,6 @@
                         <p><strong>Password : </strong>123456</p>
                     </div>
 
-                    <div style="border-top:solid #9a9797 1px;border-bottom:solid #9a9797 1px;">
-                        <p><strong>Fleet Login : </strong></p>
-                        <p><strong>Email : </strong>fleet@demo.com</p>
-                        <p><strong>Password : </strong>123456</p>
-                    </div>    
                     <div style="border-top:solid #9a9797 1px;border-bottom:solid #9a9797 1px;">
                         <p><strong>Account Login : </strong></p>
                         <p><strong>Email : </strong>account@demo.com</p>

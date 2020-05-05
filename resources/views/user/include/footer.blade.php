@@ -1,7 +1,7 @@
 <div class="row footer no-margin">
     <div class="container">
         <div class="col-md-6 text-left">
-            <p>{{ config('constants.site_copyright', '&copy; '.date('Y').' Moob Urban') }}</p>
+            <p>{{ config('constants.site_copyright', '&copy; '.date('Y').' Thinkin Cab') }}</p>
         </div>
         <div class="col-md-6 col-sm-6 col-xs-12 text-right">
             <a href="{{config('constants.store_link_ios_user','#')}}" target="_blank" class="app">

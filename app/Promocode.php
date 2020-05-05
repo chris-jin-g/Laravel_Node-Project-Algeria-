@@ -15,7 +15,7 @@ class Promocode extends Model
      * @var array
      */
     protected $fillable = [
-        'fleet_id','promo_code','percentage','max_amount','expiration','promo_description'
+        'promo_code','percentage','max_amount','expiration','promo_description'
     ];
 
     /**
@@ -30,11 +30,6 @@ class Promocode extends Model
      public function promousage()
     {
         return $this->hasMany('App\PromocodeUsage', 'promocode_id');
-    }
-
-    public function fleet()
-    {
-        return $this->belongsTo(Fleet::class);
     }
 
     /**

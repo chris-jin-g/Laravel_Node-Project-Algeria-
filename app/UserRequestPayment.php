@@ -12,13 +12,13 @@ class UserRequestPayment extends Model
      * @var array
      */
     protected $fillable = [
-        'request_id','user_id','provider_id','fleet_id','promocode_id','payment_id',
+        'request_id','user_id','provider_id','promocode_id','payment_id',
         'payment_mode',
         'fixed',
         'distance',
         'minute',
         'hour',
-        'commision','commision_per','fleet','fleet_per',
+        'commision','commision_per',
         'discount','discount_per',
         'tax','tax_per',
         'total',
@@ -53,10 +53,4 @@ class UserRequestPayment extends Model
     {
         return $this->belongsTo('App\Provider');
     }
-
-    public function fleet()
-    {
-        return $this->belongsTo(Fleet::class, 'fleet_id');
-    }
-
 }

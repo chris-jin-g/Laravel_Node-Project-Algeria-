@@ -41,11 +41,6 @@ return [
             'provider' => 'accounts',
         ],
 
-        'fleet' => [
-            'driver' => 'session',
-            'provider' => 'fleets',
-        ],
-
         'dispatcher' => [
             'driver' => 'session',
             'provider' => 'dispatchers',
@@ -100,11 +95,6 @@ return [
             'model' => App\Account::class,
         ],
 
-        'fleets' => [
-            'driver' => 'eloquent',
-            'model' => App\Fleet::class,
-        ],
-
         'dispatchers' => [
             'driver' => 'eloquent',
             'model' => App\Dispatcher::class,
@@ -113,11 +103,6 @@ return [
         'accounts' => [
             'driver' => 'eloquent',
             'model' => App\Account::class,
-        ],
-
-        'fleets' => [
-            'driver' => 'eloquent',
-            'model' => App\Fleet::class,
         ],
 
         'dispatchers' => [
@@ -162,12 +147,6 @@ return [
             'expire' => 60,
         ],
 
-        'fleets' => [
-            'provider' => 'fleets',
-            'table' => 'fleet_password_resets',
-            'expire' => 60,
-        ],
-
         'dispatchers' => [
             'provider' => 'dispatchers',
             'table' => 'dispatcher_password_resets',
@@ -177,11 +156,6 @@ return [
         'accounts' => [
             'driver' => 'eloquent',
             'model' => App\Account::class,
-        ],
-
-        'fleets' => [
-            'driver' => 'eloquent',
-            'model' => App\Fleet::class,
         ],
 
         'dispatchers' => [

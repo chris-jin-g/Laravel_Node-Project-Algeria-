@@ -258,7 +258,7 @@ class TripArrivedButton extends React.Component {
                                 <h4 className="modal-title">Cancel Reason</h4>
                             </div>
                             <div className="modal-body">
-                                <textarea className="form-control" onChange={this.handleCancelReason} name="cancel_reason" placeholder="Cancel Reason">{this.state.reason}</textarea>
+                                <textarea className="form-control" onChange={this.handleCancelReason} name="cancel_reason" placehold="Cancel Reason">{this.state.reason}</textarea>
                             </div>
                             <div className="modal-footer">
                                 <button type="submit" className="full-primary-btn fare-btn reg-btn" onClick={this.handleCancelButton.bind(this)}>Cancel</button>
@@ -303,7 +303,7 @@ class TripPickedButton extends React.Component {
                                 <h4 className="modal-title">Cancel Reason</h4>
                             </div>
                             <div className="modal-body">
-                                <textarea className="form-control" onChange={this.handleCancelReason} name="cancel_reason" placeholder="Cancel Reason">{this.state.reason}</textarea>
+                                <textarea className="form-control" onChange={this.handleCancelReason} name="cancel_reason" placehold="Cancel Reason">{this.state.reason}</textarea>
                             </div>
                             <div className="modal-footer">
                                 <button type="submit" className="full-primary-btn fare-btn reg-btn" onClick={this.handleCancelButton.bind(this)}>Cancel</button>
@@ -398,7 +398,7 @@ class TripRatingButton extends React.Component {
                         <input type="hidden" value={this.state.rating} name="rating" className="rating" onChange={this.handleRatingChange} />
                     </div>
                     <label>Your Comments</label>
-                    <textarea className="form-control" name="comment" value={this.state.comment} onChange={this.handleCommentChange} placeholder="Write Comment" />
+                    <textarea className="form-control" name="comment" value={this.state.comment} onChange={this.handleCommentChange} placehold="Write Comment" />
                 </div>
                 <button type="submit" className="full-primary-btn fare-btn" onClick={this._submit.bind(this)}>SUBMIT REVIEW</button>   
             </div>

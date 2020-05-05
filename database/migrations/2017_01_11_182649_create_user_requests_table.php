@@ -55,7 +55,7 @@ class CreateUserRequestsTable extends Migration
             
             $table->boolean('paid')->default(0);
             $table->enum('is_track', ['YES','NO'])->default('NO');
-
+            $table->double('estimated_fare', 10, 2);
             $table->double('distance', 15, 8);
             $table->string('travel_time')->nullable();
 

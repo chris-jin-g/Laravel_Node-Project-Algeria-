@@ -4,10 +4,13 @@
 
 @section('content')
 
-<div class="content-area py-1">
+
     <div class="container-fluid">
-        <div class="box box-block bg-white">
-            <h4>@lang('admin.provides.Provider_Details')</h4>
+        <div class="card">
+            <div class="card-header card-header-primary">
+            <h4 class="card-title">@lang('admin.provides.Provider_Details')</h4>
+            </div>
+            <div class="card-body">
             <div class="row">
                 <div class="col-md-12">
                     <div class="box bg-white user-1">

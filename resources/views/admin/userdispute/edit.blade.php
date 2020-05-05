@@ -11,26 +11,27 @@
   display: table-cell;
 }
 </style>
-<div class="content-area py-1">
+
     <div class="container-fluid">
-    	<div class="box box-block bg-white">
-            <a href="{{ URL::previous() }}" class="btn btn-default pull-right"><i class="fa fa-angle-left"></i> @lang('admin.back')</a>
-
-			<h5 style="margin-bottom: 2em;">@lang('admin.dispute.update_dispute')</h5>
-
+		<div class="card">
+            <div class="card-header card-header-primary">
+              <h5 class="card-title">@lang('admin.dispute.update_dispute')</h5>
+              <a href="{{ URL::previous() }}" class="btn btn-default pull-right"><i class="fa fa-angle-left"></i> @lang('admin.back')</a>
+            </div>
+            <div class="card-body">
             <form class="form-horizontal" action="{{route('admin.userdisputeupdate',$dispute->id)}}" method="POST" enctype="multipart/form-data" role="form">
             	{{csrf_field()}}
 
-				<div class="form-group row">
-					<label for="user" class="col-xs-2 col-form-label">@lang('admin.dispute.dispute_type')</label>
+				<div class="form-group">
+					<label for="user" class="bmd-label-floating">@lang('admin.dispute.dispute_type')</label>
 					<div class="col-xs-5">
-						<input class="form-control" type="text" value="{{ $dispute->dispute_type=="provider"?"Motorista":"Passageiro" }}" name="name" id="namesearch" disabled="">
+						<input class="form-control" type="text" value="{{ $dispute->dispute_type=="provider"?"Driver":"User" }}" name="name" id="namesearch" disabled="">
 						<input type="hidden" name="request_id" id="request_id" value="">
 					</div>
 				</div>
 
-				<div class="form-group row">
-					<label for="user" class="col-xs-2 col-form-label">@lang('admin.dispute.dispute_user') / @lang('admin.dispute.dispute_provider')</label>
+				<div class="form-group">
+					<label for="user" class="bmd-label-floating">@lang('admin.dispute.dispute_user') / @lang('admin.dispute.dispute_provider')</label>
 
 					<div class="col-xs-5">
 						<input class="form-control" type="text" value="{{ $dispute->user->first_name }} {{ $dispute->user->last_name }}" name="name" id="namesearch" disabled="">
@@ -38,8 +39,8 @@
 					</div>
 				</div>
 
-				<div class="form-group row">
-					<label for="lost_item_name" class="col-xs-2 col-form-label">@lang('admin.lostitem.request')</label>
+				<div class="form-group">
+					<label for="lost_item_name" class="bmd-label-floating">@lang('admin.lostitem.request')</label>
 					<div class="col-xs-5">
 		                <table class="table table-striped table-bordered dataTable requestList">
 		                    <thead>
@@ -61,36 +62,36 @@
 					</div>
 				</div>
 
-				<div class="form-group row">
-					<label for="lost_item_name" class="col-xs-2 col-form-label">@lang('admin.dispute.dispute_name')</label>
+				<div class="form-group">
+					<label for="lost_item_name" class="bmd-label-floating">@lang('admin.dispute.dispute_name')</label>
 					<div class="col-xs-5">
-						<textarea class="form-control" name="dispute_other" placeholder="@lang('admin.dispute.dispute_name')" disabled="">{{ $dispute->dispute_name }}</textarea>
+						<textarea class="form-control" name="dispute_other" placehold="@lang('admin.dispute.dispute_name')" disabled="">{{ $dispute->dispute_name }}</textarea>
 					</div>
 				</div>
 
-				<div class="form-group row">
-					<label for="lost_item_name" class="col-xs-2 col-form-label">@lang('admin.dispute.dispute_comments')</label>
+				<div class="form-group">
+					<label for="lost_item_name" class="bmd-label-floating">@lang('admin.dispute.dispute_comments')</label>
 					<div class="col-xs-5">
-						<textarea class="form-control" name="comments" placeholder="@lang('admin.dispute.dispute_comments')" required="">{{ $dispute->comments }}</textarea>
+						<textarea class="form-control" name="comments" placehold="@lang('admin.dispute.dispute_comments')" required="">{{ $dispute->comments }}</textarea>
 					</div>
 				</div>
 
-				<div class="form-group row">
-					<label for="lost_item_name" class="col-xs-2 col-form-label">@lang('admin.dispute.dispute_refund') ({{config('constants.currency', '$')}})</label>
+				<div class="form-group">
+					<label for="lost_item_name" class="bmd-label-floating">@lang('admin.dispute.dispute_refund') ({{config('constants.currency', '$')}})</label>
 					<div class="col-xs-5">
 						<input class="form-control" type="text" value="{{ $dispute->refund_amount }}" name="refund_amount" id="refund_amount">
 					</div>
 				</div>
 
-				<div class="form-group row">
-					<label for="status" class="col-xs-2 col-form-label">@lang('admin.dispute.dispute_status')</label>
+				<div class="form-group">
+					<label for="status" class="bmd-label-floating">@lang('admin.dispute.dispute_status')</label>
 					<div class="col-xs-5">
 					<input class="form-control" type="text" readonly value="closed" name="status">
 					</div>
 				</div>
 
-				<div class="form-group row">
-					<label for="" class="col-xs-2 col-form-label"></label>
+				<div class="form-group">
+					<label for="" class="bmd-label-floating"></label>
 					<div class="col-xs-5">
 						<input type="hidden" name="is_admin" value="1" />
 						<button type="submit" class="btn btn-primary">@lang('admin.dispute.update_dispute')</button>

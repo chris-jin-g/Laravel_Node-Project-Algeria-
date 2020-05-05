@@ -1,43 +1,32 @@
 @extends('admin.layout.base')
 
-@section('title', 'Atualizar Tipo de Serviço ')
+@section('title', __('admin.service.Update_Service_Type'))
 
 @section('content')
 
-<div class="content-area py-1">
+<div>
     <div class="container-fluid">
-        <div class="box box-block bg-white">
-            <a href="{{ URL::previous() }}" class="btn btn-default pull-right"><i class="fa fa-angle-left"></i> @lang('admin.back')</a>
-
-            <h5 style="margin-bottom: 2em;">@lang('admin.service.Update_Service_Type')</h5>
-
+        <div class="card">
+            <div class="card-header card-header-primary">
+              <h5 class="card-title">@lang('admin.service.Update_Service_Type')</h5>
+              <a href="{{ URL::previous() }}" class="btn btn-default pull-right"><i class="fa fa-angle-left"></i> @lang('admin.back')</a>
+            </div>
+            <div class="card-body">
             <form class="form-horizontal" action="{{route('admin.service.update', $service->id )}}" method="POST" enctype="multipart/form-data" role="form">
                 {{csrf_field()}}
                 <input type="hidden" name="_method" value="PATCH">
 
-                <div class="form-group row">
-                    <label for="promo_code" class="col-xs-2 col-form-label">Franquia</label>
+                <div class="form-group">
+                    <label for="name" class="bmd-label-floating">@lang('admin.service.Service_Name')</label>
                     <div class="col-xs-10">
-                        <select name="fleet_id" class="form-control" required>
-                            <option value="">Selecione a franquia</option>
-                            @foreach($fleets as $fleet)
-                                <option value="{{ $fleet->id }}"{{ !empty($service->fleet_id) && $fleet->id==$service->fleet_id?'selected':'' }}>{{ $fleet->name }}</option>
-                            @endforeach
-                        </select>
+                        <input class="form-control" type="text" value="{{ $service->name }}" name="name" required id="name" placehold="@lang('admin.service.Service_Name')">
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label for="name" class="col-xs-2 col-form-label">@lang('admin.service.Service_Name')</label>
-                    <div class="col-xs-10">
-                        <input class="form-control" type="text" value="{{ $service->name }}" name="name" required id="name" placeholder="@lang('admin.service.Service_Name')">
-                    </div>
-                </div>
+                <div class="input-group row">
 
-                <div class="form-group row">
-
-                    <label for="image" class="col-xs-2 col-form-label">@lang('admin.picture')</label>
-                    <div class="col-xs-10">
+                    <label for="image" class="bmd-label-floating">@lang('admin.picture')</label>
+                    <div class="col">
                         @if(isset($service->image))
                         <img style="height: 90px; margin-bottom: 15px; border-radius:2em;" src="{{ $service->image }}">
                         @endif
@@ -45,10 +34,10 @@
                     </div>
                 </div>
 
-                <div class="form-group row">
+                <div class="input-group row">
 
-                    <label for="marker" class="col-xs-2 col-form-label">@lang('admin.service.Service_marker_Image')</label>
-                    <div class="col-xs-10">
+                    <label for="marker" class="bmd-label-floating">@lang('admin.service.Service_marker_Image')</label>
+                    <div class="col">
                         @if(isset($service->marker))
                         <img style="height: 90px; margin-bottom: 15px; border-radius:2em;" src="{{ $service->marker }}">
                         @endif
@@ -56,8 +45,8 @@
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label for="calculator" class="col-xs-2 col-form-label">@lang('admin.service.Pricing_Logic')</label>
+                <div class="form-group">
+                    <label for="calculator" class="bmd-label-floating">@lang('admin.service.Pricing_Logic')</label>
                     <div class="col-xs-5">
                         <select class="form-control" id="calculator" name="calculator">
                             <option value="MIN" @if($service->calculator =='MIN') selected @endif>@lang('servicetypes.MIN')</option>
@@ -68,83 +57,83 @@
                         </select>
                     </div>
                     <div class="col-xs-5">
-                        <span class="showcal"><i><b>Cálculo de Preço: <span id="changecal"></span></b></i></span>
+                        <span class="showcal"><i><b>Price Calculation:<span id="changecal"></span></b></i></span>
                     </div>
                 </div>
                 
-                <div class="form-group row">
-                    <label for="min_price" class="col-xs-2 col-form-label">Tarifa Mínima ({{ currency('') }})</label>
+                <div class="form-group">
+                    <label for="min_price" class="bmd-label-floating">Minimum fee ({{ currency('') }})</label>
                     <div class="col-xs-5">
-                        <input class="form-control" type="text" id="currency_min_price" data-thousands="." data-decimal="," value="{{ $service->min_price }}" name="min_price" required id="min_price" placeholder="Tarifa mínima" min="0">
+                        <input class="form-control" type="text" id="currency_min_price" data-thousands="." data-decimal="," value="{{ $service->min_price }}" name="min_price" required id="min_price" min="0">
                     </div>
                     <div class="col-xs-5">
-                        <span class="showcal"><i><b>TM (Valor cobrado em viagens curtas)</b></i></span>
+                        <span class="showcal"><i><b>TM (Amount charged for short trips)</b></i></span>
                     </div>
                 </div>
 
-                <div class="form-group row" >
-                    <label for="fixed" class="col-xs-2 col-form-label">@lang('admin.service.hourly_Price') ({{ currency('') }})</label>
+                <div class="form-group" >
+                    <label for="fixed" class="bmd-label-floating">@lang('admin.service.hourly_Price') ({{ currency('') }})</label>
                     <div class="col-xs-5">
-                        <input class="form-control" type="number" value="{{ $service->hour }}" name="hour" id="hourly_price" placeholder="Definir preço por hora ( Apenas para DISTÂNCIA POR PREÇO )" min="0">
+                        <input class="form-control" type="number" value="{{ $service->hour }}" name="hour" id="hourly_price" min="0">
                     </div>
                     <div class="col-xs-5">
                         <span class="showcal"><i><b>PH (@lang('admin.service.per_hour')), TH (@lang('admin.service.total_hour'))</b></i></span>
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label for="fixed" class="col-xs-2 col-form-label">@lang('admin.service.Base_Price') ({{ currency('') }})</label>
+                <div class="form-group">
+                    <label for="fixed" class="bmd-label-floating">@lang('admin.service.Base_Price') ({{ currency('') }})</label>
                     <div class="col-xs-5">
-                        <input class="form-control" type="text" id="currency_fixed" data-thousands="." data-decimal="," value="{{ $service->fixed }}" name="fixed" required id="fixed" placeholder="@lang('admin.service.Base_Price')" min="0">
+                        <input class="form-control" type="text" id="currency_fixed" data-thousands="." data-decimal="," value="{{ $service->fixed }}" name="fixed" required id="fixed" placehold="@lang('admin.service.Base_Price')" min="0">
                     </div>
                     <div class="col-xs-5">
                         <span class="showcal"><i><b>PB (@lang('admin.service.Base_Price'))</b></i></span>
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label for="distance" class="col-xs-2 col-form-label">@lang('admin.service.Base_Distance') ({{ distance('') }})</label>
+                <div class="form-group">
+                    <label for="distance" class="bmd-label-floating">@lang('admin.service.Base_Distance') ({{ distance('') }})</label>
                     <div class="col-xs-5">
-                        <input class="form-control" type="number" value="{{ $service->distance }}" name="distance" id="distance" placeholder="@lang('admin.service.Base_Distance')" min="0">
+                        <input class="form-control" type="number" value="{{ $service->distance }}" name="distance" id="distance" placehold="@lang('admin.service.Base_Distance')" min="0">
                     </div>
                     <div class="col-xs-5">
                         <span class="showcal"><i><b>DB (@lang('admin.service.Base_Distance')) </b></i></span>
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label for="minute" class="col-xs-2 col-form-label">@lang('admin.service.unit_time') ({{ currency() }})</label>
+                <div class="form-group">
+                    <label for="minute" class="bmd-label-floating">@lang('admin.service.unit_time') ({{ currency() }})</label>
                     <div class="col-xs-5">
-                        <input class="form-control" type="text" id="currency_minute" data-thousands="." data-decimal="," value="{{ $service->minute }}" name="minute" id="minute" placeholder="@lang('admin.service.unit_time')" min="0">
+                        <input class="form-control" type="text" id="currency_minute" data-thousands="." data-decimal="," value="{{ $service->minute }}" name="minute" id="minute" placehold="@lang('admin.service.unit_time')" min="0">
                     </div>
                     <div class="col-xs-5">
-                        <span class="showcal"><i><b>PM (@lang('admin.service.per_minute')), TM(@lang('admin.service.total_minute'))</b></i></span>
+                        <span class="showcal"><i><b>PM (@lang('admin.service.per_minute')), TM (@lang('admin.service.total_minute'))</b></i></span>
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label for="price" class="col-xs-2 col-form-label">@lang('admin.service.unit') ({{ distance() }})</label>
+                <div class="form-group">
+                    <label for="price" class="bmd-label-floating">@lang('admin.service.unit') ({{ distance() }})</label>
                     <div class="col-xs-5">
-                        <input class="form-control" type="text" id="currency_price" data-thousands="." data-decimal="," value="{{ $service->price }}" name="price" id="price" placeholder="@lang('admin.service.unit')" min="0">
+                        <input class="form-control" type="text" id="currency_price" data-thousands="." data-decimal="," value="{{ $service->price }}" name="price" id="price" placehold="@lang('admin.service.unit')" min="0">
                     </div>
                     <div class="col-xs-5">
                         <span class="showcal"><i><b>P{{config('constants.distance')}} (@lang('admin.service.per') {{config('constants.distance')}}), T{{config('constants.distance')}} (@lang('admin.service.total') {{config('constants.distance')}})</b></i></span>
                     </div>
                 </div>
 
-                 <div class="form-group row">
-                    <label for="capacity" class="col-xs-2 col-form-label">@lang('admin.service.Seat_Capacity')</label>
+                 <div class="form-group">
+                    <label for="capacity" class="bmd-label-floating">@lang('admin.service.Seat_Capacity')</label>
                     <div class="col-xs-5">
-                        <input class="form-control" type="number" value="{{ $service->capacity }}" name="capacity" required id="capacity" placeholder="@lang('admin.service.Seat_Capacity')" min="1">
+                        <input class="form-control" type="number" value="{{ $service->capacity }}" name="capacity" required id="capacity" placehold="@lang('admin.service.Seat_Capacity')" min="1">
                     </div>
                 </div>
 
-                <div class="form-group row">
-                     <label for="description" class="col-xs-12 col-form-label" style="color: black;font-size: 25px;">@lang('admin.service.peak_title')</label>
-
+                <h3 for="description" class="bmd-label-floating" style="color: white; font-style:bold; font-size: 25px;">@lang('admin.service.peak_title')</h3>
+                <div class="form-group">
                      <!-- Set Peak Time -->
                     <div class="col-xs-12">
-                        <table class="table table-striped table-bordered dataTable" id="table-2">
+                        <div class="table-responsive">
+                        <table class="table">
                             <thead>
                                 <tr>
                                     <th>@lang('admin.service.peak_id')</th>
@@ -170,24 +159,26 @@
                                 </tr>
                             </tfoot>
                         </table>
+                        </div>
                     </div>
                 </div>
 
 
-
-                 <div class="form-group row">
-                    <label for="" class="col-xs-12 col-form-label" style="color: black;font-size: 25px;">@lang('admin.service.waiting_title')</label>
-                    <label for="waiting_free_mins" class="col-xs-5 col-form-label">@lang('admin.service.waiting_wave')</label>
-                    <label for="waiting_min_charge" class="col-xs-5 col-form-label">@lang('admin.service.waiting_charge')</label>
-                    <div class="col-xs-5">
-                        <input class="form-control" type="number" value="{{ $service->waiting_free_mins }}" name="waiting_free_mins" id="waiting_free_mins" placeholder="@lang('admin.service.waiting_wave')" min="0">
+                <h3 style="color: White;font-size: 25px;">@lang('admin.service.waiting_title')</h3>
+                 <div class=" row">
+                    
+                    <div class="form-group col">
+                        <label for="waiting_free_mins" class="col-xs-5 col-form-label">@lang('admin.service.waiting_wave')</label>
+                        <input class="form-control" type="number" value="{{ $service->waiting_free_mins }}" name="waiting_free_mins" id="waiting_free_mins" placehold="@lang('admin.service.waiting_wave')" min="0">
                     </div>
-                    <div class="col-xs-5">
-                        <input class="form-control" type="number" value="{{ $service->waiting_min_charge }}" name="waiting_min_charge" id="waiting_min_charge" placeholder="@lang('admin.service.waiting_charge')" min="0">
+                    
+                    <div class=" form-group col">
+                        <label for="waiting_min_charge" class="col-xs-5 col-form-label">@lang('admin.service.waiting_charge')</label>
+                        <input class="form-control" type="number" value="{{ $service->waiting_min_charge }}" name="waiting_min_charge" id="waiting_min_charge" placehold="@lang('admin.service.waiting_charge')" min="0">
                     </div>
                 </div>
                 <br>
-                <div class="form-group row">
+                <div class="form-group">
                     <div class="col-xs-12 col-sm-6 col-md-3">
                         <button type="submit" class="btn btn-primary btn-block">@lang('admin.service.Update_Service_Type')</button>
                     </div>

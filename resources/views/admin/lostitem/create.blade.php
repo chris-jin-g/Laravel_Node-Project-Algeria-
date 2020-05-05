@@ -11,30 +11,32 @@
         display: table-cell;
     }
 </style>
-<div class="content-area py-1">
-    <div class="container-fluid">
-        <div class="box box-block bg-white">
-            <a href="{{ URL::previous() }}" class="btn btn-default pull-right"><i class="fa fa-angle-left"></i> @lang('admin.back')</a>
 
-            <h5 style="margin-bottom: 2em;">@lang('admin.lostitem.add')</h5>
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header card-header-primary">
+              <h4 class="card-title">@lang('admin.lostitem.add')</h4>
+              <a href="{{ URL::previous() }}" class="btn btn-default pull-right"><i class="fa fa-angle-left"></i> @lang('admin.back')</a>
+            </div>
+            <div class="card-body">
 
             <form class="form-horizontal" action="{{route('admin.lostitem.store')}}" method="POST" enctype="multipart/form-data" role="form">
                 {{csrf_field()}}
 
-                <div class="form-group row">
-                    <label for="user" class="col-xs-2 col-form-label">@lang('admin.lostitem.lost_user')</label>
+                <div class="form-group">
+                    <label for="user" class="bmd-label-floating">@lang('admin.lostitem.lost_user')</label>
 
                     <div class="col-xs-5">
                         <div class="input-group">
-                            <input class="form-control" type="text" value="{{ old('name') }}" name="name" required id="namesearch" placeholder="Pesquisar Nome" required="" aria-describedby="basic-addon2" autocomplete="off">
+                            <input class="form-control" type="text" value="{{ old('name') }}" name="name" required id="namesearch" placehold="Search Nome" required="" aria-describedby="basic-addon2" autocomplete="off">
                             <span class="input-group-addon fa fa-search"  id="basic-addon2"></span>
                         </div>
                         <input type="hidden" name="user_id" id="user_id" value="">
                     </div>
                 </div>				
 
-                <div class="form-group row">
-                    <label for="lost_item_name" class="col-xs-2 col-form-label">@lang('admin.lostitem.request')</label>
+                <div class="form-group">
+                    <label for="lost_item_name" class="bmd-label-floating">@lang('admin.lostitem.request')</label>
                     <div class="col-xs-5">
                         <table class="table table-striped table-bordered dataTable requestList">
                             <thead>
@@ -53,15 +55,15 @@
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label for="lost_item_name" class="col-xs-2 col-form-label">@lang('admin.lostitem.lost_item')</label>
+                <div class="form-group">
+                    <label for="lost_item_name" class="bmd-label-floating">@lang('admin.lostitem.lost_item')</label>
                     <div class="col-xs-5">
-                        <textarea class="form-control" name="lost_item_name" required id="lost_item_name" placeholder="@lang('admin.lostitem.lost_item')">{{ old('lost_item') }}</textarea>
+                        <textarea class="form-control" name="lost_item_name" required id="lost_item_name" placehold="@lang('admin.lostitem.lost_item')">{{ old('lost_item') }}</textarea>
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label for="" class="col-xs-2 col-form-label"></label>
+                <div class="form-group">
+                    <label for="" class="bmd-label-floating"></label>
                     <div class="col-xs-5">
                         <input type="hidden" name="is_admin" value="1" />
                         <button type="submit" class="btn btn-primary">@lang('admin.lostitem.add')</button>

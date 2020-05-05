@@ -1,57 +1,60 @@
 @extends('admin.layout.base')
 
-@section('title', 'Atualizar Gerente de Disputa ')
+@section('title', 'Update Dispute Manager')
 
 @section('content')
 
-<div class="content-area py-1">
-    <div class="container-fluid">
-        <div class="box box-block bg-white">
-            <a href="{{ URL::previous() }}" class="btn btn-default pull-right"><i class="fa fa-angle-left"></i> @lang('admin.back')</a>
 
-            <h5 style="margin-bottom: 2em;">@lang('admin.dispute-manager.update_dispute_manager')</h5>
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header card-header-primary">
+              <h4 class="card-title">@lang('admin.dispute-manager.update_dispute_manager')</h4>
+              <a href="{{ URL::previous() }}" class="btn btn-default pull-right"><i class="fa fa-angle-left"></i> @lang('admin.back')</a>
+            </div>
+            <div class="card-body">
+            
 
             <form class="form-horizontal" action="{{route('admin.dispute-manager.update', $account->id )}}" method="POST" enctype="multipart/form-data" role="form">
                 {{csrf_field()}}
                 <input type="hidden" name="_method" value="PATCH">
 
-                <div class="form-group row">
-                    <label for="name" class="col-xs-2 col-form-label">@lang('admin.account-manager.full_name')</label>
+                <div class="form-group">
+                    <label for="name" class="bmd-label-floating">@lang('admin.account-manager.full_name')</label>
                     <div class="col-xs-10">
-                        <input class="form-control" type="text" value="{{ $account->name }}" name="name" required id="name" placeholder="@lang('admin.account-manager.full_name')">
+                        <input class="form-control" type="text" value="{{ $account->name }}" name="name" required id="name" placehold="@lang('admin.account-manager.full_name')">
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label for="email" class="col-xs-2 col-form-label">@lang('admin.email')</label>
+                <div class="form-group">
+                    <label for="email" class="bmd-label-floating">@lang('admin.email')</label>
                     <div class="col-xs-10">
-                        <input class="form-control" type="text" value="{{ $account->email }}" name="email" required id="email" placeholder="@lang('admin.email')">
+                        <input class="form-control" type="text" value="{{ $account->email }}" name="email" required id="email" placehold="@lang('admin.email')">
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label for="mobile" class="col-xs-2 col-form-label">@lang('admin.mobile')</label>
+                <div class="form-group">
+                    <label for="mobile" class="bmd-label-floating">@lang('admin.mobile')</label>
                     <div class="col-xs-10">
-                        <input class="form-control" type="number" value="{{ $account->mobile }}" name="mobile" required id="mobile" placeholder="@lang('admin.mobile')">
+                        <input class="form-control" type="number" value="{{ $account->mobile }}" name="mobile" required id="mobile" placehold="@lang('admin.mobile')">
                     </div>
                 </div>
                 
-                <div class="form-group row">
-                    <label class="col-xs-2 col-form-label">@lang('admin.password')</label>
+                <div class="form-group">
+                    <label class="bmd-label-floating">@lang('admin.password')</label>
                     <div class="col-xs-10">
-                        <input type="password" class="form-control" name="password" placeholder="@lang('admin.password')">
+                        <input type="password" class="form-control" name="password" placehold="@lang('admin.password')">
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label class="col-xs-2 col-form-label">@lang('admin.account-manager.password_confirmation')</label>
+                <div class="form-group">
+                    <label class="bmd-label-floating">@lang('admin.account-manager.password_confirmation')</label>
                     <div class="col-xs-10">
-                        <input type="password" class="form-control" name="password_confirm" placeholder="@lang('admin.account-manager.password_confirmation')">
+                        <input type="password" class="form-control" name="password_confirm" placehold="@lang('admin.account-manager.password_confirmation')">
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label for="zipcode" class="col-xs-2 col-form-label"></label>
+                <div class="form-group">
+                    <label for="zipcode" class="bmd-label-floating"></label>
                     <div class="col-xs-10">
                         <button type="submit" class="btn btn-primary">@lang('admin.account-manager.update_account_manager')</button>
                         <a href="{{route('admin.dispute-manager.index')}}" class="btn btn-default">@lang('admin.cancel')</a>

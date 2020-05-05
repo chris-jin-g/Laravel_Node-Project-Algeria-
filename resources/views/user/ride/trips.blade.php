@@ -448,7 +448,7 @@ window.onclick = function(event) {
                                     <h2>Comments</h2>
                                 </div>
                                 <div class="col-xs-7">    
-                                <textarea class="dispdesc" name="msg" id="lostitemMsg" placeholder="Type your message"></textarea>
+                                <textarea class="dispdesc" name="msg" id="lostitemMsg" placehold="Type your message"></textarea>
                             </div>
                             </div>
                             <input type="submit" name="submitbtn" class="submitbtn lostitemBtn" id="`+trip_id+`" value="send">`);
@@ -463,7 +463,7 @@ window.onclick = function(event) {
                                     <h2>Title</h2>
                                 </div>
                                 <div class="col-xs-7">
-                                <input type="text" class="disptitle" id="lostitemTitle" name="title" placeholder="Enter title"/>
+                                <input type="text" class="disptitle" id="lostitemTitle" name="title" placehold="Enter title"/>
                                 </div>
                             </div>`);
                             $("#lostitemMsgBody").empty()
@@ -472,7 +472,7 @@ window.onclick = function(event) {
                                     <h2>Comments</h2>
                                 </div>
                                 <div class="col-xs-7">    
-                                <textarea class="dispdesc" name="msg" id="lostitemMsg" placeholder="Type your message"></textarea>
+                                <textarea class="dispdesc" name="msg" id="lostitemMsg" placehold="Type your message"></textarea>
                             </div>
                             </div>
                             <input type="submit" name="submitbtn" class="submitbtn lostitemBtn" id="`+trip_id+`" value="send">`);
@@ -576,7 +576,7 @@ window.onclick = function(event) {
                                 <h2>Comments</h2>
                              </div>
                              <div class="col-xs-7">    
-                             <textarea class="dispdesc" name="msg" id="disputeMsg" placeholder="Type your message"></textarea>
+                             <textarea class="dispdesc" name="msg" id="disputeMsg" placehold="Type your message"></textarea>
                              </div>
                              </div>
                             <input type="submit" name="submitbtn" class="submitbtn disputeSendBtn" id="`+trip_id+`" value="send">`);
@@ -602,7 +602,7 @@ window.onclick = function(event) {
                                 <h2>Title</h2>
                             </div>
                             <div class="col-xs-7">
-                            <input type="text" class="disptitle" id="disputeTitle" name="title" placeholder="Enter title"/>
+                            <input type="text" class="disptitle" id="disputeTitle" name="title" placehold="Enter title"/>
                             </div>
                         </div>`);
                         $("#disputeReason").empty();
@@ -685,7 +685,7 @@ window.onclick = function(event) {
                                 <h2>Comments</h2>
                             </div>
                             <div class="col-xs-7">    
-                            <textarea class="dispdesc" name="msg" id="disputeMsg" placeholder="Type your message"></textarea>
+                            <textarea class="dispdesc" name="msg" id="disputeMsg" placehold="Type your message"></textarea>
                            </div>
                            </div>`);
 

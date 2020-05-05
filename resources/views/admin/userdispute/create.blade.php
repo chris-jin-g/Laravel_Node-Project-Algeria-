@@ -11,69 +11,73 @@
   display: table-cell;
 }
 </style>
-<div class="content-area py-1">
     <div class="container-fluid">
-    	<div class="box box-block bg-white">
-            <a href="{{ URL::previous() }}" class="btn btn-default pull-right"><i class="fa fa-angle-left"></i> @lang('admin.back')</a>
-
-			<h5 style="margin-bottom: 2em;">@lang('admin.dispute.add_dispute')</h5>
+		<div class="card">
+            <div class="card-header card-header-primary">
+              <h4 class="card-title pull-left">@lang('admin.dispute.add_dispute')</h4>
+                <a href="{{ URL::previous() }}" class="btn pull-right"><i
+                    class="fa fa-angle-left"></i> @lang('admin.back')</a>
+            </div>
+            <div class="card-body">
 
             <form class="form-horizontal" action="{{route('admin.userdisputestore')}}" method="POST" enctype="multipart/form-data" role="form">
             	{{csrf_field()}}
 
-				<div class="form-group row">
-					<label for="user" class="col-xs-2 col-form-label">@lang('admin.dispute.dispute_type')</label>
+				<div class="form-group">
+					<label for="user" class="bmd-label-floating">@lang('admin.dispute.dispute_type')</label>
 					<div class="col-xs-5">
 						<select class="form-control" name="dispute_type" id="dispute_type">
-							<option value="user">Usuário</option>
-							<option value="provider">Motorista</option>
+							<option value="user">{{__('admin.user')}}</option>
+							<option value="provider">{{__('admin.provider')}}</option>
 						</select>
 					</div>
 				</div>
 
-				<div class="form-group row">
-					<label for="user" class="col-xs-2 col-form-label">@lang('admin.dispute.dispute_user') / @lang('admin.dispute.dispute_provider')</label>
+				<div class="form-group">
+					<label for="user" class="bmd-label-floating">@lang('admin.dispute.dispute_user') / @lang('admin.dispute.dispute_provider')</label>
 
 					<div class="col-xs-5">
 						<div class="input-group">
-							<input class="form-control" type="text" value="{{ old('name') }}" name="name" id="namesearch" placeholder="Nome do Usuário" required="" aria-describedby="basic-addon2" autocomplete="off">
+							<input class="form-control" type="text" value="{{ old('name') }}" name="name" id="namesearch" placehold="Nome do Usuário" required="" aria-describedby="basic-addon2" autocomplete="off">
 						 	<span class="input-group-addon fa fa-search"  id="basic-addon2"></span>
 						</div>
 						<input type="hidden" name="user_id1" id="user_id1" value="">
 					</div>
 				</div>
 
-				<div class="form-group row">
-					<label for="lost_item_name" class="col-xs-2 col-form-label">@lang('admin.lostitem.request')</label>
+				<div class="form-group">
+					<label for="lost_item_name" class="bmd-label-floating">@lang('admin.lostitem.request')</label>
 					<div class="col-xs-5">
-		                <table class="table table-striped table-bordered dataTable requestList">
+						<div class="table-responsive">
+		                <table class="table">
 		                    <thead>
 		                        <tr>
-		                            <th>ID Viagem</th>
-		                            <th>De </th>
-		                            <th>Para </th>
-		                            <th>Selecionar</th>
+		                            <th>Request Id</th>
+		                            <th>From </th>
+		                            <th>To </th>
+		                            <th>Choose</th>
 		                        </tr>
 		                    </thead>
 		                    <tbody>
-		                   		<tr><td colspan="4">Sem resultados</td></tr>
+		                   		<tr><td colspan="4">No results</td></tr>
 		                    </tbody>
-		                </table>
+						</table>
+						</div>
 					</div>
 				</div>
 
-				<div class="form-group row">
-					<label for="lost_item_name" class="col-xs-2 col-form-label">@lang('admin.dispute.dispute_name')</label>
+				<div class="form-group">
+					<label for="lost_item_name" class="bmd-label-floating">@lang('admin.dispute.dispute_name')</label>
 					<div class="col-xs-5">
 						<select class="form-control" name="dispute_name" id="dispute_name" required="">
 							<option value="">Select</option>
 						</select>
-						<textarea style="display: none;margin-top:5px;" class="form-control" name="dispute_other" required id="dispute_other" placeholder="@lang('admin.dispute.dispute_name')">{{ old('dispute_other') }}</textarea>
+						<textarea style="display: none;margin-top:5px;" class="form-control" name="dispute_other" required id="dispute_other" placehold="@lang('admin.dispute.dispute_name')">{{ old('dispute_other') }}</textarea>
 					</div>
 				</div>
 
-				<div class="form-group row">
-					<label for="" class="col-xs-2 col-form-label"></label>
+				<div class="form-group">
+					<label for="" class="bmd-label-floating"></label>
 					<div class="col-xs-5">
 						<input type="hidden" name="is_admin" value="1" />
 						<button type="submit" class="btn btn-primary">@lang('admin.dispute.add_dispute')</button>

@@ -47,11 +47,7 @@ class ResetPasswordOTP extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
-            ->subject('Alteração de senha')
-            ->line('Você está recebendo este e-mail porque recebemos uma solicitação de redefinição de senha para sua conta. Seu código OTP é')
-            ->action($this->otp,'#')
-            ->line('Se você não solicitou uma redefinição de senha, nenhuma ação adicional é necessária.');
+        return (new MailMessage)-> subject ('Password Change') -> line('You are receiving this email because we have received a password reset request for your account. Your OTP code is') -> action ($this->otp,'#') -> line ('If you have not requested a password reset, no further action is required.');
     }
 
     /**

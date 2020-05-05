@@ -27,7 +27,7 @@
 
 .dd-item,
 .dd-empty,
-.dd-placeholder {
+.dd-placehold {
   display: block;
   position: relative;
   margin: 0;
@@ -87,7 +87,7 @@
   content: '-';
 }
 
-.dd-placeholder,
+.dd-placehold,
 .dd-empty {
   margin: 5px 0;
   padding: 0;

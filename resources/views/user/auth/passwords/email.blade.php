@@ -9,15 +9,15 @@
         <div class="row no-margin">
             <div class="col-md-6 log-left">
                 <span class="login-logo"><img src="{{ config('constants.site_logo', asset('logo-black.png'))}}"></span>
-                <h2>Crie sua conta e mova-se em minutos</h2>
-                <p>Bem-vindo(a) ao {{ config('constants.site_title', 'Moob Urban')  }}, a maneira mais fácil de se locomover com o toque de um botão.</p>
+                <h2>Create your account and move in minutes</h2>
+                <p>Welcome to{{ config('constants.site_title', 'Thinkin Cab')  }},The easiest way to get around at the touch of a button.</p>
             </div>
             <div class="col-md-6 log-right">
                 <div class="login-box-outer">
                 <div class="login-box row no-margin">
                     <div class="col-md-12">
-                        <a class="log-blk-btn" href="{{url('login')}}">JÁ TEM UMA CONTA?</a>
-                        <h3>Redefinir Senha</h3>
+                        <a class="log-blk-btn" href="{{url('login')}}">ALREADY HAVE AN ACCOUNT?</a>
+                        <h3>Change Password</h3>
                     </div>
                     @if (session('status'))
                         <div class="alert alert-success">
@@ -28,7 +28,7 @@
                         {{ csrf_field() }}
 
                         <div class="col-md-12">
-                            <input type="email" class="form-control" name="email" placeholder="Seu e-mail" value="{{ old('email') }}">
+                            <input type="email" class="form-control" name="email" placehold="Seu e-mail" value="{{ old('email') }}">
 
                             @if ($errors->has('email'))
                                 <span class="help-block">
@@ -39,18 +39,18 @@
 
                         
                         <div class="col-md-12">
-                            <button class="log-teal-btn" type="submit">ENVIAR LINK DE REDEFINIÇÃO</button>
+                            <button class="log-teal-btn" type="submit">SEND RESET LINK</button>
                         </div>
                     </form>     
 
                     <div class="col-md-12">
-                        <p class="helper">Ou <a href="{{route('login')}}">Entre</a> com sua conta de usuário.</p>   
+                        <p class="helper">Ou <a href="{{route('login')}}">Entre</a> with your user account.                        </p>   
                     </div>
 
                 </div>
 
 
-                <div class="log-copy"><p class="no-margin">{{ config('constants.site_copyright', '&copy; '.date('Y').' Appoets') }}</p></div>
+                <div class="log-copy"><p class="no-margin">{{ config('constants.site_copyright', '&copy; '.date('Y').' Thinkin Cab') }}</p></div>
                 </div>
             </div>
         </div>

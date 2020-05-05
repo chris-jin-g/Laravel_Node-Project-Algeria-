@@ -47,7 +47,7 @@ $(document).ready(function() {
     // Setup - add a text input to each footer cell
     $( '#table-3 tfoot th' ).each( function () {
         var title = $('#table-3 thead th').eq( $(this).index() ).text();
-        $(this).html( '<input type="text" class="form-control" placeholder="Search ' + title + '" />' );
+        $(this).html( '<input type="text" class="form-control" placehold="Search ' + title + '" />' );
     } );
     
     // Apply the search

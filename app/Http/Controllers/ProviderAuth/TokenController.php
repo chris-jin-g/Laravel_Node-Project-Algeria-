@@ -53,11 +53,8 @@ class TokenController extends Controller
 				'device_id' => 'required',
 				'device_type' => 'required|in:android,ios',
 				'device_token' => 'required',
-                //'state_id' => 'required',
-                //'city_id' => 'required',
 				'first_name' => 'required|max:255',
 				'last_name' => 'required|max:255',
-                'cpf' => 'max:255',
 				'email' => 'required|email|max:255|unique:providers',
 				'country_code' => 'required',
 				'mobile' => 'required|unique:providers',
@@ -76,9 +73,6 @@ class TokenController extends Controller
 				}');
 			    // $file=QrCode::format('png')->size(200)->margin(20)->phoneNumber($request->country_code.$request->mobile);
 				$fileName = Helper::upload_qrCode($request->mobile,$file);
-            if($request->city_id != ''){
-                $Provider['city_id'] = $request->city_id;
-            }
             if($request->has('gender')){
                 if($request->gender == 'Masculino'){
                     $Provider['gender'] = 'MALE';
@@ -262,7 +256,7 @@ class TokenController extends Controller
 			Notification::send($provider, new ResetPasswordOTP($otp));
 
 			return response()->json([
-				'message' => 'Código de verificação enviado para seu e-mail!',
+				'message' => 'Verification code sent to your email!',
 				'provider' => $provider
 			]);
 
@@ -613,14 +607,7 @@ class TokenController extends Controller
 
 	public function settings(Request $request)
 	{
-
-		if($request->has('city_id')){
-            $serviceType = ServiceType::select('id', 'name')->where('status', 1)->whereHas('fleet', function ($query) use($request){
-                $query->where('city_id',$request->city_id);
-            })->get();
-        }else{
-            $serviceType = ServiceType::select('id', 'name')->where('status', 1)->get();
-        }
+        $serviceType = ServiceType::select('id', 'name')->where('status', 1)->get();
 
 		$settings = [
 			'serviceTypes' => $serviceType,

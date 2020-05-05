@@ -10,7 +10,7 @@
     <form role="form" method="POST" action="{{ url('/provider/login') }}">
         {{ csrf_field() }}
 
-        <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="@lang('user.profile.email')" autofocus>
+        <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" placehold="@lang('user.profile.email')" autofocus>
 
         @if ($errors->has('email'))
             <span class="help-block">
@@ -18,7 +18,7 @@
             </span>
         @endif
 
-        <input id="password" type="password" class="form-control" name="password" placeholder="@lang('provider.signup.password')">
+        <input id="password" type="password" class="form-control" name="password" placehold="@lang('provider.signup.password')">
 
         @if ($errors->has('password'))
             <span class="help-block">

@@ -4,10 +4,13 @@
 
 @section('content')
 
-    <div class="content-area py-1">
+
         <div class="container-fluid">
-            <div class="box box-block bg-white">
-            	<h3>{{$page}}</h3>
+			<div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title">{{$page}}</h4>
+                </div>
+                <div class="card-body">
 
             	<div class="datemenu">
             		<span>
@@ -25,20 +28,20 @@
             	<div class="clearfix" style="margin-top: 15px;">
 					<form class="form-horizontal" action="{{route('account.ride.statement.range')}}" method="GET" enctype="multipart/form-data" role="form">
 
-						<div class="form-group row col-md-5">
+						<div class="form-group col-md-5">
 							<label for="name" class="col-xs-4 col-form-label">Date From</label>
 							<div class="col-xs-8">
-								<input class="form-control" type="date" name="from_date" id="from_date" required placeholder="From Date">
+								<input class="form-control" type="date" name="from_date" id="from_date" required placehold="From Date">
 							</div>
 						</div>
 
-						<div class="form-group row col-md-5">
+						<div class="form-group col-md-5">
 							<label for="email" class="col-xs-4 col-form-label">Date To</label>
 							<div class="col-xs-8">
-								<input class="form-control" type="date" required name="to_date" id="to_date" placeholder="To Date">
+								<input class="form-control" type="date" required name="to_date" id="to_date" placehold="To Date">
 							</div>
 						</div>
-						<div class="form-group row col-md-2">
+						<div class="form-group col-md-2">
 							<button type="submit" class="btn btn-primary">Submit</button>
 						</div>
 					</form>

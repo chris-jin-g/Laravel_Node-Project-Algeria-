@@ -87,7 +87,7 @@
                             @endif
                             <input type="hidden" name="user_type" value="provider" />
                             <div class="input-group full-input">
-                                <input type="number" class="form-control" name="amount" placeholder="@lang('user.enter_amount')" >
+                                <input type="number" class="form-control" name="amount" placehold="@lang('user.enter_amount')" >
                             </div>
 
                             

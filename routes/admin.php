@@ -41,7 +41,6 @@ Route::resource('dispatch-manager', 'Resource\DispatcherResource');
 Route::resource('account-manager', 'Resource\AccountResource');
 Route::resource('dispute-manager', 'Resource\DisputeManagerResource');
 
-Route::resource('fleet', 'Resource\FleetResource');
 Route::resource('provider', 'Resource\ProviderResource');
 Route::resource('document', 'Resource\DocumentResource');
 Route::resource('service', 'Resource\ServiceResource');
@@ -89,18 +88,15 @@ Route::get('dbbackup', 'AdminController@DBbackUp')->name('dbbackup');
 Route::get('/statement', 'AdminController@statement')->name('ride.statement');
 Route::get('/statement/provider', 'AdminController@statement_provider')->name('ride.statement.provider');
 Route::get('/statement/user', 'AdminController@statement_user')->name('ride.statement.user');
-Route::get('/statement/fleet', 'AdminController@statement_fleet')->name('ride.statement.fleet');
 Route::get('/statement/range', 'AdminController@statement_range')->name('ride.statement.range');
 Route::get('/statement/today', 'AdminController@statement_today')->name('ride.statement.today');
 Route::get('/statement/monthly', 'AdminController@statement_monthly')->name('ride.statement.monthly');
 Route::get('/statement/yearly', 'AdminController@statement_yearly')->name('ride.statement.yearly');
 Route::get('statement/{id}/statement', 'Resource\ProviderResource@statement')->name('statement');
 Route::get('statement_user/{id}/statement_user', 'Resource\ProviderResource@statementUser')->name('statement_user');
-Route::get('statement_fleet/{id}/statement_fleet', 'Resource\ProviderResource@statementFleet')->name('statement_fleet');
 //transactions
 Route::get('/transactions', 'AdminController@transactions')->name('transactions');
 Route::get('transfer/provider', 'AdminController@transferlist')->name('providertransfer');
-Route::get('transfer/fleet', 'AdminController@transferlist')->name('fleettransfer');
 Route::get('/transfer/{id}/approve', 'AdminController@approve')->name('approve');
 Route::get('/transfer/cancel', 'AdminController@requestcancel')->name('cancel');
 Route::get('transfer/{id}/create', 'AdminController@transfercreate')->name('transfercreate');
@@ -124,7 +120,10 @@ Route::get('disputelist', 'Resource\DisputeResource@dispute_list');
 Route::post('disputeuserstore', 'Resource\DisputeResource@create_dispute')->name('userdisputestore');
 Route::post('disputeuserupdate{id}', 'Resource\DisputeResource@update_dispute')->name('userdisputeupdate');
 Route::get('disputeusercreate', 'Resource\DisputeResource@userdisputecreate')->name('userdisputecreate');
+Route::get('disputeusers/create', 'Resource\DisputeResource@userdisputecreate')->name('userdisputecreate');
 Route::get('disputeuseredit/{id}', 'Resource\DisputeResource@userdisputeedit')->name('userdisputeedit');
+Route::get('disputeusers/edit/{id}', 'Resource\DisputeResource@userdisputeedit')->name('userdisputeedit');
+
 
 
 //notifications

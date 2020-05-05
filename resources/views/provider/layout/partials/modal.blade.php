@@ -2,7 +2,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title text-center incoming-tit" id="myModalLabel">Solicitação recebida</h4>
+                <h4 class="modal-title text-center incoming-tit" id="myModalLabel">Request received</h4>
             </div>
             <div class="modal-body">
                 <div class="incoming-img bg-img" id="user-image" style="background-image: url(img/img1.png);"></div>
@@ -11,8 +11,8 @@
                 </div>
             </div>
             <div class="modal-footer row no-margin">
-                <button type="button" class="btn btn-primary incoming-btn">Aceitar</button>
-                <button type="button" class="btn btn-default incoming-btn" data-dismiss="modal">Rejeitar</button>
+                <button type="button" class="btn btn-primary incoming-btn">Accept</button>
+                <button type="button" class="btn btn-default incoming-btn" data-dismiss="modal">Reject</button>
             </div>
         </div>
     </div>

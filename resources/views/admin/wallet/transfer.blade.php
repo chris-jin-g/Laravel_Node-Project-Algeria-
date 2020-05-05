@@ -1,24 +1,27 @@
 @extends('admin.layout.base')
 
-@section('title', 'Transferências ')
+@section('title', 'Transfers')
 
 @section('content')
 
-<div class="content-area py-1">
         <div class="container-fluid">
             @if($type=='provider') @php($flag=1) @else @php($flag=2) @endif
-            <div class="box box-block bg-white">
+            <div class="card">
+                <div class="card-header card-header-primary">
                 @if(Setting::get('demo_mode', 0) == 1)
                 <div class="col-md-12" style="hSetting::get('demo_mode', 0) == 0eight:50px;color:red;">
                     ** Demo Mode : No Permission to create or send settlements.
                 </div>
                 @endif
-                <h5 class="mb-1">Pedido pendente @if($type=='provider')Motoristas @else Frotas @endif</h5>
+                <h5 class="card-title ">Pending request @if($type=='provider') Driver @endif</h5>
 
                 @if(Setting::get('demo_mode', 0) == 0)
                     <a href="{{route('admin.transfercreate', $flag)}}" style="margin-left: 1em;" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> @lang('admin.addsettle')</a>
                 @endif
-                <table class="table table-striped table-bordered dataTable" id="table-4">
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table">
                     <thead>
                         <tr>
                             <th>@lang('admin.sno')</th>
@@ -26,8 +29,6 @@
                             <th>@lang('admin.datetime')</th>
                             @if($type=='provider')
                                 <th>@lang('admin.provides.provider_name')</th>
-                            @else
-                                <th>@lang('admin.fleet.fleet_name')</th>
                             @endif        
                             <th>@lang('admin.amount')</th>
                             <th>@lang('admin.action')</th>
@@ -43,9 +44,6 @@
                                 <td>{{$pending->created_at->diffForHumans()}}</td>
                                 @if($type=='provider')
                                     <td>{{$pending->provider->first_name." ".$pending->provider->last_name}} </td>
-                                @endif
-                                @if($type=='fleet')
-                                    <td>{{$pending->fleet->name}} </td>
                                 @endif
                                 <td>{{currency($pending->amount)}}</td>
                                 <td> 
@@ -79,42 +77,43 @@
           <form action="" method="Get" id="transurl">
           <div class="modal-body">
             <div id="sendbody" style="display:none">
-                <div class="form-group row">
-                    <label for="send_by" class="col-xs-3 col-form-label" required>Pagamento</label>
+                <div class="form-group">
+                    <label for="send_by" class="col-xs-3 col-form-label" required>Payment</label>
                     <div class="col-xs-5">
                         <select class="form-control" name="send_by" id="send_by">
                             @if(config("constants.card")==1)
                                 <option value="online">Stripe</option>
                             @endif    
                             @if(config("constants.cash")==1)    
-                                <option value="offline">Dinheiro</option>
+                                <option value="offline">Offline</option>
                             @endif                         
                         </select>
                     </div>
                 </div>
                 <div id="show_alert_text" class="alert alert-warning alert-dismissible" style="display:none">
-                    <strong>Atenção!</strong> <span id="setbody">Tem certeza de que deseja concluir esta transação no modo de dinheiro?</span>
+                    <strong>Attention!</strong> <span id="setbody">Are you sure you want to complete this transaction in cash mode?</span>
                 </div>
             </div>
             <div id="cancelbody" style="display:none">
                 <input type="hidden" value="" name="id" id="transfer_id">
                 <div class="alert alert-warning alert-dismissible">
-                    <strong>Atenção!</strong> <span id="setbody">Tem certeza de que deseja cancelar esta transação?</span>
+                    <strong>Attention!</strong> <span id="setbody">Are you sure you want to cancel this transaction?</span>
                 </div>
             </div>    
           </div>
           <div class="modal-footer">
             @if(config("constants.card")==1 || config("constants.cash")==1)
                 <!-- <a class="btn btn-success" href="#" id="transurl">Confirm</a> -->
-                <button type="submit" class="btn btn-success">Confirmar</button>
+                <button type="submit" class="btn btn-success">Confirm</button>
             @endif    
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
           </div>
         </form>
         </div>
 
       </div>
     </div>
+        </div>
 @endsection
 
 @section('scripts')

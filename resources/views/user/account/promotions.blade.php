@@ -46,7 +46,7 @@
                     <div class="row no-margin" id="card-payment">
                         <div class="form-group col-md-12 col-sm-12">
                             <label>Promocode</label>
-                            <input autocomplete="off" name="promocode" required type="text" class="form-control" placeholder="@lang('user.add_promocode')">
+                            <input autocomplete="off" name="promocode" required type="text" class="form-control" placehold="@lang('user.add_promocode')">
                         </div>
 
                     </div>

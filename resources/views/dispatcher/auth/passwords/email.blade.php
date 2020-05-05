@@ -12,7 +12,7 @@
                 <form class="form-material mb-1" role="form" method="POST" action="{{ url('/dispatcher/password/email') }}" >
                 {{ csrf_field() }}
                     <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
-                        <input type="email" name="email" value="{{ old('email') }}" required="true" class="form-control" id="email" placeholder="Email">
+                        <input type="email" name="email" value="{{ old('email') }}" required="true" class="form-control" id="email" placehold="Email">
                         @if ($errors->has('email'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('email') }}</strong>

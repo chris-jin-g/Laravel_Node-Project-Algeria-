@@ -34,7 +34,7 @@
                         <div class="prof-sub-col col-xs-12">
                             <br/>
                             <div class="form-group">
-                                <input tabindex="2" id="pac-input" class="form-control" type="text" placeholder="@lang('provider.enter_location')" name="s_address">
+                                <input tabindex="2" id="pac-input" class="form-control" type="text" placehold="@lang('provider.enter_location')" name="s_address">
                             </div>
                         </div>
 

@@ -33,8 +33,9 @@
       <form role="form" action="{{route('verify')}}" method="post" autocomplete="off">
         {{ csrf_field() }}
         <div class="form-group">
-            <label for="password">Informe a Senha</label>
-            <input type="password" name="password" class="form-control" id="password" placeholder="Informe a Senha">
+            <label for="password">
+              Enter Password</label>
+            <input type="password" name="password" class="form-control" id="password">
         </div>
         <button type="submit" class="btn btn-default">Enviar E-mail</button>
       </form>

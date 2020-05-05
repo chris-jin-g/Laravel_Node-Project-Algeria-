@@ -67,16 +67,6 @@ return array(
 							<b>In the Demo mode, You cannot add, Edit and delete the dispatcher user</b>
 							",
 
-							"admin.fleet.index" =>"<h3>Fleet Panel</h3><li>Admin manages fleet users.</li><li>
-							Fleet owner manage the details of a fleet owner like name, email, image and company name</li><li>
-							The list of providers under each fleet can be viewed based on each company</li><li>
-							Admin can add fleet owners manually from admin panel</li><li>
-							This process happens when a user wants to lend their car to the third party and approaches the company and provides the details</li><li>
-							Admin can export the file as CSV or Excel or PDF.</li><li>
-							The details include name, email, phone number, password  and company logo</li>
-							<b>In the demo mode, You cannot  Add, Edit, Delete the fleet user</b>
-							",
-
 							"admin.account-manager.index" =>"<h3>Account Manager</h3><li>Admin can manage the account manager details in the admin panel</li><li>
 							The account manager is the one who manages the complete track of providers earning</li><li>
 							Admin stores details like name, mobile, mail of account manager</li><li>
@@ -134,13 +124,6 @@ return array(
 							<li>Admin canexport the file as CSV or Excel or PDF.</li>
 							<li>The admin can view the  Transaction, Date&Time, Provider Name, Amount and Action.</li>
 							<b>In the demo mode, there is no option to create and send the settlements</b>
-							",
-
-							"admin.fleettransfer" =>"<h3>Fleet Settlements</h3><li>Admin should have a debit card to make a transaction with driver account</li>
-							<li>The driver will have to pay tax and commission amount to admin from his/her earnings, so the driver can request admin for the transaction</li>
-							<li>Admin can export the file as CSV or Excel or PDF.</li>
-							<li>The admin can view the Transaction, Date & Time, Provider Name, Amount and Action.</li>
-							<b>In the Demo mode, there is no option to create and send the settlements</b>
 							",
 
 							"admin.transactions" =>"<h3>Transactions</h3><li>Admin can view all the in one page.</li>

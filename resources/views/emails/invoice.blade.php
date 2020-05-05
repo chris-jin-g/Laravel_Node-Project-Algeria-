@@ -8,7 +8,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
             <meta name="viewport" content="width=device-width">
                 <!--[if !mso]><!--><meta http-equiv="X-UA-Compatible" content="IE=edge"><!--<![endif]-->
-                    <title>{{config('constants.site_name','Moob Urban')}}</title>
+                    <title>{{config('constants.site_name','Thinkin Cab')}}</title>
                     <!--[if !mso]><!-- -->
                     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
                         <!--<![endif]-->
@@ -363,7 +363,7 @@
                                                                     <div class="">
                                                     <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 10px; padding-left: 10px; padding-top: 10px; padding-bottom: 10px;"><![endif]-->
                                                                         <div style="color:#555555;line-height:120%;font-family:'Montserrat', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; padding-right: 10px; padding-left: 10px; padding-top: 10px; padding-bottom: 10px;"> 
-                                                                            <div style="font-size:12px;line-height:14px;text-align:center;color:#555555;font-family:'Montserrat', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;"><p style="margin: 0;font-size: 12px;line-height: 14px;text-align: center"><strong><span style="font-size: 18px; line-height: 21px;">Passageiro</span></strong></p></div>    
+                                                                            <div style="font-size:12px;line-height:14px;text-align:center;color:#555555;font-family:'Montserrat', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;"><p style="margin: 0;font-size: 12px;line-height: 14px;text-align: center"><strong><span style="font-size: 18px; line-height: 21px;">Users</span></strong></p></div>    
                                                                         </div>
                                                                         <!--[if mso]></td></tr></table><![endif]-->
                                                                     </div>

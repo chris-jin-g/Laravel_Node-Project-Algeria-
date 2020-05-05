@@ -755,7 +755,7 @@
 .ti-layout-sidebar-left:before {
 	content: "\e6f3";
 }
-.ti-layout-placeholder:before {
+.ti-layout-placehold:before {
 	content: "\e6f4";
 }
 .ti-layout-menu:before {

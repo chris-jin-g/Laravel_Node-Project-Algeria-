@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Resource;
 
-use App\Fleet;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -40,12 +39,12 @@ class ServiceResource extends Controller
      */
     public function index(Request $request)
     {
-        $services = ServiceType::with('fleet')->get();
-        $fleets = Fleet::with('services')->get();
+        $services = ServiceType::all();
+        
         if($request->ajax()) {
             return $services;
         } else {
-            return view('admin.service.index', compact('fleets'));
+            return view('admin.service.index', compact('services'));
         }
     }
 
@@ -57,8 +56,7 @@ class ServiceResource extends Controller
     public function create()
     {
         $Peakhour =  PeakHour::get();
-        $fleets = Fleet::all();
-        return view('admin.service.create', compact('Peakhour','fleets'));
+        return view('admin.service.create', compact('Peakhour'));
     }
 
     /**
@@ -71,7 +69,6 @@ class ServiceResource extends Controller
     {
 
         $this->validate($request, [
-            'fleet_id' => 'required',
             'name' => 'required|max:255',
             'capacity' => 'required|numeric',
             'fixed' => 'required',
@@ -87,8 +84,6 @@ class ServiceResource extends Controller
 
         try {
             $service = new ServiceType;
-
-            $service->fleet_id = $request->fleet_id;
             $service->name = $request->name;
             $service->fixed = str_replace(",", ".", $request->fixed);
             $service->price = str_replace(",", ".", $request->price);
@@ -179,7 +174,6 @@ class ServiceResource extends Controller
         try {
 
             $service = ServiceType::findOrFail($id);
-            $fleets = Fleet::all();
 
             $Peakhour=PeakHour::with(['servicetimes' => function ($query) use ($id) {
                         $query->where('service_type_id', $id);
@@ -188,7 +182,7 @@ class ServiceResource extends Controller
         /*  echo "<pre>";
             print_r($Peakhour->toArray());exit;*/
 
-            return view('admin.service.edit',compact('service','Peakhour','fleets'));
+            return view('admin.service.edit',compact('service','Peakhour'));
         } catch (ModelNotFoundException $e) {
             return back()->with('flash_error', trans('admin.service_type_msgs.service_type_not_found'));
         }
@@ -205,7 +199,6 @@ class ServiceResource extends Controller
     {
 
         $this->validate($request, [
-            'fleet_id' => 'required',
             'name' => 'required|max:255',
             'fixed' => 'required',
             'price' => 'sometimes|nullable',
@@ -233,7 +226,6 @@ class ServiceResource extends Controller
                 }
                 $service['marker'] = Helper::upload_picture($request->marker);
             }
-            $service['fleet_id'] = $request->fleet_id;
             $service['name'] = $request->name;
             $service['fixed'] = str_replace(",", ".", $request->fixed);
             $service['min_price'] = str_replace(",", ".", $request->min_price);

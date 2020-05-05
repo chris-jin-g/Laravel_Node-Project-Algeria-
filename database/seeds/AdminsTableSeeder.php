@@ -16,7 +16,7 @@ class AdminsTableSeeder extends Seeder
         DB::table('admins')->truncate();
         DB::table('admin_wallet')->truncate();
         $users = Admin::create([
-            'name' => 'Moob',
+            'name' => 'Thinkin Dragon',
             'email' => 'admin@demo.com',
             'password' => bcrypt('123456'),
         ]);
@@ -26,8 +26,8 @@ class AdminsTableSeeder extends Seeder
         if($role != null) $users->assignRole($role->id);
 
         $dispatcher = Admin::create([
-            'name' => 'Demo Expedidor',
-            'email' => 'expedidor@demo.com',
+            'name' => 'Demo Dispatcher',
+            'email' => 'dispatcher@demo.com',
             'password' => bcrypt('123456'),
         ]);
 
@@ -36,8 +36,8 @@ class AdminsTableSeeder extends Seeder
         if($role != null) $dispatcher->assignRole($role->id);
 
         $account = Admin::create([
-            'name' => 'Demo Contas',
-            'email' => 'contas@demo.com',
+            'name' => 'Demo account',
+            'email' => 'account@demo.com',
             'password' => bcrypt('123456'),
         ]);
 
@@ -46,8 +46,8 @@ class AdminsTableSeeder extends Seeder
         if($role != null) $account->assignRole($role->id);
 
         $dispute = Admin::create([
-            'name' => 'Demo Disputa',
-            'email' => 'disputa@demo.com',
+            'name' => 'Demo Dispute',
+            'email' => 'dispute@demo.com',
             'password' => bcrypt('123456'),
         ]);
 

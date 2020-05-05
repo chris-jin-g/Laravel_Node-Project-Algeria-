@@ -198,22 +198,22 @@
             font-family: inherit;
         }
 
-        input::-webkit-input-placeholder {
+        input::-webkit-input-placehold {
             color: inherit;
             opacity: .5;
         }
 
-        input:-ms-input-placeholder {
+        input:-ms-input-placehold {
             color: inherit;
             opacity: .5;
         }
 
-        input::-ms-input-placeholder {
+        input::-ms-input-placehold {
             color: inherit;
             opacity: .5;
         }
 
-        input::placeholder {
+        input::placehold {
             color: inherit;
             opacity: .5;
         }

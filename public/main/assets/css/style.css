@@ -30,7 +30,7 @@ btn {
     font-size: 13px;
     font-weight: 300;
     color: #f2f2f2;
-    background: #5c3386;
+    background: #000;
 }
 
 .btn-larger:hover,
@@ -38,7 +38,7 @@ btn {
 .btn-larger:active,
 .btn-larger.active,
 .open .dropdown-toggle.btn-larger {
-    background-color: #694499;
+    background-color:grey;
     color: #f2f2f2;
 }
 
@@ -79,7 +79,7 @@ fieldset[disabled] .btn-larger.active {
 div#form {
     color: #fff;
     background-attachment: scroll;
-    background: #1c1e21 url(../img/bg.jpg);
+    /* background: #1c1e21 url(../img/bg.jpg); */
     background-position: center center;
     background-repeat: none;
     -webkit-background-size: cover;
@@ -101,7 +101,7 @@ div#form {
 }
 
 #userform {
-    background: #fff;
+    background: #010134;
     margin: 20px 0 20px 0;
     border-radius: 10px;
     -moz-border-radius: 10px;
@@ -122,7 +122,7 @@ div#form {
 
 .details .text-left {
     text-align: left;
-    color: #5c3386;
+    color: #000;
     border-bottom: 1px solid #dec873;
     padding-bottom: 12px;
 }
@@ -144,7 +144,7 @@ div#form {
 #userform .nav-tabs.nav-justified>li>a {
     text-transform: uppercase;
     font-size: 12px;
-    color: #5c3386;
+    color: #000;
     background-color: #e6e6e6;
 }
 
@@ -152,7 +152,7 @@ div#form {
 #userform .nav-tabs.nav-justified>.active>a:hover,
 #userform .nav-tabs.nav-justified>.active>a:focus {
     border: 0;
-    background: #5c3386;
+    background: #000;
     color: #f2f2f2;
     border-radius: 0;
 }
@@ -172,7 +172,7 @@ div#form {
 }
 
 #userform .nav-tabs.nav-justified>li>a:hover {
-    background: #5c3386;
+    background: #000;
     color: #f2f2f2;
     border-radius: 0;
     border: 0;
@@ -192,7 +192,7 @@ div#form {
         border: 0;
     }
     #userform .nav-tabs.nav-justified>li>a:hover {
-        background-color: #5c3386;
+        background-color: #000;
         border-color: transparent;
         border: 0;
         color: #f2f2f2;
@@ -252,7 +252,7 @@ div#form {
     box-shadow: none;
 }
 
-#userform::-webkit-input-placeholder {
+#userform::-webkit-input-placehold {
     text-transform: uppercase;
     font-family: 'Dosis', sans-serif;
     font-weight: 700;
@@ -277,7 +277,7 @@ div#form {
 
 #userform #signup .form-group label .req {
     margin: 2px;
-    color: #5c3386;
+    color: #000;
 }
 
 #userform #signup .form-group label.active {

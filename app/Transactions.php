@@ -12,7 +12,7 @@ class Transactions extends Model
     * @var array
     */
     protected $fillable = [
-        'transaction_type', 'invoice_id', 'user_id', 'provider_id', 'admin_id', 'fleet_id', 'tax_per', 'tax_amount','commison_per','commision_amount', 'fleet_per','fleet_commission','discount_per','discount_amount','tips','total_amount','payment_mode','payment_transaction_id','is_partial','wallet_amount','online_amount','cash_amount','status'
+        'transaction_type', 'invoice_id', 'user_id', 'provider_id', 'admin_id', 'tax_per', 'tax_amount','commison_per','commision_amount','discount_per','discount_amount','tips','total_amount','payment_mode','payment_transaction_id','is_partial','wallet_amount','online_amount','cash_amount','status'
     ];
 
     /**

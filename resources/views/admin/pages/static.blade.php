@@ -3,21 +3,23 @@
 @section('title', 'Páginas ')
 
 @section('content')
-<div class="content-area py-1">
+
     <div class="container-fluid">
-        <div class="box box-block bg-white">
+        <div class="card">
+            <div class="card-header card-header-primary">
+              <h5 class="card-title">@lang('admin.pages.pages')</h5>
             @if(Setting::get('demo_mode', 0) == 1)
             <div class="col-md-12" style="height:50px;color:red;">
                 ** Demo Mode : @lang('admin.demomode')
             </div>
             @endif
-            <h5>@lang('admin.pages.pages')</h5>
-
+            </div>
+            <div class="card-body">
             <div className="row">
                 <form id="cmspages" action="{{ route('admin.pages.update') }}" method="POST">
                     <div class="form-group">
                         <select class="form-control" id="types" name="types">
-                            <option value="select">Selecione</option>
+                            <option value="select">select</option>
                             <option value="help">Ajuda</option>
                             <option value="page_privacy">Política de Privacidade</option>
                             <option value="terms">Termos de Uso</option>

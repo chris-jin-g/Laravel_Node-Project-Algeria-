@@ -21,7 +21,6 @@ class Provider extends Authenticatable
         'city_id',
         'first_name',
         'last_name',
-        'cpf',
         'email',
         'password',
         'mobile',
@@ -34,7 +33,6 @@ class Provider extends Authenticatable
         'avatar',
         'gender',
         'social_unique_id',
-        'fleet',
         'login_by',
         'paypal_email',
         'referral_unique_id',
@@ -50,11 +48,6 @@ class Provider extends Authenticatable
     protected $hidden = [
         'password', 'remember_token'
     ];
-
-    public function city()
-    {
-        return $this->belongsTo(City::class);
-    }
 
     /**
      * The services that belong to the user.

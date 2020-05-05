@@ -9,22 +9,22 @@
 @section('content')
 <?php $diff = ['-success', '-info', '-warning', '-danger']; ?>
 
-<div class="content-area py-1">
     <div class="container-fluid">
-        <div class="box box-block bg-white">
-            <div class="clearfix mb-1">
+        <div class="card">
+            <div class="card-header card-header-primary">
                 <h5 class="float-xs-left">@lang('admin.heatmap.godseye')</h5>
                 <div class="float-xs-right">
-                    <button class="btn btn-primary godseye_menu" data-value="ALL">Todos</button>
-                    <button class="btn btn-default godseye_menu" data-value="ACTIVE">Disponíveis</button>
-                    <button class="btn btn-default godseye_menu" data-value="STARTED">A Caminho do Embarque</button>
-                    <button class="btn btn-default godseye_menu" data-value="ARRIVED">No Local de Embarque</button>
-                    <button class="btn btn-default godseye_menu" data-value="PICKEDUP">Em Viagem</button>
+                    <button class="btn btn-primary godseye_menu" data-value="ALL">All</button>
+                    <button class="btn btn-default godseye_menu" data-value="ACTIVE">Available</button>
+                    <button class="btn btn-default godseye_menu" data-value="STARTED">On the way to boarding</button>
+                    <button class="btn btn-default godseye_menu" data-value="ARRIVED">reached to pickup</button>
+                    <button class="btn btn-default godseye_menu" data-value="PICKEDUP">On ride</button>
                 </div>
             </div>
-            <div class="row">
+            <div class="card-body">
+                <div class="row">
                 <div class="col-md-4">
-                    <h3 class="provider_title btn-primary">Todos</h3>
+                    <h3 class="provider_title btn-primary">All</h3>
                     <ul class="provider_list"></ul>
                 </div>
                 <div class="col-md-8">

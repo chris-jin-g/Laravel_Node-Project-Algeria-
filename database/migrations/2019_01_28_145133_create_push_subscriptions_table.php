@@ -17,7 +17,7 @@ class CreatePushSubscriptionsTable extends Migration
             $table->increments('id');
             $table->string('guard')->nullable();
             $table->integer('admin_id')->unsigned()->nullable();
-            $table->string('endpoint', 500)->unique();
+            $table->string('endpoint')->unique();
             $table->string('public_key')->nullable();
             $table->string('auth_token')->nullable();
             $table->timestamps();

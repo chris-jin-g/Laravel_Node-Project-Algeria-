@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>{{ config('constants.site_title','Moob Urban') }}</title>
+        <title>{{ config('constants.site_title','Thinkin Cab') }}</title>
 
         <meta name="description" content="">
         <meta name="author" content="">
@@ -14,12 +14,23 @@
         <link href="{{asset('asset/css/bootstrap.min.css')}}" rel="stylesheet">
         <link href="{{asset('asset/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
         <link href="{{asset('asset/css/style.css')}}" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="{{asset('assets/css/jquery-ui.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/slicknav.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/magnificpopup.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/jquery.mb.YTPlayer.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/typography.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/responsive.css')}}">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="{{asset('assets/img/icon/favicon.ico')}}">
     </head>
     <body>
         <div id="wrapper">
-            <!-- <div class="overlay" id="overlayer" data-toggle="offcanvas"></div> -->
+             <div class="overlay" id="overlayer" data-toggle="offcanvas"></div> 
 
-            <!-- <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+             <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
                 <ul class="nav sidebar-nav">
                     <li>
                     </li>
@@ -51,7 +62,7 @@
                         <a href="{{ Setting::get('store_link_android','#') }}"><img src="{{ asset('/asset/img/playstore-white.png') }}"></a>
                     </li>
                 </ul>
-            </nav> -->
+            </nav> 
 
             <div id="page-content-wrapper">
                 <header>
@@ -76,18 +87,18 @@
                             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                                 <ul class="nav navbar-nav">
                                     <li @if(Request::url() == url('/ride')) class="active" @endif>
-                                         <a href="{{url('/ride')}}">Passageiro</a>
+                                         <a href="{{url('/ride')}}">Ride</a>
                                     </li>
                                     <li @if(Request::url() == url('/drive')) class="active" @endif>
-                                         <a href="{{url('/drive')}}">Motorista</a>
+                                         <a href="{{url('/drive')}}">Drive</a>
                                     </li>
-                                    <li><a href="{{ url('help') }}">Ajuda</a></li>
+                                    <li><a href="{{ url('help') }}">Help</a></li>
 
                                 </ul>
                                 <ul class="nav navbar-nav navbar-right">
 
-                                    <li><a class="btn-outline" href="{{url('/register')}}">Cadastro Passageiro</a></li>
-                                    <li><a class="menu-btn" href="{{url('/provider/register')}}">Cadastro Motorista</a></li>
+                                    <li><a class="btn-outline" href="{{url('/register')}}">Signup to Ride</a></li>
+                                    <li><a class="menu-btn" href="{{url('/provider/register')}}">Signup to Drive</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -103,24 +114,24 @@
 
                                 <img src="{{ asset('asset/img/support.png') }}">
                             </div>
-                            <div class="col-xs-12 col-sm-12  col-md-6 sup-txt"><h2>Precisa de ajuda? Fale conosco</h2>
+                            <div class="col-xs-12 col-sm-12  col-md-6 sup-txt"><h2>For Support?     Call Us</h2>
                                 <div class="call-num">
-                                    <h3 class=""><a href="mailto:{{ config('constants.contact_email', 'contato@mobilidadeurana.com.br')  }}">
-                                    <!-- <span class="phone-icon"><i class="fa fa-3x fa-phone"></i></span> --> 
-                                    {{ config('constants.contact_email', 'contato@mobilidadeurana.com.br')}}</a> </h3>
+                                    <h3 class=""><a href="mailto:{{ config('constants.contact_email', 'Support@dragon.com')  }}">
+                                    <span class="phone-icon"><i class="fa fa-3x fa-envelope"></i></span>
+                                    {{ config('constants.contact_email', 'test@dragon.com')}}</a> </h3>
                                 </div>
                             </div>
                             <div class="hidden-xs hidden-sm col-md-2 support">
 
                                 <img src="{{ asset('asset/img/question.png') }}">
                             </div>
-                            <!--  <div class="col-md-12">
+                              <div class="col-md-12">
                                 <div class="call-num">
                 <h3 class=""><a href="tel:{{ Setting::get('contact_number', '')  }}"><span class="phone-icon"><i class="fa fa-3x fa-phone"></i></span> {{ Setting::get('contact_number', '+9197911 01817
                 ')  }}</a> </h3>
                                 </div>
                             
-                         </div> -->
+                         </div>
 
                         </div>
                     </div>
@@ -131,8 +142,8 @@
                             <div class="row app-dwon pad-60">
                                 <div class="container pad-60">
                                     <div class="row center">
-                                        <h2>Baixe o aplicativo</h2>
-                                        <p class="white">Obtenha os aplicativos do passageiro e motorista para Android e iOS gratuitamente</p><br>
+                                        <h2>Get the app</h2>
+                                        <p class="white">Get passenger and driver apps for Android and iOS for free</p><br>
                                         <div class="">
 
                                             <div class="col-md-6">
@@ -249,7 +260,7 @@
 
                             <div class="row no-margin">
                                 <div class="col-md-12 copy">
-                                    <p>{{ config('constants.site_copyright', '&copy; '.date('Y').' Appoets') }}</p>
+                                    <p>{{ config('constants.site_copyright', '&copy; '.date('Y').' Thinkin Cab') }}</p>
                                 </div>
                             </div>
                         </div>
@@ -269,7 +280,7 @@
                         <h4 class="modal-title">Bem-vindo!</h4>
                     </div>
                     <div class="modal-body">
-                        <p>{{ config('constants.site_title','Moob Urban') }} está disponível na sua cidade</p>
+                        <p>{{ config('constants.site_title','Thinkin Cab') }} está disponível na sua cidade</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -283,21 +294,19 @@
         <script src="{{asset('asset/js/bootstrap.min.js')}}"></script>
         <script src="{{asset('asset/js/scripts.js')}}"></script>
 
+        <script src="{{asset('assets/js/jquery-3.2.0.min.js')}}"></script>
+        <script src="{{asset('assets/js/jquery-ui.js')}}"></script>
+        <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
+        <script src="{{asset('assets/js/jquery.slicknav.min.js')}}"></script>
+        <script src="{{asset('assets/js/owl.carousel.min.js')}}"></script>
+        <script src="{{asset('assets/js/magnific-popup.min.js')}}"></script>
+        <script src="{{asset('assets/js/counterup.js')}}"></script>
+        <script src="{{asset('assets/js/jquery.waypoints.min.js')}}"></script>
+        <script src="{{asset('assets/js/jquery.mb.YTPlayer.min.js')}}"></script>
+        <script src="{{asset('assets/js/theme.js')}}"></script>
+
         @if(Setting::get('demo_mode', 0) == 1)
-        <!-- Start of LiveChat (www.livechatinc.com) code -->
-        <script type="text/javascript">
-window.__lc = window.__lc || {};
-window.__lc.license = 8256261;
-(function () {
-    var lc = document.createElement('script');
-    lc.type = 'text/javascript';
-    lc.async = true;
-    lc.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.livechatinc.com/tracking.js';
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(lc, s);
-})();
-        </script>
-        <!-- End of LiveChat code -->
+        {{--Chat support here--}}
         @endif
 
         <script>

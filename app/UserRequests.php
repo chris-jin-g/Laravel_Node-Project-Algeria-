@@ -20,6 +20,7 @@ class UserRequests extends Model
         'user_id',
         'current_provider_id',
         'service_type_id',
+        'estimated_fare',
         'promocode_id',
         'rental_hours',
         'status',

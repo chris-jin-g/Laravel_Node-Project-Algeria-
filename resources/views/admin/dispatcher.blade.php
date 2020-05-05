@@ -97,7 +97,7 @@
 <script src="https://unpkg.com/babel-standalone@6.24.0/babel.min.js"></script>
 
 <script type="text/javascript">
-    window.Moob = {!! json_encode([
+    window.Thinkin = {!! json_encode([
         "minDate" => \Carbon\Carbon::today()->format('Y-m-d\TH:i'),
         "maxDate" => \Carbon\Carbon::today()->addDays(30)->format('Y-m-d\TH:i'),
         "map" => false,

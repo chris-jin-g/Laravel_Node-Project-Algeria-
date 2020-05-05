@@ -67,11 +67,11 @@ function get_all_service_types()
 
 function demo_mode(){
 	if(\Setting::get('demo_mode', 0) == 1) {
-        return back()->with('flash_error', 'Disabled for demo purposes! Please contact us at info@appdupe.com');
+        return back()->with('flash_error', 'Disabled for demo purposes! Please contact us at info@thinkin.com');
     }
 }
 
 function get_all_language()
 {
-	return array('pt-br'=>'Português','en'=>'English','ar'=>'Arabic');
+	return array('en'=>'English','ar'=>'Arabic');
 }

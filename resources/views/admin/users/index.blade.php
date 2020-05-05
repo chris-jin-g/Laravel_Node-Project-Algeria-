@@ -1,35 +1,34 @@
 @extends('admin.layout.base')
 
-@section('title', 'Passageiros ')
+@section('title', 'Users ')
 
 @section('content')
-<div class="content-area py-1">
     <div class="container-fluid">
-        <div class="box box-block bg-white">
-            <h5 class="mb-1">
-                    @lang('admin.users.Users')
-            </h5>
-            
+            <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title ">@lang('admin.users.Users')</h4>
+                </div>
+                <div class="card-body">
             <form action="{{ route('admin.user.index') }}" method="get">
-                <div class="form-group row col-md-12" style="padding-left:0 !important; padding-right:0 !important; margin-bottom: 20px;">
+                <div class="form-group col-md-12" style="padding-left:0 !important; padding-right:0 !important; margin-bottom: 20px;">
                     <div class="col-xs-6">
-                        <input name="name" type="text" class="form-control" placeholder="Nome do Passageiro ou Email" aria-label="Nome do Passageiro" aria-describedby="basic-addon2">
+                        <input name="name" type="text" class="form-control" placehold="User Name or Email" aria-label="Passenger name" aria-describedby="basic-addon2">
                     </div>
 
                     <div class="col-xs-3">
-                        <button class="btn btn-primary" type="submit">Pesquisar</button>
+                        <button class="btn btn-primary" type="submit">Search</button>
                     </div>
 
                     @can('user-create')
                     <div class="col-xs-3">
-                        <a href="{{ route('admin.user.create') }}" style="margin-left: 1em;" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Adicionar Novo</a>
+                        <a href="{{ route('admin.user.create') }}" style="margin-left: 1em;" class="btn btn-primary pull-right"><i class="fa fa-plus"></i>Add New</a>
 
                     </div>
                     @endcan
                 </div>
             </form>
-           
-            <table class="table table-striped table-bordered dataTable" id="table-5">
+            <div class="table-responsive">
+                <table class="table">
                 <thead>
                     <tr>
                         <th>@lang('admin.id')</th>
@@ -76,7 +75,7 @@
                                 @endcan
 
                                 @can('user-delete')
-                                <button class="btn btn-danger" onclick="return confirm('Você tem certeza?')"><i class="fa fa-trash"></i> @lang('admin.delete')</button>
+                                <button class="btn btn-danger" onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i> @lang('admin.delete')</button>
                                 @endcan
 
                                 @endif
@@ -99,9 +98,10 @@
                 </tfoot>
             </table>
             @include('common.pagination')
+            </div>
         </div>
     </div>
-</div>
+    </div>
 @endsection
 
 @section('scripts')

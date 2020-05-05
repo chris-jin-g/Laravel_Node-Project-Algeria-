@@ -16,11 +16,11 @@
             <div class="col-md-6">
                 <form action="{{url('confirm/ride')}}" method="GET" onkeypress="return disableEnterKey(event);">
                     <div class="input-group dash-form">
-                        <input type="text" class="form-control" id="origin-input" name="s_address"  placeholder="Local de partida">
+                        <input type="text" class="form-control" id="origin-input" name="s_address"  placehold="Local de partida">
                     </div>
 
                     <div class="input-group dash-form">
-                        <input type="text" class="form-control" id="destination-input" name="d_address"  placeholder="Local de chegada" >
+                        <input type="text" class="form-control" id="destination-input" name="d_address"  placehold="Local de chegada" >
                     </div>
 
                     <input type="hidden" name="s_latitude" id="origin_latitude">
@@ -54,7 +54,7 @@
                     </div>
                    
                     <div class="input-group dash-form" id="hours" >
-                        <input type="number" class="form-control" id="rental_hours" name="rental_hours"  placeholder="(Horas de aluguel) Quantas horas?" >
+                        <input type="number" class="form-control" id="rental_hours" name="rental_hours"  placehold="(Horas de aluguel) Quantas horas?" >
                     </div>
                     <button type="submit"  class="full-primary-btn fare-btn">@lang('user.ride.ride_now')</button>
              
@@ -90,7 +90,7 @@
     if( navigator.geolocation ) {
        navigator.geolocation.getCurrentPosition( success, fail );
     } else {
-        console.log('Desculpe, seu navegador não suporta serviços de geolocalização');
+        console.log('Sorry, your browser does not support geolocation services.');
         initMap();
     }
 

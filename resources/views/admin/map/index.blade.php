@@ -4,16 +4,17 @@
 
 @section('content')
 
-<div class="content-area py-1">
+<div>
     <div class="container-fluid">
-        
-        <div class="box box-block bg-white">
-            <h5 class="mb-1">Map View</h5>
-            <div class="row">
-                <div class="col-xs-12">
+        <div class="card">
+            <div class="card-header card-header-primary">
+              <h4 class="card-title">Map View</h4>
+            </div>
+            <div class="card-body">
+                
                     <div id="map"></div>
                     <div id="legend"><h3>Note: </h3></div>
-                </div>
+                
             </div>
         </div>
     </div>
@@ -78,19 +79,19 @@
         var legend = document.getElementById('legend');
 
         var div = document.createElement('div');
-        div.innerHTML = '<img src="' + mapIcons['user'] + '"> ' + 'Passageiro';
+        div.innerHTML = '<img src="' + mapIcons['user'] + '"> ' + 'User';
         legend.appendChild(div);
 
         var div = document.createElement('div');
-        div.innerHTML = '<img src="' + mapIcons['offline'] + '"> ' + 'Motorista em Descanso';
+        div.innerHTML = '<img src="' + mapIcons['offline'] + '"> ' + 'Driver Offline';
         legend.appendChild(div);
         
         var div = document.createElement('div');
-        div.innerHTML = '<img src="' + mapIcons['active'] + '"> ' + 'Motorista Disponível';
+        div.innerHTML = '<img src="' + mapIcons['active'] + '"> ' + 'Driver Available';
         legend.appendChild(div);
         
         var div = document.createElement('div');
-        div.innerHTML = '<img src="' + mapIcons['unactivated'] + '"> ' + 'Motorista Inativo';
+        div.innerHTML = '<img src="' + mapIcons['unactivated'] + '"> ' + 'Inactive Driver';
         legend.appendChild(div);
         map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
         

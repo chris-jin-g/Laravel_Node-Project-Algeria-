@@ -18,7 +18,6 @@ class CreateUserRequestPaymentsTable extends Migration
             $table->integer('request_id');
             $table->integer('user_id');
             $table->integer('provider_id');
-            $table->integer('fleet_id')->nullable();
             $table->integer('promocode_id')->nullable();            
             $table->string('payment_id')->nullable();
             $table->string('payment_mode')->nullable();
@@ -28,8 +27,6 @@ class CreateUserRequestPaymentsTable extends Migration
             $table->float('hour',10,2)->default(0);
             $table->float('commision',  10, 2)->default(0);
             $table->float('commision_per',  5, 2)->default(0);
-            $table->float('fleet',  10, 2)->default(0);
-            $table->float('fleet_per',  5, 2)->default(0);
             $table->float('discount',   10, 2)->default(0);
             $table->float('discount_per',   5, 2)->default(0);
             $table->float('tax',        10, 2)->default(0);

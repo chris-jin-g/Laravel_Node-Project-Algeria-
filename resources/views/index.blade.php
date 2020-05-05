@@ -20,6 +20,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('asset/new/css/timeTo.css')}}">
     <link rel="icon" href="{{asset('asset/new/img/favicon.png')}}" type="image/x-icon">
     <link rel="shortcut" type="imges/png" href="{{asset('asset/new/img/favicon.png')}}">
+
 </head>
 
 <body>
@@ -233,6 +234,9 @@
     <script src="{{asset('asset/new/js/WOW.js')}}"></script>
     <script src="{{asset('asset/new/js/slick.min.js')}}"></script>
     <script src="{{asset('asset/new/js/myscripts.js')}}"></script>
+
+
+
     <script>
     window.onscroll = function() { myFunction() };
     var header = document.getElementById("head-nav");

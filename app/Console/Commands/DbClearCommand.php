@@ -56,12 +56,7 @@ class DbClearCommand extends Command
             DB::table('provider_wallet')->delete();
             DB::table('admins')->where('id', '>', 1)->delete();
             DB::table('admin_wallet')->delete();
-            DB::table('fleets')->where('id', '>', 1)->delete();
             $othervalues=array('stripe_cust_id'=>NULL,'wallet_balance'=>0);
-            DB::table('fleets')->update($othervalues);
-            DB::table('fleet_password_resets')->delete();
-            DB::table('fleet_cards')->delete();
-            DB::table('fleet_wallet')->delete();
             DB::table('accounts')->where('id', '>', 1)->delete();
             DB::table('account_password_resets')->delete();
             DB::table('dispatchers')->where('id', '>', 1)->delete();

@@ -27,7 +27,6 @@ Route::post('password', 'AccountController@password_update')->name('password.upd
 Route::get('/statement', 'AccountController@statement')->name('ride.statement');
 Route::get('/statement/provider', 'AccountController@statement_provider')->name('ride.statement.provider');
 Route::get('/statement/user', 'AccountController@statement_user')->name('ride.statement.user');
-Route::get('/statement/fleet', 'AccountController@statement_fleet')->name('ride.statement.fleet');
 Route::get('/statement/range', 'AccountController@statement_range')->name('ride.statement.range');
 Route::get('/statement/today', 'AccountController@statement_today')->name('ride.statement.today');
 Route::get('/statement/monthly', 'AccountController@statement_monthly')->name('ride.statement.monthly');

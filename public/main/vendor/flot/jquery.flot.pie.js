@@ -256,8 +256,8 @@ More detail and specific examples can be found in the included HTML file.
 				return; // if no series were passed
 			}
 
-			var canvasWidth = plot.getPlaceholder().width(),
-				canvasHeight = plot.getPlaceholder().height(),
+			var canvasWidth = plot.getplacehold().width(),
+				canvasHeight = plot.getplacehold().height(),
 				legendWidth = target.children().filter(".legend").children().width() || 0;
 
 			ctx = newCtx;

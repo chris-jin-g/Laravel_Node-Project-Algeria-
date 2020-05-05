@@ -131,11 +131,11 @@
 
                     {{ csrf_field() }}
                 <div class="input-group fare-form">
-                    <input type="text" class="form-control"  placeholder="Local de partida" id="origin-input" name="s_address">                               
+                    <input type="text" class="form-control"  placehold="Local de partida" id="origin-input" name="s_address">                               
                 </div>
 
                 <div class="input-group fare-form no-border-right">
-                    <input type="text" class="form-control"  placeholder="Local de chegada" id="destination-input" name="d_address">
+                    <input type="text" class="form-control"  placehold="Local de chegada" id="destination-input" name="d_address">
                    
                 </div>
                 
@@ -178,7 +178,7 @@
             <div class="col-md-6 content-block">
                 <h2>Safety Putting people first</h2>
                 <div class="title-divider"></div>
-                <p>Whether riding in the backseat or driving up front, every part of the {{ config('constants.site_title', 'Moob Urban') }} experience has been designed around your safety and security.</p>
+                <p>Whether riding in the backseat or driving up front, every part of the {{ config('constants.site_title', 'Thinkin Cab') }} experience has been designed around your safety and security.</p>
                 <a class="content-more" href="#">HOW WE KEEP YOU SAFE <i class="fa fa-chevron-right"></i></a>
             </div>
             <div class="col-md-6 img-block text-center"> 
@@ -211,7 +211,7 @@
             <div class="col-md-8 col-md-offset-2">
         <form>
             <div class="input-group find-form">                
-                <input type="text" class="form-control"  placeholder="Buscar cidade" id="mode-selector" name="s_address1">  
+                <input type="text" class="form-control"  placehold="Buscar cidade" id="mode-selector" name="s_address1">  
                 <span class="input-group-addon">
                     <button type="button" data-toggle="modal" data-target="#myModal">
                         <i class="fa fa-2x fa-arrow-right"></i>
@@ -225,10 +225,10 @@
 </div>-->
     <!-- <div class="row find-city no-margin">
         <div class="container">
-            <h2>{{config('constants.site_title','Moob Urban')}} is in your city</h2>
+            <h2>{{config('constants.site_title','Thinkin Cab')}} is in your city</h2>
             <form>
                 <div class="input-group find-form">
-                    <input type="text" class="form-control"  placeholder="Search" >
+                    <input type="text" class="form-control"  placehold="Search" >
                     <span class="input-group-addon">
                         <button type="submit">
                             <i class="fa fa-arrow-right"></i>

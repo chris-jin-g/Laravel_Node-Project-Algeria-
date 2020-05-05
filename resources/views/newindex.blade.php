@@ -1,258 +1,187 @@
 @extends('user.layout.app')
 
 @section('content')
-<!-- <div class="banner row no-margin" style="background-image: url('{{ asset('asset/img/banner-bg.jpg') }}');">
-    <div class="banner-overlay"></div>
-    <div class="container">
-        <div class="col-md-8">
-            <h2 class="banner-head"><span class="strong">Get there</span><br>Your day belongs to you</h2>
-        </div>
-        <div class="col-md-4">
-            <div class="banner-form">
-                <div class="row no-margin fields">
-                    <div class="left">
-                        <img src="{{ asset('asset/img/ride-form-icon.png') }}">
-                    </div>
-                    <div class="right">
-                        <a href="{{url('login')}}">
-                            <h3>Sign up to Ride</h3>
-                            <h5>SIGN UP <i class="fa fa-chevron-right"></i></h5>
-                        </a>
-                    </div>
-                </div>
-                <div class="row no-margin fields">
-                    <div class="left">
-                        <img src="{{ asset('asset/img/ride-form-icon.png') }}">
-                    </div>
-                    <div class="right">
-                        <a href="{{ url('/provider/register') }}">
-                            <h3>Sign up to Drive</h3>
-                            <h5>SIGN UP <i class="fa fa-chevron-right"></i></h5>
-                        </a>
-                    </div>
-                </div>
-                <p class="note-or">Or <a href="{{ url('/provider/login') }}">sign in</a> with your rider account.</p>
-            </div>
-        </div>
-    </div>
-</div> -->
-<div class="banner row no-margin" style="background-position: center; background-image: url('{{ asset('asset/img/login-bg.jpg') }}');">
-    <div class="banner-overlay"></div>
-    <div class="container slider pad-60">
-        <div class="row">
-        <div class="col-md-12 center ">
+<div id="preloader">
+    <div class="spinner"></div>
+</div>
 
-            <h2 class="banner-head">Viagem ou entrega?<br>A escolha é sua</h2>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3 col-md-offset-3">
-             <div class="row no-margin fields banner-ride-drive">
-                    <div class="btn-icon">
-                        <img src="{{ asset('asset/img/destination.png') }}">
-                    </div>
-                    <div class="btn-txt">
-                        <a href="{{url('login')}}">
-                            <h3 class="btn-title">Passageiro</h3>
-                            <!-- <h5>SIGN UP <i class="fa fa-chevron-right"></i></h5> -->
-                        </a>
+    <!-- slider area start -->
+    <section class="slider-area" id="home">
+        <div class="container">
+            <div class="col-md-6 col-sm-6 hidden-xs">
+                <div class="row">
+                    <div class="slider-img">
+                        <img src="assets/img/mobile/slider-left-img.png" alt="slider image">
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
-             <div class="row no-margin fields banner-ride-drive">
-                    <div class="left">
-                        <img src="{{ asset('asset/img/taxi-car.png') }}">
-                    </div>
-                    <div class="right">
-                        <a href="{{ url('/provider/login') }}">
-                            <h3 class="btn-title">Motorista</h3>
-                            <!-- <h5>SIGN UP <i class="fa fa-chevron-right"></i></h5> -->
-                        </a>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="row">
+                    <div class="slider-inner text-right">
+                        <h2>Who Else Wants To User</h2>
+                        <h5>And Use Our Zeed App !</h5>
+                        <a class="expand-video" href="https://www.youtube.com/watch?v=8qs2dZO6wcc"><i class="fa fa-play"></i>Watch the video</a>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- <div class="col-md-4">
-            <div class="banner-form">
-                <div class="row no-margin fields">
-                    <div class="left">
-                        <img src="{{ asset('asset/img/ride-form-icon.png') }}">
-                    </div>
-                    <div class="right">
-                        <a href="{{url('login')}}">
-                            <h3>Sign up to Ride</h3>
-                            <h5>SIGN UP <i class="fa fa-chevron-right"></i></h5>
-                        </a>
-                    </div>
-                </div>
-                <div class="row no-margin fields">
-                    <div class="left">
-                        <img src="{{ asset('asset/img/ride-form-icon.png') }}">
-                    </div>
-                    <div class="right">
-                        <a href="{{ url('/provider/register') }}">
-                            <h3>Sign up to Drive</h3>
-                            <h5>SIGN UP <i class="fa fa-chevron-right"></i></h5>
-                        </a>
+    </section>
+    <!-- slider area end -->
+    <!-- service area start -->
+    <div class="service-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="service-single">
+                        <img src="assets/img/service/service-img1.png" alt="service image">
+                        <h2>Call service</h2>
+                        <p>Take The initative to call</p>
                     </div>
                 </div>
-                <p class="note-or">Or <a href="{{ url('/provider/login') }}">sign in</a> with your rider account.</p>
+                <div class="col-md-4 col-sm-4 col-xs-12 col-6">
+                    <div class="service-single">
+                        <img src="assets/img/service/service-img2.png" alt="service image">
+                        <h2>Active warning</h2>
+                        <p>Timely detection of accidents</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12 col-6">
+                    <div class="service-single">
+                        <img src="assets/img/service/service-img3.png" alt="service image">
+                        <h2>Care plan</h2>
+                        <p>The care content is pushed</p>
+                    </div>
+                </div>
             </div>
-        </div> -->
-    </div>
-</div>
-<div class="row white-section pad-60">
-    <div class="container">
-        <div class="col-md-6 img-box text-center"> 
-            <img src="{{ asset('asset/img/screen-bg.png') }}">
-        </div>
-        <div class="col-md-6">
-             <div class="content-block">
-              <div class="icon"><img src="{{ asset('asset/img/taxi-app.png') }}"></div>
-            <h2>Agilidade, praticidade e segurança na palma da mão</h2>
-            <div class="title-divider"></div>
-            <p>{{ config('constants.site_title', 'Moob Urban')  }} é a maneira mais inteligente de se locomover. Um toque e um carro ou moto vai até você. Seu motorista sabe exatamente para onde ir. E você pode pagar com dinheiro ou cartão.</p>
-            <a class="content-more more-btn" href="{{url('/ride')}}">SAIBA MAIS <i class="fa fa-chevron-right"></i></a>
         </div>
     </div>
-    </div>
-</div>
-
-<div class="row gray-section pad-60">
-    <div class="container">                
-        <div class="col-md-6">
-            <div class="content-block">
-            <div class="icon"><img src="{{ asset('asset/img/destination.png') }}"></div>
-            <h2>A qualquer hora, em qualquer lugar</h2>
-            <div class="title-divider"></div>
-            <p>Viagem para o trabalho, entregas, passeios pela cidade, ir para a faculdade, aquela balada noturna, aonde quer que você vá, conte com o {{ config('constants.site_title', 'Moob Urban') }} para uma viagem segura.</p>
-            <a class="content-more more-btn" href="{{url('/ride')}}">SAIBA MAIS <i class="fa fa-chevron-right"></i></a>
-        </div>
-    </div>
-        <div class="col-md-6 img-box text-center"> 
-            <img src="{{ asset('asset/img/screen-bg-3.png') }}">
-        </div>
-    </div>
-</div>
-
-<div class="row white-section pad-60">
-    <div class="container">
-        <div class="col-md-6 img-box text-center"> 
-            <img src="{{ asset('asset/img/screen-bg-4.png') }}">
-        </div>
-        <div class="col-md-6 content-block">
-              <div class="icon"><img src="{{ asset('asset/img/budget.png') }}"></div>
-            <h2>Transporte executivo de baixo custo</h2>
-            <div class="title-divider"></div>
-            <p>Vai de carro ou de moto? com o {{ config('constants.site_title', 'Moob Urban') }} você anda de tarnsporte executivo com baixo custo.</p>
-            <a class="content-more more-btn" href="{{url('/ride')}}">SAIBA MAIS <i class="fa fa-chevron-right"></i></a>
-        </div>
-    </div>
-</div>
-
-<div class="row gray-section pad-60 full-section">
-    <div class="container">                
-        <div class="col-md-6 content-block">
-              <div class="icon"><img src="{{ asset('asset/img/car-wheel.png') }}"></div>
-            <h5>Atrás do votante</h5>
-            <h2>São pessoas como você, seguindo seu caminho</h2>
-            <div class="title-divider"></div>
-            <p>O {{ config('constants.site_title', 'Moob Urban') }} conta com os mais responsáveis motoristas, são pessoas com grande experiência e apaixonadas pelo que fazem. Eles são mães e pais, alunos e professores, veteranos vizinhos, amigos, nossos parceiros do dia-a-dia.</p>
-            <a class="content-more more-btn" href="{{ url('/drive') }}">QUERO SER MOTORISTA <i class="fa fa-chevron-right"></i></a>
-        </div>
-        <div class="col-md-6 full-img text-center" style="background-image: url({{ asset('asset/img/behind-the-wheel.jpg') }});"> 
-            <!-- <img src="img/anywhere.png"> -->
-        </div>
-    </div>
-</div>
-
-<div class="row white-section pad-60 ">
-    <div class="container">
-        <div class="col-md-6 img-box text-center"> 
-            <img src="{{ asset('asset/img/cost-cities.png') }}">
-        </div>
-        <div class="col-md-6 content-block">
-              <div class="icon"><img src="{{ asset('asset/img/taxi-location.png') }}"></div>
-            <h2>Contribuindo para o transporte pelo bem de todos</h2>
-            <div class="title-divider"></div>
-            <p>Uma cidade com o {{ config('constants.site_title', 'Moob Urban') }} tem mais oportunidades econômicas para os residentes e melhor acesso ao transporte para aqueles que não o possuem.</p>
-            <a class="content-more more-btn" href="{{ url('/login') }}">SOLICITE SEU TRANSPORTE <i class="fa fa-chevron-right"></i></a>
-        </div>
-    </div>
-</div>
-
-<div class="row gray-section pad-60 full-section">
-    <div class="container">
-        <div class="col-md-6 content-block">
-              <div class="icon"><img src="{{ asset('asset/img/seat-belt.png') }}"></div>
-            <h2>Segurança com as pessoas em primeiro lugar</h2>
-            <div class="title-divider"></div>
-            <p>Seja andando no banco de trás ou dirigindo na frente, todo o sistema do {{ config('constants.site_title', 'Moob Urban') }} foi desenvovido para dar a melhor experiencia de viagem com total qualidade e segurança.</p>
-            <a class="content-more more-btn" href="{{ url('/login') }}">VÁ COM SEGURANÇA, CADASTRE-SE <i class="fa fa-chevron-right"></i></a>
-        </div>
-        <!-- <div class="col-md-6 img-box text-center"> 
-            <img src="{{ asset('asset/img/seat-belt.jpg') }}">
-        </div> -->
-        <div class="col-md-6 full-img text-center" style="background-image: url({{ asset('asset/img/safty-bg.jpg') }});"> 
-            <!-- <img src="img/anywhere.png"> -->
-        </div>
-    </div>
-</div>
-<!--<div class="row find-city">
-    <div class="container pad-60 content-block center">
-        <h2>{{ config('constants.site_title','Moob Urban') }} na sua cidade</h2>
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-        <form>
-            <div class="input-group find-form">
-                <input type="text" class="form-control" placeholder="Buscar cidade" id="origin-input">
-                <div id="map" style="display: none;"></div>
-                <span class="input-group-addon">
-                    <button type="button" data-toggle="modal" data-target="#myModal">
-                        <i class="fa fa-2x fa-arrow-right"></i>
-                    </button>  
-                </span>
-            </div>           
-        </form>
-    </div>
-</div>
-    </div>
-</div>-->
-<!-- <div class="row app-dwon pad-60">
-    <div class="container pad-60"">
-        <div class="row center">
-            <h2>Get App on</h2>
-            <div class="col-md-3 col-md-offset-3">
-                 
-             <a href="{{config('constants.store_link_ios','#')}}">
-            <img src="{{asset('asset/img/appstore.png')}}">
-                                        </a>
+    <!-- service area end -->
+    <!-- about area start -->
+    <div class="about-area ptb--100">
+        <div class="container">
+            <div class="section-title">
+                <h2>About App</h2>
+                <p>Nemo enim ipsam voluptatem quia voluptas sit </p>
             </div>
-            <div class="col-md-3">
-             <a href="{{config('constants.store_link_android','#')}}">
-                                            <img src="{{asset('asset/img/playstore.png')}}">
-                                        </a>
-                                    </div>
+            <div class="row d-flex flex-center">
+                <div class="col-md-6 col-sm-6 hidden-xs">
+                    <div class="about-left-img">
+                        <img src="assets/img/about/abt-left-img.png" alt="image">
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-sm-6 col-xs-12 d-flex flex-center">
+                    <div class="about-content">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed  eiuiosmod terttmpor incididunt ut labore et dolore magna aliqua. enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. doliuor in reprehenderit in voluptate velit esse  dolore eu fugiat nulla pariatur. cdatat non proident</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tuiempor incididunt ut labore et dolore magna aliqua. enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-
-    <div class="container footer-social content-block pad-60"">
-        <div class="row center">
-            <h2>Get Connect with Scoical Media</h2>
-            <div class="col-md-6 col-md-offset-3">
-                 <div class="socil-media">
-                   <ul>
-                                    <li><a href="#"><i class="fa fa-2x fa-facebook"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-2x fa-twitter"></i></a></li>
-                                </ul>
-                 </div>
-             </div>
+    <!-- about area end -->
+    <!-- feature area start -->
+    <section class="feature-area bg-gray ptb--100" id="feature">
+        <div class="container">
+            <div class="section-title">
+                <h2>Features</h2>
+                <p>Nemo enim ipsam voluptatem quia voluptas sit</p>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="ft-content rtl">
+                        <div class="ft-single">
+                            <img src="assets/img/icon/feature/1.png" alt="icon">
+                            <div class="meta-content">
+                                <h2>Full Optional</h2>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, iumod tempor incididunt</p>
+                            </div>
+                        </div>
+                        <div class="ft-single">
+                            <img src="assets/img/icon/feature/2.png" alt="icon">
+                            <div class="meta-content">
+                                <h2>Unique Design</h2>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, iumod tempor incididunt</p>
+                            </div>
+                        </div>
+                        <div class="ft-single">
+                            <img src="assets/img/icon/feature/3.png" alt="icon">
+                            <div class="meta-content">
+                                <h2>Voice Maker</h2>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, iumod tempor incididunt</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 hidden-sm col-xs-12">
+                    <div class="ft-screen-img">
+                        <img src="assets/img/mobile/ft-screen-img.png" alt="image">
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="ft-content">
+                        <div class="ft-single">
+                            <img src="assets/img/icon/feature/4.png" alt="icon">
+                            <div class="meta-content">
+                                <h2>Easy Settings</h2>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, iumod tempor incididunt</p>
+                            </div>
+                        </div>
+                        <div class="ft-single">
+                            <img src="assets/img/icon/feature/5.png" alt="icon">
+                            <div class="meta-content">
+                                <h2>Flat Design</h2>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, iumod tempor incididunt</p>
+                            </div>
+                        </div>
+                        <div class="ft-single">
+                            <img src="assets/img/icon/feature/6.png" alt="icon">
+                            <div class="meta-content">
+                                <h2>Easy Download</h2>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, iumod tempor incididunt</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- feature area end -->
+    <!-- achivement area start -->
+    <div class="achivement-area ptb--100">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                    <div class="ach-single">
+                        <div class="icon"><i class="fa fa-users"></i></div>
+                        <p><span class="counter">10</span>k</p>
+                        <h5>Happy Clients</h5>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                    <div class="ach-single">
+                        <div class="icon"><i class="fa fa-book"></i></div>
+                        <span class="counter">978</span>
+                        <h5>Projects complet</h5>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                    <div class="ach-single">
+                        <div class="icon"><i class="fa fa-coffee"></i></div>
+                        <p><span class="counter">150</span>k</p>
+                        <h5>Cups of coffee</h5>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                    <div class="ach-single">
+                        <div class="icon"><i class="fa fa-trophy"></i></div>
+                        <span class="counter">100</span>
+                        <h5>Winning awards</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div> -->
+    <!-- achivement area end -->
 
-
-
-<!-- <div class="footer-city row no-margin" style="background-image: url({{ asset('asset/img/footer-city.png') }});"></div> -->
 @endsection

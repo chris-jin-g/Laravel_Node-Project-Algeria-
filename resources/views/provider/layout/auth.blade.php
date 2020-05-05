@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('title'){{ config('constants.site_title', 'Moob Urban') }}</title>
+    <title>@yield('title'){{ config('constants.site_title', 'Thinkin Cab') }}</title>
     <link rel="shortcut icon" type="image/png" href="{{ config('constants.site_icon') }}"/>
 
 
@@ -32,15 +32,15 @@
                 <div class="row no-margin">
                     <div class="col-md-6 log-left">
                         <span class="login-logo"><img src="{{ config('constants.site_logo', asset('logo-black.png')) }}"></span>
-                        <h2>{{config('constants.site_title','Moob Urban')}} precisa de parceiros como você.</h2>
-                        <p>Dirija com o {{config('constants.site_title','Moob Urban')}} e ganhe muito dinheiro com contratado independente. Seja pago semanalmente apenas para ajudar a nossa comunidade de pilotos a fazer passeios pela cidade. Seja seu próprio patrão e seja pago em tarifas por dirigir em seu próprio horário.</p>
+                        <h2>{{config('constants.site_title','Thinkin Cab')}} You need partners like you.</h2>
+                        <p>Drive with the {{config('constants.site_title','Thinkin Cab')}} and earn a lot of money with independent contractor. Get paid weekly just to help our rider community take city tours. Be your own boss and get paid on fares for driving at your own time.</p>
                     </div>
                     <div class="col-md-6 log-right">
                         <div class="login-box-outer">
                             <div class="login-box row no-margin">
                                 @yield('content')
                             </div>
-                            <div class="log-copy"><p class="no-margin">{{ config('constants.site_copyright', '&copy; '.date('Y').' Appoets') }}</p></div>
+                            <div class="log-copy"><p class="no-margin">{{ config('constants.site_copyright', '&copy; '.date('Y').' Thinkin Cab') }}</p></div>
                         </div>
                     </div>
                 </div>
@@ -54,17 +54,7 @@
     @yield('scripts')
     
     @if(Setting::get('demo_mode', 0) == 1)
-        <!-- Start of LiveChat (www.livechatinc.com) code -->
-        <script type="text/javascript">
-            window.__lc = window.__lc || {};
-            window.__lc.license = 8256261;
-            (function() {
-                var lc = document.createElement('script'); lc.type = 'text/javascript'; lc.async = true;
-                lc.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.livechatinc.com/tracking.js';
-                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(lc, s);
-            })();
-        </script>
-        <!-- End of LiveChat code -->
+{{--Chat support here--}}
     @endif
 </body>
 </html>

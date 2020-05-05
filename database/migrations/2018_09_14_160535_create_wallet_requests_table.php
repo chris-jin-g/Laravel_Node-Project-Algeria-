@@ -16,7 +16,7 @@ class CreateWalletRequestsTable extends Migration
         Schema::create('wallet_requests', function (Blueprint $table) {
             $table->increments('id');
             $table->string('alias_id');            
-            $table->string('request_from')->comment('user,provider,fleet');
+            $table->string('request_from')->comment('user,provider');
             $table->integer('from_id');
             $table->string('from_desc')->nullable();
             $table->enum('type', [

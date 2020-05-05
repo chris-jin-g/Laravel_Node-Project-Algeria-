@@ -10,7 +10,7 @@
             <div class="col-md-6 log-left">
                 <span class="login-logo"><a href="{{url('/')}}"><img src="{{ config('constants.site_logo', asset('logo-black.png'))}}"></a></span>
                 <h2>Crie sua conta e mova-se em minutos</h2>
-                <p>Bem-vindo(a) ao {{config('constants.site_title','Moob Urban')}}, a maneira mais fácil de se locomover com o toque de um botão.</p>
+                <p>Bem-vindo(a) ao {{config('constants.site_title','Thinkin Cab')}}, a maneira mais fácil de se locomover com o toque de um botão.</p>
             </div>
             <div class="col-md-6 log-right">
                 <div class="login-box-outer">
@@ -23,11 +23,11 @@
 
 <!--                            <div id="first_step">
                                 <div class="col-md-4">
-                                    <input value="+55" type="text" placeholder="+1" id="country_code" name="country_code" />
+                                    <input value="+55" type="text" placehold="+1" id="country_code" name="country_code" />
                                 </div> 
 
                                 <div class="col-md-8">
-                                    <input type="text" autofocus id="phone_number" class="form-control" placeholder="Número celular com DDD" name="phone_number" value="{{ old('phone_number') }}" data-stripe="number" maxlength="11" onkeypress="return isNumberKey(event);" required/>
+                                    <input type="text" autofocus id="phone_number" class="form-control" placehold="Número celular com DDD" name="phone_number" value="{{ old('phone_number') }}" data-stripe="number" maxlength="11" onkeypress="return isNumberKey(event);" required/>
                                 </div>
 
                                 <div class="col-md-8">
@@ -51,7 +51,7 @@
                                 <input value="+55" type="hidden" id="country_code" name="country_code" />
                                 
                                 <div class="col-md-6">
-                                    <input type="text" autofocus class="form-control" placeholder="Nome" name="first_name" value="{{ old('first_name') }}" data-validation="alphanumeric" data-validation-allowing=" -" data-validation-error-msg="First Name can only contain alphanumeric characters and . - spaces">
+                                    <input type="text" autofocus class="form-control" placehold="Nome" name="first_name" value="{{ old('first_name') }}" data-validation="alphanumeric" data-validation-allowing=" -" data-validation-error-msg="First Name can only contain alphanumeric characters and . - spaces">
 
                                     @if ($errors->has('first_name'))
                                     <span class="help-block">
@@ -60,7 +60,7 @@
                                     @endif
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" placeholder="Sobrenome" name="last_name" value="{{ old('last_name') }}" data-validation="alphanumeric" data-validation-allowing=" -" data-validation-error-msg="Last Name can only contain alphanumeric characters and . - spaces">
+                                    <input type="text" class="form-control" placehold="Sobrenome" name="last_name" value="{{ old('last_name') }}" data-validation="alphanumeric" data-validation-allowing=" -" data-validation-error-msg="Last Name can only contain alphanumeric characters and . - spaces">
 
                                     @if ($errors->has('last_name'))
                                     <span class="help-block">
@@ -69,7 +69,7 @@
                                     @endif
                                 </div>
                                 <div class="col-md-12">
-                                    <input type="email" class="form-control" name="email" placeholder="E-mail" value="{{ old('email') }}" data-validation="email">
+                                    <input type="email" class="form-control" name="email" placehold="E-mail" value="{{ old('email') }}" data-validation="email">
 
                                     @if ($errors->has('email'))
                                     <span class="help-block">
@@ -79,12 +79,12 @@
                                 </div>
 
                                 <div class="col-md-12">
-                                    <input type="text" id="phone_number" class="form_tel" class="form-control" placeholder="Número celular com DDD" name="phone_number" value="{{ old('phone_number') }}" data-stripe="number" maxlength="11" onkeypress="return isNumberKey(event);" required/>
+                                    <input type="text" id="phone_number" class="form_tel" class="form-control" placehold="Número celular com DDD" name="phone_number" value="{{ old('phone_number') }}" data-stripe="number" maxlength="11" onkeypress="return isNumberKey(event);" required/>
                                 </div>
 
                                 <div class="col-md-12">
-                                    <label class="checkbox"><input type="radio" name="gender" value="MALE" data-validation="required"  data-validation-error-msg="Por favor, selecione um gênero"> Masculino</label>
-                                    <label class="checkbox"><input type="radio" name="gender" value="FEMALE" data-validation-error-msg="Por favor, selecione um gênero"> Feminino</label>
+                                    <label class="checkbox"><input type="radio" name="gender" value="MALE" data-validation="required"  data-validation-error-msg="Please select a gender"> Male</label>
+                                    <label class="checkbox"><input type="radio" name="gender" value="FEMALE" data-validation-error-msg="Please select a gender"> Female</label>
                                     @if ($errors->has('gender'))
                                         <span class="help-block">
                                             <strong>{{ $errors->first('gender') }}</strong>
@@ -93,7 +93,7 @@
                                 </div> 
 
                                 <div class="col-md-12">
-                                    <input type="password" class="form-control" name="password" placeholder="Senha" data-validation="length" data-validation-length="min6" data-validation-error-msg="Password should not be less than 6 characters">
+                                    <input type="password" class="form-control" name="password" data-validation="length" data-validation-length="min6" data-validation-error-msg="Password should not be less than 6 characters">
 
                                     @if ($errors->has('password'))
                                     <span class="help-block">
@@ -103,7 +103,7 @@
                                 </div>
 
                                 <div class="col-md-12">
-                                    <input type="password" placeholder="Repita a Senha" class="form-control" name="password_confirmation" data-validation="confirmation" data-validation-confirm="password" data-validation-error-msg="As senhas não correspondem">
+                                    <input type="password" class="form-control" name="password_confirmation" data-validation="confirmation" data-validation-confirm="password" data-validation-error-msg="Passwords do not match">
 
                                     @if ($errors->has('password_confirmation'))
                                     <span class="help-block">
@@ -113,7 +113,7 @@
                                 </div>
                                 @if(config('constants.referral') == 1)
                                 <div class="col-md-12">
-                                    <input type="text" placeholder="Código de Referência (Opcional)" class="form-control" name="referral_code" >
+                                    <input type="text" placehold="Código de Referência (Opcional)" class="form-control" name="referral_code" >
 
                                     @if ($errors->has('referral_code'))
                                     <span class="help-block">
@@ -140,7 +140,7 @@
                     </div>
 
 
-                    <div class="log-copy"><p class="no-margin">{{ config('constants.site_copyright', '&copy; '.date('Y').' Appoets') }}</p></div>
+                    <div class="log-copy"><p class="no-margin">{{ config('constants.site_copyright', '&copy; '.date('Y').' Thinkin Cab') }}</p></div>
                 </div>
             </div>
         </div>

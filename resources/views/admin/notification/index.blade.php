@@ -4,10 +4,10 @@
 
 @section('content')
 
-    <div class="content-area py-1">
+    <div>
         <div class="container-fluid">
             
-            <div class="box box-block bg-white">
+            <div class="card">
                 @if(Setting::get('demo_mode', 0) == 1)
                     <div class="col-md-12" style="height:50px;color:red;">
                         ** Demo Mode : @lang('admin.demomode')
@@ -35,11 +35,11 @@
                             <td>{{ $index + 1 }}</td>
                             <td>
                                 @if($notify->notify_type == "user") 
-                                    Passageiros
+                                    Users
                                 @elseif($notify->notify_type == "provider")
-                                    Motoristas
+                                    Drivers
                                 @else
-                                    Todos
+                                    All
                                 @endif
                             </td>
                             <td>
@@ -65,10 +65,10 @@
                                     <input type="hidden" name="_method" value="DELETE">
                                     @if( Setting::get('demo_mode', 0) == 0)
                                     @can('notification-edit')
-                                    <a href="{{ route('admin.notification.edit', $notify->id) }}" class="btn btn-info"><i class="fa fa-pencil"></i> Editar</a>
+                                    <a href="{{ route('admin.notification.edit', $notify->id) }}" class="btn btn-info"><i class="fa fa-pencil"></i> Edit</a>
                                     @endcan
                                     @can('notification-delete')
-                                    <button class="btn btn-danger" onclick="return confirm('Você tem certeza?')"><i class="fa fa-trash"></i> Excluir</button>
+                                    <button class="btn btn-danger" onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i> Delete</button>
                                     @endcan
                                     @endif
                                 </form>

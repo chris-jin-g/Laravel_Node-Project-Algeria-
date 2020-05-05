@@ -9,7 +9,7 @@
             <div class="col-md-6 log-left">
                 <span class="login-logo"><img src="{{ config('constants.site_logo', asset('logo-black.png'))}}"></span>
                 <h2>Crie sua conta e mova-se em minutos</h2>
-                <p>Bem-vindo(a) ao {{config('constants.site_title', 'Moob Urban')}}, a maneira mais fácil de se locomover com o toque de um botão.</p>
+                <p>Bem-vindo(a) ao {{config('constants.site_title', 'Thinkin Cab')}}, a maneira mais fácil de se locomover com o toque de um botão.</p>
             </div>
             <div class="col-md-6 log-right">
                 <div class="login-box-outer">
@@ -21,7 +21,7 @@
                     <form  role="form" method="POST" action="{{ url('/login') }}"> 
                     {{ csrf_field() }}                      
                         <div class="col-md-12">
-                             <input id="email" type="email" class="form-control" placeholder="Seu e-mail" name="email" value="{{ old('email') }}" required autofocus>
+                             <input id="email" type="email" class="form-control" placehold="Seu e-mail" name="email" value="{{ old('email') }}" required autofocus>
 
                             @if ($errors->has('email'))
                                 <span class="help-block">
@@ -31,7 +31,7 @@
                         </div>
                         
                         <div class="col-md-12">
-                            <input id="password" type="password" class="form-control" placeholder="Senha" name="password" required>
+                            <input id="password" type="password" class="form-control" placehold="Password" name="password" required>
 
                             @if ($errors->has('password'))
                                 <span class="help-block">
@@ -45,26 +45,26 @@
                         </div>
                        
                         <div class="col-md-12">
-                            <button type="submit" class="log-teal-btn">ENTRAR</button>
+                            <button type="submit" class="log-teal-btn">Login</button>
                         </div>
                     </form>
 
                     @if(config('constants.social_login', 0) == 1)
                     <div class="col-md-12">
-                        <a href="{{ url('/auth/facebook') }}"><button type="submit" class="log-teal-btn fb"><i class="fa fa-facebook"></i>ENTRAR COM O FACEBOOK</button></a>
+                        <a href="{{ url('/auth/facebook') }}"><button type="submit" class="log-teal-btn fb"><i class="fa fa-facebook"></i>Login from Facebook</button></a>
                     </div>  
 <!--                    <div class="col-md-12">
-                        <a href="{{ url('/auth/google') }}"><button type="submit" class="log-teal-btn gp"><i class="fa fa-google-plus"></i>ENTRAR COM O GOOGLE+</button></a>
+                        <a href="{{ url('/auth/google') }}"><button type="submit" class="log-teal-btn gp"><i class="fa fa-google-plus"></i>Login from GOOGLE+</button></a>
                     </div>-->
                     @endif
 
                     <div class="col-md-12">
-                        <p class="helper"> <a href="{{ url('/password/reset') }}">Esqueceu a senha?</a></p>   
+                        <p class="helper"> <a href="{{ url('/password/reset') }}">Forgot password?</a></p>   
                     </div>
                 </div>
 
 
-                <div class="log-copy"><p class="no-margin">{{ config('constants.site_copyright', '&copy; '.date('Y').' Appoets') }}</p></div></div>
+                <div class="log-copy"><p class="no-margin">{{ config('constants.site_copyright', '&copy; '.date('Y').' Thinkin Cab') }}</p></div></div>
             </div>
         </div>
     </div>

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{config('constants.site_title','Moob Urban')}}</title>
+    <title>{{config('constants.site_title','Thinkin Cab')}}</title>
 
     <meta name="description" content="">
     <meta name="author" content="">
@@ -25,17 +25,7 @@
     <script src="{{asset('asset/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('asset/js/scripts.js')}}"></script>
     @if(Setting::get('demo_mode', 0) == 1)
-        <!-- Start of LiveChat (www.livechatinc.com) code -->
-        <script type="text/javascript">
-            window.__lc = window.__lc || {};
-            window.__lc.license = 8256261;
-            (function() {
-                var lc = document.createElement('script'); lc.type = 'text/javascript'; lc.async = true;
-                lc.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.livechatinc.com/tracking.js';
-                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(lc, s);
-            })();
-        </script>
-        <!-- End of LiveChat code -->
+{{--Chat support here--}}
     @endif
 
     @yield('scripts')

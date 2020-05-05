@@ -20,7 +20,7 @@ stack, you can set the stack option like this:
 
 You can also specify it for a single series, like this:
 
-	$.plot( $("#placeholder"), [{
+	$.plot( $("#placehold"), [{
 		data: [ ... ],
 		stack: true
 	}])

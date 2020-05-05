@@ -35,7 +35,7 @@
             dragClass       : 'dd-dragel',
             handleClass     : 'dd-handle',
             collapsedClass  : 'dd-collapsed',
-            placeClass      : 'dd-placeholder',
+            placeClass      : 'dd-placehold',
             noDragClass     : 'dd-nodrag',
             emptyClass      : 'dd-empty',
             expandBtnHTML   : '<button data-action="expand" type="button">Expand</button>',
@@ -431,7 +431,7 @@
                 }
                 var before = e.pageY < (this.pointEl.offset().top + this.pointEl.height() / 2);
                     parent = this.placeEl.parent();
-                // if empty create new list to replace empty placeholder
+                // if empty create new list to replace empty placehold
                 if (isEmpty) {
                     list = $(document.createElement(opt.listNodeName)).addClass(opt.listClass);
                     list.append(this.placeEl);

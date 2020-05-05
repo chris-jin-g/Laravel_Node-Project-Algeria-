@@ -287,7 +287,7 @@
                                             @endif
                                         </td> -->
                                         <td>@if($each->status=='CANCELLED')- @else{{currency($fully_sum)}}@endif</td>
-                                        <td><button id="{{$each->id}}" class="Dispute" value="{{$each->id}}">Disputa</button></td>
+                                        <td><button id="{{$each->id}}" class="Dispute" value="{{$each->id}}">Dispute</button></td>
 
                                     </tr>
                                 @endforeach
@@ -418,7 +418,7 @@ var trip_id;
                                 <h2>Comments</h2>
                              </div>
                              <div class="col-xs-7">    
-                             <textarea class="dispdesc" name="msg" id="disputeMsg" placeholder="Type your message"></textarea>
+                             <textarea class="dispdesc" name="msg" id="disputeMsg" placehold="Type your message"></textarea>
                              </div>
                              </div>
                             <input type="submit" name="submitbtn" class="submitbtn" id="sendBtn" value="send">`);
@@ -444,7 +444,7 @@ var trip_id;
                                 <h2>Title</h2>
                             </div>
                             <div class="col-xs-7">
-                            <input type="text" class="disptitle" id="disputeTitle" name="title" placeholder="Enter title"/>
+                            <input type="text" class="disptitle" id="disputeTitle" name="title" placehold="Enter title"/>
                             </div>
                         </div>`);
                         $("#disputeReason").empty();
@@ -524,7 +524,7 @@ var trip_id;
                                 <h2>Comments</h2>
                             </div>
                             <div class="col-xs-7">    
-                            <textarea class="dispdesc" name="msg" id="disputeMsg" placeholder="Type your message"></textarea>
+                            <textarea class="dispdesc" name="msg" id="disputeMsg" placehold="Type your message"></textarea>
                            </div>
                            </div>`);
 

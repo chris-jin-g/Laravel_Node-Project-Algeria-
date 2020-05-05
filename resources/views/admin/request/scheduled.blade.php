@@ -1,16 +1,20 @@
 @extends('admin.layout.base')
 
-@section('title', 'Viagens Agendadas ')
+@section('title', 'Scheduled Trips')
 
 @section('content')
 
-    <div class="content-area py-1">
+
         <div class="container-fluid">
             
-            <div class="box box-block bg-white">
-                <h5 class="mb-1">Viagens Agendadas</h5>
+            <div class="card">
+                <div class="card-header card-header-primary">
+                    <h5 class="card-title ">Scheduled Trips</h5>
+                  </div>
+                  <div class="card-body">
                 @if(count($requests) != 0)
-                <table class="table table-striped table-bordered dataTable" id="table-2">
+                <div class="table-responsive">
+                <table class="table">
                     <thead>
                         <tr>
                             <th>@lang('admin.id')</th>
@@ -52,19 +56,19 @@
                             <td>{{$request->payment_mode}}</td>
                             <td>
                                 @if($request->paid)
-                                    Pago
+                                    Paid
                                 @else
-                                    Não Pago
+                                    Não Paid
                                 @endif
                             </td>
                             <td>
                                 <div class="input-group-btn">
-                                  <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">Ação
+                                  <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">Action
                                     <span class="caret"></span>
                                   </button>
                                   <ul class="dropdown-menu">
                                     <li>
-                                        <a href="{{ route('admin.requests.show', $request->id) }}" class="btn btn-default"><i class="fa fa-search"></i> Mais detalhes</a>
+                                        <a href="{{ route('admin.requests.show', $request->id) }}" class="btn btn-default"><i class="fa fa-search"></i> More details</a>
                                     </li>
                                   </ul>
                                 </div>
@@ -86,8 +90,9 @@
                         </tr>
                     </tfoot>
                 </table>
+                </div>
                 @else
-                    <h6 class="no-result">Nenhum resultado encontrado</h6>
+                    <h6 class="no-result">no results found</h6>
                 @endif 
             </div>
             

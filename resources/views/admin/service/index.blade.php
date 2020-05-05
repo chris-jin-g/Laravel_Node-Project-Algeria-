@@ -1,46 +1,45 @@
 @extends('admin.layout.base')
 
-@section('title', 'Tipos de Serviço ')
+@section('title', 'Service Types')
 
 @section('content')
-    <div class="content-area py-1">
         <div class="container-fluid">
-            <div class="box box-block bg-white">
+            <div class="card">
+                <div class="card-header card-header-primary">
                 @if(Setting::get('demo_mode', 0) == 1)
                     <div class="col-md-12" style="height:50px;color:red;">
                         ** Demo Mode : @lang('admin.demomode')
                     </div>
                 @endif
-                <h5 class="mb-1">Tipos de Serviço</h5>
+                <h5 class="card-title">Service Types</h5>
                 @can('service-types-create')
                     <a href="{{ route('admin.service.create') }}" style="margin-left: 1em;"
-                       class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Adicionar Novo</a>
+                       class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Add Service</a>
                 @endcan
-                <table class="table table-striped table-bordered dataTable" id="table-2">
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table">
                     <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Nome do Serviço</th>
-                        <!-- <th>Provider Name</th> -->
-                        <th>Capacidade</th>
-                        <th>Tarifa Mínima</th>
-                        <th>Preço Base</th>
-                        <th>Distância Base</th>
-                        <th>Preço Distância</th>
-                        <th>Preço Tempo</th>
-                        <th>Preço Hora</th>
-                        <th>Cáuculo de Preço</th>
-                        <th>Imagem</th>
-                        <th>Marker Mapa</th>
-                        <th>Ação</th>
+                        <th> ID </th>
+                        <th> Service Name </th>
+                        <!-- <th> Provider Name </th> -->
+                        <th> Capacity </th>
+                        <th> Minimum Rate </th>
+                        <th> Base Price </th>
+                        <th> Base Distance </th>
+                        <th> Price Distance </th>
+                        <th> Price Time </th>
+                        <th> Price Hour </th>
+                        <th> Price Calculation </th>
+                        <th> Image </th>
+                        <th> Marker Map </th>
+                        <th> Action </th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($fleets as $fleet)
-                        <tr>
-                            <td colspan="12"><b>{{ $fleet->name }}</b></td>
-                        </tr>
-                        @foreach($fleet->services as $index => $service)
+                    @foreach($services as $service)
                             <tr>
                                 <td>{{ $index + 1 }}</td>
                                 <td>{{ $service->name }}</td>
@@ -54,7 +53,7 @@
                                 @if($service->calculator == 'DISTANCEHOUR' || $service->calculator == 'HOUR')
                                     <td>{{ currency($service->hour) }}</td>
                                 @else
-                                    <td>Não</td>
+                                    <td>N/A</td>
                                 @endif
                                 <td>@lang('servicetypes.'.$service->calculator)</td>
                                 <td>
@@ -78,37 +77,37 @@
                                         @if( Setting::get('demo_mode', 0) == 0)
                                             @can('service-types-edit')
                                                 <a href="{{ route('admin.service.edit', $service->id) }}" class="btn btn-info btn-block">
-                                                    <i class="fa fa-pencil"></i> Editar
+                                                    <i class="fa fa-pencil"></i> Edit
                                                 </a>
                                             @endcan
                                             @can('service-types-delete')
-                                                <button class="btn btn-danger btn-block" onclick="return confirm('Você tem certeza?')">
-                                                    <i class="fa fa-trash"></i> Excluir
+                                                <button class="btn btn-danger btn-block" onclick="return confirm('Are you sure?')">
+                                                    <i class="fa fa-trash"></i> Delete
                                                 </button>
                                             @endcan
                                         @endif
                                     </form>
                                 </td>
                             </tr>
-                        @endforeach
+                        {{-- @endforeach --}}
                     @endforeach
                     </tbody>
                     <tfoot>
                     <tr>
-                        <th>ID</th>
-                        <th>Nome do Serviço</th>
-                        <!-- <th>Provider Name</th> -->
-                        <th>Capacidade</th>
-                        <th>Tarifa Mínima</th>
-                        <th>Preço Base</th>
-                        <th>Distância Base</th>
-                        <th>Preço Distância</th>
-                        <th>Preço Tempo</th>
-                        <th>Preço Hora</th>
-                        <th>Cáuculo de Preço</th>
-                        <th>Imagem</th>
-                        <th>Marker Mapa</th>
-                        <th>Ação</th>
+                        <th> ID </th>
+                        <th> Service Name </th>
+                        <!-- <th> Provider Name </th> -->
+                        <th> Capacity </th>
+                        <th> Minimum Rate </th>
+                        <th> Base Price </th>
+                        <th> Base Distance </th>
+                        <th> Price Distance </th>
+                        <th> Price Time </th>
+                        <th> Price Hour </th>
+                        <th> Price Calculation </th>
+                        <th> Image </th>
+                        <th> Marker Map </th>
+                        <th> Action </th>
                     </tr>
                     </tfoot>
                 </table>

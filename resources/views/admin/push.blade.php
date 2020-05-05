@@ -1,6 +1,6 @@
 @extends('admin.layout.base')
 
-@section('title', 'Motificação Push ')
+@section('title', __('admin.push.Push_Notification'))
 
 @section('styles')
 <link href="{{asset('asset/css/bootstrap-datepicker.min.css')}}" rel="stylesheet">
@@ -9,9 +9,9 @@
 
 @section('content')
 
-<div class="content-area py-1">
+<div>
     <div class="container-fluid">
-        <div class="box box-block bg-white">
+        <div class="card">
             @if(Setting::get('demo_mode', 0) == 1)
             <div class="col-md-12" style="height:50px;color:red;">
                 ** Demo Mode : @lang('admin.demomode')
@@ -23,95 +23,95 @@
 
                 {{csrf_field()}}
 
-                <div class="form-group row">
-                    <label class="col-xs-2 col-form-label">@lang('admin.push.Sent_to')</label>
+                <div class="form-group">
+                    <label class="bmd-label-floating">@lang('admin.push.Sent_to')</label>
                     <div class="col-xs-10">
                         <select class="form-control" name="send_to" onchange="switch_send(this.value)">
-                            <option value="ALL">Todos Passageiros e Motoristas</option>
-                            <option value="USERS">Todos Passageiros</option>
-                            <option value="PROVIDERS">Todos Motoristas</option>
+                            <option value="ALL">All Users and Drivers</option>
+                            <option value="USERS">All Users</option>
+                            <option value="PROVIDERS">All Drivers</option>
                         </select>
                     </div>
                 </div>
 
-                <div class="form-group row" id="for_users" style="display: none;">
-                    <label class="col-xs-2 col-form-label">Condições do Passageiro</label>
+                <div class="form-group" id="for_users" style="display: none;">
+                    <label class="bmd-label-floating">User Condition</label>
                     <div class="col-xs-5">
                         <select class="form-control" name="user_condition" onchange="switch_user_condition(this.value);">
                             <option value="">Nenhuma</option>
-                            <option value="ACTIVE">Para passageiros ativos em </option>
-                            <option value="LOCATION">Usuários que estão em </option>
-                            <option value="RIDES">Quem usou o serviço mais de </option>
+                            <option value="ACTIVE">For Users active in</option>
+                            <option value="LOCATION">Users who are in</option>
+                            <option value="RIDES">Who used the service more than</option>
                             <!-- <option value="AMOUNT"> who spent more than </option> -->
                         </select>
                     </div>
                     <div class="col-xs-5" id="user_active" style="display: none;">
                         <select class="form-control" name="user_active">
-                            <option value="HOUR">Última uma hora</option>
-                            <option value="WEEK">Última semana </option>
-                            <option value="MONTH">Último mês </option>
+                            <option value="HOUR">Last one hour</option>
+                            <option value="WEEK">Last week</option>
+                            <option value="MONTH">Last month</option>
                         </select>
                     </div>
 
                     <div class="col-xs-5" id="user_rides"  style="display: none;">
-                        <input type="number" class="form-control" name="user_rides" placeholder="Número de Viagens">
+                        <input type="number" class="form-control" name="user_rides" placehold="Number of Trips">
                     </div>
 
                     <div class="col-xs-5" id="user_amount" style="display: none;">
-                        <input type="number" class="form-control" name="user_amount" placeholder="Valor Gasto">
+                        <input type="number" class="form-control" name="user_amount" placehold="Value amount">
                     </div>
 
                     <div class="col-xs-5" id="user_location" style="display: none;">
-                        <input type="text" class="form-control"  id="search_location" placeholder="Digite a Localização">
+                        <input type="text" class="form-control"  id="search_location" placehold="Enter Location">
                         <input type="hidden" name="user_location" id="user_point">
                     </div>
 
                 </div>
 
 
-                <div class="form-group row" id="for_providers" style="display: none;">
-                    <label class="col-xs-2 col-form-label">Condição dos Motoristas</label>
+               <div class="form-group" id="for_providers" style="display: none;">
+                     <label class="bmd-label-floating">Drivers Condition</label>
                     <div class="col-xs-5">
                         <select class="form-control" name="provider_condition" onchange="switch_provider_condition(this.value);">
-                            <option value="">Nenhuma</option>
-                            <option value="ACTIVE">Para motoristas ativos em </option>
-                            <option value="LOCATION">Motoristas que estão em </option>
-                            <option value="RIDES">Quem atendeu mais de </option>
+                            <option value="">None</option>
+                            <option value="ACTIVE">For drivers active in </option>
+                            <option value="LOCATION">Drivers who are in </option>
+                            <option value="RIDES">Who answered more than </option>
                             <!-- <option value="AMOUNT">  who earned more than </option> -->
                         </select>
                     </div>
                     <div class="col-xs-5" id="provider_active" style="display: none;">
                         <select class="form-control" name="provider_active">
-                            <option value="HOUR">Última uma hora</option>
-                            <option value="WEEK">Última semana </option>
-                            <option value="MONTH">Último mês </option>
+                            <option value="HOUR">Last one hour</option>
+                            <option value="WEEK">Last week</option>
+                            <option value="MONTH">Last month</option>
                         </select>
                     </div>
 
                     <div class="col-xs-5" id="provider_rides"  style="display: none;">
-                        <input type="number" class="form-control" name="provider_rides" placeholder="Número de Viagens">
+                        <input type="number" class="form-control" name="provider_rides" placehold="Provider rides">
                     </div>
 
                     <div class="col-xs-5" id="provider_amount" style="display: none;">
-                        <input type="number" class="form-control" name="provider_amount" placeholder="Valor Gasto">
+                        <input type="number" class="form-control" name="provider_amount" placehold="Provider Amount">
                     </div>
 
                     <div class="col-xs-5" id="provider_location" style="display: none;">
-                        <input type="text" class="form-control" id="search_provider_location" placeholder="Digite a Localização">
+                        <input type="text" class="form-control" id="search_provider_location" placehold="Enter Location">
                         <input type="hidden" name="provider_location" id="provider_point">
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label for="message" class="col-xs-2 col-form-label">@lang('admin.push.message')</label>
+                <div class="form-group">
+                    <label for="message" class="bmd-label-floating">@lang('admin.push.message')</label>
                     <div class="col-xs-10">
-                        <textarea maxlength="200" class="form-control" rows="3" name="message" required id="message" placeholder="Digite a Mensagem" ></textarea>
+                        <textarea maxlength="200" class="form-control" rows="3" name="message" required id="message" placehold="Digite a Mensagem" ></textarea>
                         <div id="characterLeftDesc"></div>
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label for="zipcode" class="col-xs-2 col-form-label"></label>
+                <div class="form-group">
+                    <label for="zipcode" class="bmd-label-floating"></label>
                     <div class="col-xs-10">							
                         <button type="submit" class="btn btn-primary">@lang('admin.push.Push_Now')</button>
                         &nbsp;
@@ -121,7 +121,7 @@
             </form>
         </div>
 
-        <div class="box box-block bg-white">
+        <div class="card">
             <h5 class="mb-1">@lang('admin.push.Notification_History')</h5>
             <table class="table table-striped table-bordered dataTable" id="table-2">
                 <thead>
@@ -175,15 +175,15 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Programar Envio de Notificação</h4>
+                <h4 class="modal-title">Schedule Notification Submission</h4>
             </div>
             <form>
                 <div class="modal-body">
 
                     <label>Data</label>
-                    <input value="{{date('m/d/Y')}}" class="form-control" type="text" id="datepicker" placeholder="Data" name="schedule_date">
+                    <input value="{{date('m/d/Y')}}" class="form-control" type="text" id="datepicker" placehold="Data" name="schedule_date">
                     <label>Hora</label>
-                    <input value="{{date('H:i')}}" class="form-control" type="text" id="timepicker" placeholder="Hora" name="schedule_time">
+                    <input value="{{date('H:i')}}" class="form-control" type="text" id="timepicker" placehold="Hora" name="schedule_time">
 
                 </div>
                 <div class="modal-footer">

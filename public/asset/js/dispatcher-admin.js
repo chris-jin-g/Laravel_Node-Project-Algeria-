@@ -39,28 +39,20 @@ class DispatcherPanel extends React.Component {
         }
     }
 
-    handleRequestShow(trip, event) {
-        console.log('Show Request', trip);
-        if(trip.status == 'CANCELLED') {
+    
+    handleRequestShow(trip) {
+        // console.log('Show Request', trip);
+        if(trip.current_provider_id == 0) {
             this.setState({
-                listContent: 'dispatch-cancelled',
+                listContent: 'dispatch-assign',
                 trip: trip
             });
         } else {
-            if(trip.current_provider_id == 0) {
-                this.setState({
-                    listContent: 'dispatch-assign',
-                    trip: trip
-                });
-
-            } else {
-                this.setState({
-                    listContent: 'dispatch-map',
-                    trip: trip
-                });
-            }
+            this.setState({
+                listContent: 'dispatch-map',
+                trip: trip
+            });
         }
-        
         ongoingInitialize(trip);
     }
 
@@ -97,17 +89,12 @@ class DispatcherPanel extends React.Component {
                 break;
             case 'dispatch-map':
                 listContent = <div className="col-md-4">
-                        <DispatcherList clicked={this.handleRequestShow.bind(this)} checked={this.handleAutoRequest.bind(this)} />
-                    </div>;
-                break;
-            case 'dispatch-assigned':
-                listContent = <div className="col-md-4">
-                        <DispatcherAssignedList />
+                        <DispatcherList clicked={this.handleRequestShow.bind(this)} />
                     </div>;
                 break;
             case 'dispatch-cancelled':
                 listContent = <div className="col-md-4">
-                        <DispatcherCancelledList clicked={this.handleRequestShow.bind(this)} />
+                        <DispatcherCancelledList />
                     </div>;
                 break;
             case 'dispatch-assign':
@@ -119,7 +106,7 @@ class DispatcherPanel extends React.Component {
 
         return (
             <div className="container-fluid">
-                <h4>Expedidor</h4>
+                <h4>Dispatcher</h4>
 
                 <DispatcherNavbar body={this.state.listContent} updateBody={this.handleUpdateBody.bind(this)} updateFilter={this.handleUpdateFilter.bind(this)}/>
 
@@ -165,11 +152,6 @@ class DispatcherNavbar extends React.Component {
             this.setState({
                 body: 'dispatch-create'
             });
-        }else if(this.state.body == 'dispatch-assigned') {
-            this.props.updateBody('dispatch-map');
-            this.setState({
-                body: 'dispatch-assigned'
-            });
         }else if(this.state.body == 'dispatch-cancelled') {
             this.props.updateBody('dispatch-map');
             this.setState({
@@ -189,41 +171,41 @@ class DispatcherNavbar extends React.Component {
 
     render() {
         return (
-            <nav className="navbar navbar-light bg-white b-a mb-2">
+            <nav className="navbar navbar-expand-lg">
                 <button className="navbar-toggler hidden-md-up" 
                     data-toggle="collapse"
                     data-target="#process-filters"
                     aria-controls="process-filters"
                     aria-expanded="false"
                     aria-label="Toggle Navigation"></button>
-                
-
-                <ul className="nav navbar-nav float-xs-right">
+                <div className="navbar-toggleable-sm" id="process-filters">
+                    <ul className="nav navbar-nav dispatcher-nav">
+                        <li className={this.isActive('all')} onClick={this.filter.bind(this, 'all')}>
+                            <span className="nav-link" href="#">Searching</span>
+                        </li>
+                        <li className={this.isActive('cancelled')} onClick={this.filter.bind(this, 'cancelled')}>
+                            <span className="nav-link" href="#">Cancelled</span>
+                        </li>
+                        <li className={this.isActive('warning')} onClick={this.filter.bind(this, 'warning')}>
+                            <span className="nav-link" href="#">Warning</span>
+                        </li>
+                        <li className={this.isActive('scheduled')}onClick={this.filter.bind(this, 'scheduled')}>
+                            <span className="nav-link" href="#">Scheduled</span>
+                        </li>
+                    </ul>
+                </div>
+                <ul className="nav navbar-nav ml-auto">
                     <li className="nav-item">
                         <button type="button" 
                             onClick={this.handleBodyChange.bind(this)} 
                             className="btn btn-success btn-md label-right b-a-0 waves-effect waves-light">
                             <span className="btn-label"><i className="ti-plus"></i></span>
-                            NOVA VIAGEM
+                            ADD
                         </button>
                     </li>
                 </ul>
-
-                <div className="collapse navbar-toggleable-sm" id="process-filters">
-                    <ul className="nav navbar-nav dispatcher-nav">
-                        <li className={this.isActive('all')} onClick={this.filter.bind(this, 'all')}>
-                            <span className="nav-link" href="#">Em pesquisa</span>
-                        </li>
-                        <li className={this.isActive('assigned')} onClick={this.filter.bind(this, 'assigned')}>
-                            <span className="nav-link" href="#">Atribuídos ao Motorista</span>
-                        </li>
-                        <li className={this.isActive('cancelled')} onClick={this.filter.bind(this, 'cancelled')}>
-                            <span className="nav-link" href="#">Cancelados</span>
-                        </li>
-                        
-                    </ul>
-                </div>
             </nav>
+ 
         );
     }
 }
@@ -240,14 +222,14 @@ class DispatcherList extends React.Component {
 
     componentDidMount() {
         window.worldMapInitialize();
-        window.Moob.TripTimer = setInterval(
+        window.Thinkin.TripTimer = setInterval(
             () => this.getTripsUpdate(),
             1000
         );
     }
 
     componentWillUnmount() {
-        clearInterval(window.Moob.TripTimer);
+        clearInterval(window.Thinkin.TripTimer);
     }
 
     getTripsUpdate() {
@@ -267,109 +249,20 @@ class DispatcherList extends React.Component {
     }
 
     handleClick(trip) {
-        this.props.checked(trip);
         this.props.clicked(trip);
     }
 
     render() {
         return (
-            <div className="card">
-                <div className="card-header text-uppercase"><b>Lista de Viagens em Pesquisa</b></div>
+                <div className="card">
+                <div className="card-header card-header-primary">
+                  <h4 className="card-title">Searching List</h4> 
+                </div>
+                <div className="card-body">
                 <DispatcherListItem data={this.state.data.data} clicked={this.handleClick.bind(this)} />
-            </div>
-        );
-    }
-}
+                </div>
+                </div>
 
-class DispatcherAssignedList extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            data: {
-                data: []
-            }
-        };
-    }
-
-    componentDidMount() {
-        window.worldMapInitialize();
-        window.Moob.TripTimer = setInterval(
-            () => this.getTripsUpdate(),
-            1000
-        );
-    }
-
-    componentWillUnmount() {
-        clearInterval(window.Moob.TripTimer);
-    }
-
-    getTripsUpdate() {
-        $.get('/admin/dispatcher/trips?type=ASSIGNED', function(result) {
-            if(result.hasOwnProperty('data')) {
-                this.setState({
-                    data: result
-                });
-            } else {
-                this.setState({
-                    data: {
-                        data: []
-                    }
-                });
-            }
-        }.bind(this));
-    }
-
-    render() {
-        return (
-            <div className="card">
-                <div className="card-header text-uppercase"><b>Lista de Atribuídas</b></div>
-                <DispatcherAssignedListItem data={this.state.data.data} />
-            </div>
-        );
-    }
-}
-
-
-class DispatcherAssignedListItem extends React.Component {
-
-    render() {
-        var listItem = function(trip) {
-            return (
-                    <div className="il-item" key={trip.id}>
-                        <a className="text-black" href="#">
-                            <div className="media">
-                                <div className="media-body">
-                                    <p className="mb-0-5">{trip.user.first_name} {trip.user.last_name} 
-                                    {trip.status == 'COMPLETED' ?
-                                        <span className="tag tag-success pull-right"> CONCLUÍDA </span>
-                                    : trip.status == 'ASSIGNED' ?
-                                        <span className="tag tag-danger pull-right"> ATRIBUÍDA </span>
-                                    : trip.status == 'CANCELLED' ?
-                                        <span className="tag tag-danger pull-right"> CANCELADA </span>
-                                    : trip.status == 'SEARCHING' ?
-                                        <span className="tag tag-warning pull-right"> PESQUISANDO </span>
-                                    : trip.status == 'SCHEDULED' ?
-                                        <span className="tag tag-primary pull-right"> AGENDADA </span>
-                                    : 
-                                        <span className="tag tag-info pull-right"> {trip.status} </span>
-                                    }
-                                    </p>
-                                    <h6 className="media-heading">Partida: {trip.s_address}</h6>
-                                    <h6 className="media-heading">Chegada: {trip.d_address ? trip.d_address : "Não selecionado"}</h6>
-                                    <h6 className="media-heading">Pagamento: {trip.payment_mode == 'CASH' ? 'DINHEIRO' : 'CARTÃO'}</h6>
-                                    <h6 className="media-heading">Motorista atribuído: {trip.provider.first_name} {trip.provider.last_name}</h6>
-                                    <span className="text-muted">Atribuído em: {trip.updated_at}</span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                );
-        }.bind(this);
-
-        return (
-            <div className="items-list">
-                {this.props.data.map(listItem)}
-            </div>
         );
     }
 }
@@ -386,14 +279,14 @@ class DispatcherCancelledList extends React.Component {
 
     componentDidMount() {
         window.worldMapInitialize();
-        window.Moob.TripTimer = setInterval(
+        window.Thinkin.TripTimer = setInterval(
             () => this.getTripsUpdate(),
             1000
         );
     }
 
     componentWillUnmount() {
-        clearInterval(window.Moob.TripTimer);
+        clearInterval(window.Thinkin.TripTimer);
     }
 
     getTripsUpdate() {
@@ -412,15 +305,15 @@ class DispatcherCancelledList extends React.Component {
         }.bind(this));
     }
 
-    handleClick(trip) {
-        this.props.clicked(trip);
-    }
-
     render() {
         return (
             <div className="card">
-                <div className="card-header text-uppercase"><b>Lista de Canceladas</b></div>
-                <DispatcherCancelledListItem data={this.state.data.data} clicked={this.handleClick.bind(this)} />
+                <div className="card-header card-header-primary">
+                  <h4 className="card-title">Cancelled List</h4> 
+                </div>
+                <div className="card-body">
+                    <DispatcherCancelledListItem data={this.state.data.data} />
+                </div>
             </div>
         );
     }
@@ -428,35 +321,32 @@ class DispatcherCancelledList extends React.Component {
 
 
 class DispatcherCancelledListItem extends React.Component {
-    handleClick(trip) {
-        this.props.clicked(trip)
-    }
 
     render() {
         var listItem = function(trip) {
             return (
-                    <div className="il-item" key={trip.id}  onClick={this.handleClick.bind(this, trip)}>
+                    <div className="il-item" key={trip.id}>
                         <a className="text-black" href="#">
                             <div className="media">
                                 <div className="media-body">
                                     <p className="mb-0-5">{trip.user.first_name} {trip.user.last_name} 
                                     {trip.status == 'COMPLETED' ?
-                                        <span className="tag tag-success pull-right"> CONCLUÍDA </span>
+                                        <span className="tag tag-success pull-right"> {trip.status} </span>
                                     : trip.status == 'CANCELLED' ?
-                                        <span className="tag tag-danger pull-right"> CANCELADA </span>
+                                        <span className="tag tag-danger pull-right"> {trip.status} </span>
                                     : trip.status == 'SEARCHING' ?
-                                        <span className="tag tag-warning pull-right"> PESQUISANDO </span>
+                                        <span className="tag tag-warning pull-right"> {trip.status} </span>
                                     : trip.status == 'SCHEDULED' ?
-                                        <span className="tag tag-primary pull-right"> AGENDADA </span>
+                                        <span className="tag tag-primary pull-right"> {trip.status} </span>
                                     : 
                                         <span className="tag tag-info pull-right"> {trip.status} </span>
                                     }
                                     </p>
-                                    <h6 className="media-heading">Partida: {trip.s_address}</h6>
-                                    <h6 className="media-heading">Chegada: {trip.d_address ? trip.d_address : "Não selecionado"}</h6>
-                                    <h6 className="media-heading">Pagamento: {trip.payment_mode == 'CASH' ? 'DINHEIRO' : 'CARTÃO'}</h6>
-                                    <h6 className="media-heading">Motivo Cancelamento: {trip.cancel_reason}</h6>
-                                    <span className="text-muted">Cancelado em : {trip.updated_at}</span>
+                                    <h6 className="media-heading">From: {trip.s_address}</h6>
+                                    <h6 className="media-heading">To: {trip.d_address ? trip.d_address : "Not Selected"}</h6>
+                                    <h6 className="media-heading">Payment: {trip.payment_mode}</h6>
+                                    <progress className="progress progress-success progress-sm" max="100"></progress>
+                                    <span className="text-muted">Cancelled at : {trip.updated_at}</span>
                                 </div>
                             </div>
                         </a>
@@ -476,38 +366,32 @@ class DispatcherListItem extends React.Component {
     handleClick(trip) {
         this.props.clicked(trip)
     }
-
-    handleCancel(trip, event) {
-        event.stopPropagation();
-        location.assign("/admin/dispatcher/cancel?request_id="+trip.id);
-    }
-
     render() {
         var listItem = function(trip) {
             return (
                     <div className="il-item" key={trip.id} onClick={this.handleClick.bind(this, trip)}>
-                        <button className="btn btn-danger" onClick={this.handleCancel.bind(this, trip)} >Cancel Ride</button>
+                        <a className="btn btn-danger" href={"/admin/dispatcher/cancel?request_id=" + trip.id} >Cancel Ride</a>
                         <a className="text-black" href="#">
                             <div className="media">
                                 <div className="media-body">
                                     <p className="mb-0-5">{trip.user.first_name} {trip.user.last_name} 
                                     {trip.status == 'COMPLETED' ?
-                                        <span className="tag tag-success pull-right"> CONCLUÍDA </span>
+                                        <span className="tag tag-success pull-right"> {trip.status} </span>
                                     : trip.status == 'CANCELLED' ?
-                                        <span className="tag tag-danger pull-right"> CANCELADA </span>
+                                        <span className="tag tag-danger pull-right"> {trip.status} </span>
                                     : trip.status == 'SEARCHING' ?
-                                        <span className="tag tag-warning pull-right"> PESQUISANDO </span>
+                                        <span className="tag tag-warning pull-right"> {trip.status} </span>
                                     : trip.status == 'SCHEDULED' ?
-                                        <span className="tag tag-primary pull-right"> AGENDADA </span>
+                                        <span className="tag tag-primary pull-right"> {trip.status} </span>
                                     : 
                                         <span className="tag tag-info pull-right"> {trip.status} </span>
                                     }
                                     </p>
-                                    <h6 className="media-heading">Partida: {trip.s_address}</h6>
-                                    <h6 className="media-heading">Chegada: {trip.d_address ? trip.d_address : "Not Selected"}</h6>
-                                    <h6 className="media-heading">Pagamento: {trip.payment_mode == 'CASH' ? 'DINHEIRO' : 'CARTÃO'}</h6>
+                                    <h6 className="media-heading">From: {trip.s_address}</h6>
+                                    <h6 className="media-heading">To: {trip.d_address ? trip.d_address : "Not Selected"}</h6>
+                                    <h6 className="media-heading">Payment: {trip.payment_mode}</h6>
                                     <progress className="progress progress-success progress-sm" max="100"></progress>
-                                    <span className="text-muted">{trip.current_provider_id == 0 ? "Atribuição manual" : "Pesquisa automática"} : {trip.created_at}</span>
+                                    <span className="text-muted">{trip.current_provider_id == 0 ? "Manual Assignment" : "Auto Search"} : {trip.created_at}</span>
                                 </div>
                             </div>
                         </a>
@@ -539,8 +423,8 @@ class DispatcherRequest extends React.Component {
         
         // Schedule Time Datepicker
         $('#schedule_time').datetimepicker({
-            minDate: window.Moob.minDate,
-            maxDate: window.Moob.maxDate,
+            minDate: window.Thinkin.minDate,
+            maxDate: window.Thinkin.maxDate,
         });
 
         // Get Service Type List
@@ -575,10 +459,6 @@ class DispatcherRequest extends React.Component {
             type: 'POST',
             data: $("#form-create-ride").serialize(),
             success: function(data) {
-                if(typeof data.message !== 'undefined') {
-                    $('.container-fluid').first().before('<div class="alert alert-danger notification"><button type="button" class="close" data-dismiss="alert">×</button><p style="margin-top:10px;">'+data.message+'</p></div>');
-                    setTimeout(function() { $('.notification').fadeOut('fast', 'linear', function() { $('.notification').delay(5000).remove(); }); }, 5000);
-                }
                 console.log('Accept', data);
                 this.props.completed(data);
             }.bind(this)
@@ -591,72 +471,78 @@ class DispatcherRequest extends React.Component {
 
     render() {
         return (
-            <div className="card card-block" id="create-ride">
-                <h3 className="card-title text-uppercase">Detalhes da Viagem</h3>
+            <div className="card" id="create-ride">
+                <div className="card-header card-header-primary">
+                  <h4 className="card-title">Ride Details</h4>
+                </div>
+                <div className="card-body">
                 <form id="form-create-ride" onSubmit={this.createRide.bind(this)} method="POST">
                     <div className="row">
                         <div className="col-xs-6">
                             <div className="form-group">
-                                <label htmlFor="first_name">Nome do Passageiro</label>
-                                <input type="text" className="form-control" name="first_name" id="first_name" placeholder="Nome" required />
+                                <label className="bmd-label-floating" htmlFor="first_name">First Name</label>
+                                <input type="text" className="form-control" name="first_name" id="first_name" required />
                             </div>
                         </div>
                         <div className="col-xs-6">
                             <div className="form-group">
-                                <label htmlFor="last_name">Sobrenome</label>
-                                <input type="text" className="form-control" name="last_name" id="last_name" placeholder="Sobrenome" required />
+                                <label className="bmd-label-floating" htmlFor="last_name">Last Name</label>
+                                <input type="text" className="form-control" name="last_name" id="last_name" required />
                             </div>
                         </div>
                         <div className="col-xs-6">
                             <div className="form-group">
-                                <label htmlFor="email">E-mail</label>
-                                <input type="email" className="form-control" name="email" id="email" placeholder="E-mail" required/>
+                                <label className="bmd-label-floating" htmlFor="email">Email</label>
+                                <input type="email" className="form-control" name="email" id="email" required/>
                             </div>
                         </div>
                         <div className="col-xs-6">
                             <div className="form-group">
-                                <label htmlFor="mobile">Telefone</label>
-                                <input type="text" className="form-control numbers" name="mobile" id="mobile" placeholder="Telefone" required />
+                                <label className="bmd-label-floating" htmlFor="mobile">Phone</label>
+                                <input type="text" className="form-control" name="mobile" id="mobile" required />
                             </div>
                         </div>
                         <div className="col-xs-12">
                             <div className="form-group">
-                                <label htmlFor="s_address">Endereço de Partida</label>
+                                <label className="bmd-label-floating" htmlFor="s_address">Pickup Address</label>
                                 
                                 <input type="text"
                                     name="s_address"
                                     className="form-control"
                                     id="s_address"
-                                    placeholder="Endereço de Partida"
+                                    
                                     required></input>
 
                                 <input type="hidden" name="s_latitude" id="s_latitude"></input>
                                 <input type="hidden" name="s_longitude" id="s_longitude"></input>
                             </div>
                             <div className="form-group">
-                                <label htmlFor="d_address">Endereço de Destino</label>
+                                <label className="bmd-label-floating" htmlFor="d_address">Dropoff Address</label>
                                 
                                 <input type="text" 
                                     name="d_address"
                                     className="form-control"
                                     id="d_address"
-                                    placeholder="Endereço de destino"
+                                    
                                     required></input>
 
                                 <input type="hidden" name="d_latitude" id="d_latitude"></input>
                                 <input type="hidden" name="d_longitude" id="d_longitude"></input>
                                 <input type="hidden" name="distance" id="distance"></input>
                             </div>
-                            
                             <div className="form-group">
-                                <label htmlFor="service_types">Tipo de Serviço</label>
+                                <label className="bmd-label-floating" htmlFor="schedule_time">Schedule Time</label>
+                                <input type="text" className="form-control" name="schedule_time" id="schedule_time" required/>
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="service_types">Service Type</label>
                                 <ServiceTypes data={this.state.data} />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="estimated" className="estimate_amount">Valor estimado :  <span id="estimated">R$0</span></label>
+                                <label htmlFor="estimated" className="estimate_amount">Estimated Amount : <span id="estimated">R$0</span></label>
                             </div>
                             <div className="form-group">
-                                <label htmlFor="provider_auto_assign">Atribuição automática de motorista</label>
+                                <label htmlFor="provider_auto_assign">Auto Assign Provider</label>
                                 <br />
                                 <input type="checkbox" id="provider_auto_assign" name="provider_auto_assign" className="js-switch" data-color="#f59345" defaultChecked />
                             </div>
@@ -665,16 +551,17 @@ class DispatcherRequest extends React.Component {
                     <div className="row">
                         <div className="col-xs-6">
                             <button type="button" className="btn btn-lg btn-danger btn-block waves-effect waves-light" onClick={this.cancelCreate.bind(this)}>
-                                CANCELAR
+                                CANCEL
                             </button>
                         </div>
                         <div className="col-xs-6">
-                            <button id="showbtn" className="btn btn-lg btn-success btn-block waves-effect waves-light" disabled>
-                                ENVIAR
+                            <button className="btn btn-lg btn-success btn-block waves-effect waves-light">
+                                SUBMIT
                             </button>
                         </div>
                     </div>
                 </form>
+            </div>
             </div>
         );
     }
@@ -692,13 +579,11 @@ class DispatcherAssignList extends React.Component {
 
     componentDidMount() {
         $.get('/admin/dispatcher/providers', { 
-            service_type: this.props.trip.service_type_id,
             latitude: this.props.trip.s_latitude,
             longitude: this.props.trip.s_longitude
         }, function(result) {
             console.log('Providers', result);
-            if(result) {
-                result['data']=result;
+            if(result.hasOwnProperty('data')) {
                 this.setState({
                     data: result
                 });
@@ -718,7 +603,7 @@ class DispatcherAssignList extends React.Component {
         console.log('DispatcherAssignList - render', this.state.data);
         return (
             <div className="card">
-                <div className="card-header text-uppercase"><b>Atribuir Motorista</b></div>
+                <div className="card-header text-uppercase"><b>Assign Provider</b></div>
                 
                 <DispatcherAssignListItem data={this.state.data.data} trip={this.props.trip} />
             </div>
@@ -740,9 +625,9 @@ class DispatcherAssignListItem extends React.Component {
                             <div className="media">
                                 <div className="media-body">
                                     <p className="mb-0-5">{provider.first_name} {provider.last_name}</p>
-                                    <h6 className="media-heading">Avaliação: {provider.rating}</h6>
-                                    <h6 className="media-heading">Telefone: {provider.mobile}</h6>
-                                    <h6 className="media-heading">Tipo: {provider.service.service_type.name}</h6>
+                                    <h6 className="media-heading">Rating: {provider.rating}</h6>
+                                    <h6 className="media-heading">Phone: {provider.mobile}</h6>
+                                    <h6 className="media-heading">Type: {provider.service.service_type.name}</h6>
                                 </div>
                             </div>
                         </a>
@@ -770,7 +655,7 @@ class ServiceTypes extends React.Component {
         return (
                 <select 
                     name="service_type"
-                    className="form-control" id="service_type">
+                    className="form-control">
                     {this.props.data.map(mySelectOptions)}
                 </select>
             )
@@ -788,10 +673,9 @@ class ServiceTypesOption extends React.Component {
 class DispatcherMap extends React.Component {
     render() {
         return (
-            <div className="card my-card">
-                <div className="card-header text-uppercase">
-                    <b>MAPA</b>
-                </div>
+            <div className="card">
+                <div className="card-header card-header-primary">
+                  <h4 className="card-title">Map</h4></div>
                 <div className="card-body">
                     <div id="map" style={{ height: '450px'}}></div>
                 </div>

@@ -127,7 +127,7 @@ $('#dispaly-vehi-form').click(function(e){
 // fleet dropdown
 function DropDown(el) {
     this.dd = el;
-    this.placeholder = this.dd.children('span');
+    this.placehold = this.dd.children('span');
     this.opts = this.dd.find('ul.dropdown > li');
     this.val = '';
     this.index = -1;
@@ -147,7 +147,7 @@ DropDown.prototype = {
             var opt = $(this);
             obj.val = opt.text();
             obj.index = opt.index();
-            obj.placeholder.text(obj.val);
+            obj.placehold.text(obj.val);
         });
     },
     getValue : function() {

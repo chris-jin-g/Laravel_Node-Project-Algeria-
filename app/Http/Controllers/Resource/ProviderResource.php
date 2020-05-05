@@ -16,8 +16,6 @@ use QrCode;
 use \Carbon\Carbon;
 use App\Provider;
 use App\User;
-use App\Fleet;
-use App\FleetCities;
 use App\UserRequestPayment;
 use App\UserRequests;
 use App\Helpers\Helper;
@@ -69,7 +67,7 @@ class ProviderResource extends Controller
                 if ($provider->active_documents() == $total_documents && $provider->service != null) {
                     return "<a class='btn btn-success btn-block' href='" . route('admin.provider.document.index', $provider->id) . "'>Verificado</a>";
                 } else {
-                    return "<a class='btn btn-danger btn-block label-right' href='" . route('admin.provider.document.index', $provider->id) . "'>Pendente <span class='btn-label'>" . $provider->pending_documents() . "</span></a>";
+                    return "<a class='btn btn-danger btn-block label-right' href='" . route('admin.provider.document.index', $provider->id) . "'>Attention! <span class='btn-label'>" . $provider->pending_documents() . "</span></a>";
                 }
             })
             ->addColumn('action', function ($user) {
@@ -92,11 +90,7 @@ class ProviderResource extends Controller
         if (!empty($request->page) && $request->page == 'all') {
             $AllProviders = Provider::with('service', 'accepted', 'cancelled')
                 ->orderBy('id', 'asc');
-            if (request()->has('fleet')) {
-                $providers = $AllProviders->where('fleet', $request->fleet)->get();
-            } else {
                 $providers = $AllProviders->get();
-            }
             return response()->json(array('success' => true, 'data' => $providers));
         } else {
             if ($request->has('name') || $request->has('status')) {
@@ -126,19 +120,13 @@ class ProviderResource extends Controller
                     }
                         //$AllProviders->orderBy('id', 'DESC');
                 }
-
-                if (request()->has('fleet')) {
-                    $providers = $AllProviders->where('fleet', $request->fleet)->paginate($this->perpage)->appends(['fleet' => $request->get('fleet')]);
-
-                } else {
-
                     if($request->has('name')){
 
                         $providers = $AllProviders->paginate($this->perpage)->appends(['name' => $request->get('name'), 'status' => $request->get('status')]);
                     }else{
                         $providers = $AllProviders->paginate($this->perpage);
                     }
-                }
+                
 
                 $total_documents = Document::count();
 
@@ -153,12 +141,9 @@ class ProviderResource extends Controller
             } else {
                 $AllProviders = Provider::with('service', 'accepted', 'cancelled')
                     ->orderBy('id', 'DESC');
-                if (request()->has('fleet')) {
-                    $providers = $AllProviders->where('fleet', $request->fleet)->paginate($this->perpage)->appends(['fleet' => $request->get('fleet')]);
 
-                } else {
                     $providers = $AllProviders->paginate($this->perpage);
-                }
+                
 
                 $total_documents = Document::count();
 
@@ -181,8 +166,6 @@ class ProviderResource extends Controller
     public function create()
     {   
         try {
-            $states = State::with('cities')->get();
-            $stateId = State::whereHas('cities')->get()->first();
             return view('admin.providers.create', compact('states', 'stateId'));
         } catch (ModelNotFoundException $e) {
             return $e;
@@ -201,7 +184,6 @@ class ProviderResource extends Controller
         $this->validate($request, [
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
-            'cpf' => 'required|max:255',
             'country_code' => 'required|max:25',
             'email' => 'required|unique:providers,email|email|max:255',
             'mobile' => 'digits_between:6,13',
@@ -224,11 +206,6 @@ class ProviderResource extends Controller
                 }');
             // $file=QrCode::format('png')->size(200)->margin(20)->phoneNumber($request->country_code.$request->mobile);
             
-            //Registra motorista na franquia se existir na cidade informada
-            $FleetCities = FleetCities::where('city_id', $provider['city_id'])->first();
-            if($FleetCities->city_id){
-               $provider['fleet'] = $FleetCities->fleet_id;
-            }
             
             $provider['qrcode_url'] = Helper::upload_qrCode($request->mobile, $file);
             $provider = Provider::create($provider);
@@ -265,12 +242,8 @@ class ProviderResource extends Controller
     public function edit($id)
     {
         try {
-            $states = State::with('cities')->get();
             $provider = Provider::findOrFail($id);
-            $stateId = State::whereHas('cities', function ($query) use ($provider) {
-                $query->where('id', $provider->city_id);
-            })->get()->first();
-            return view('admin.providers.edit', compact('provider', 'states', 'stateId'));
+            return view('admin.providers.edit', compact('provider'));
         } catch (ModelNotFoundException $e) {
             return $e;
         }
@@ -287,7 +260,6 @@ class ProviderResource extends Controller
     {
 
         $this->validate($request, [
-            'city_id' => 'required',
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
             'country_code' => 'required|max:25',
@@ -296,13 +268,8 @@ class ProviderResource extends Controller
         ]);
 
         try {
-            $fleet = Fleet::where('city_id','=',$request->city_id)->get()->first();
-
+            
             $provider = Provider::findOrFail($id);
-
-            if(!is_null($fleet->id) && !empty($fleet)){
-                $provider->fleet = $fleet->id;
-            }
 
             if ($request->hasFile('avatar')) {
                 if ($provider->avatar) {
@@ -317,20 +284,17 @@ class ProviderResource extends Controller
                 }');
             // $file=QrCode::format('png')->size(200)->margin(20)->phoneNumber($request->country_code.$request->mobile);
             $provider->qrcode_url = Helper::upload_qrCode($request->mobile, $file);
-
-            $provider->city_id = $request->city_id;
             $provider->first_name = $request->first_name;
             $provider->last_name = $request->last_name;
-            $provider->cpf = $request->cpf;
             $provider->country_code = $request->country_code;
             $provider->mobile = $request->mobile;
             if($request->password && !$request->password_confirm){
-                return back()->with('flash_error', 'Por favor, informe a senha de confirmação!');
+                return back()->with('flash_error', 'Please enter the confirmation password!');
             }elseif($request->password && $request->password_confirm){
                 if($request->password == $request->password_confirm){
                     $provider->password = bcrypt($request->password);
                 }else{
-                    return back()->with('flash_error', 'As senhas não conferem!');
+                    return back()->with('flash_error', 'Passwords do not match!');
                 }
             }
             $provider->save();
@@ -554,61 +518,8 @@ class ProviderResource extends Controller
     /**
      * account statements.
      *
-     * @param  \App\fleet $fleet
      * @return \Illuminate\Http\Response
      */
-    public function statementFleet($id)
-    {
-
-        try {
-
-            $listname = '';
-            $statement_for = "fleet";
-            
-            $Fleet = Fleet::where('id', $id)->first();
-            
-            $rides = UserRequests::whereHas('user', function ($query) use ($Fleet) {
-                $query->where('city_id', $Fleet->city_id);
-            })->orderBy('id', 'desc')->paginate($this->perpage);
-            
-            $cancel_rides = UserRequests::whereHas('user', function ($query) use ($Fleet) {
-                $query->where('city_id', $Fleet->city_id);
-            })->where('status', 'CANCELLED')->count();
-            
-            $fleet = Fleet::find($id);
-            
-            $revenue = UserRequestPayment::where('fleet_id', $id)
-                ->select(\DB::raw(
-                    'SUM(total) as overall, SUM(provider_pay) as commission'
-                ))->get();
-                                    
-            $Joined = $fleet->created_at ? '- Cadastrado ' . $fleet->created_at->diffForHumans() : '';
-
-            $pagination = (new Helper)->formatPagination($rides);
-
-            $dates['yesterday'] = Carbon::yesterday()->format('Y-m-d');
-            $dates['today'] = Carbon::today()->format('Y-m-d');
-            $dates['pre_week_start'] = Carbon::today()->subWeek()->format('Y-m-d');
-            $dates['pre_week_end'] = Carbon::parse('last sunday of this month')->format('Y-m-d');
-            $dates['cur_week_start'] = Carbon::today()->startOfWeek()->format('Y-m-d');
-            $dates['cur_week_end'] = Carbon::today()->endOfWeek()->format('Y-m-d');
-            $dates['pre_month_start'] = Carbon::parse('first day of last month')->format('Y-m-d');
-            $dates['pre_month_end'] = Carbon::parse('last day of last month')->format('Y-m-d');
-            $dates['cur_month_start'] = Carbon::parse('first day of this month')->format('Y-m-d');
-            $dates['cur_month_end'] = Carbon::parse('last day of this month')->format('Y-m-d');
-            $dates['pre_year_start'] = Carbon::parse('first day of last year')->format('Y-m-d');
-            $dates['pre_year_end'] = Carbon::parse('last day of last year')->format('Y-m-d');
-            $dates['cur_year_start'] = Carbon::parse('first day of this year')->format('Y-m-d');
-            $dates['cur_year_end'] = Carbon::parse('last day of this year')->format('Y-m-d');
-            $dates['nextWeek'] = Carbon::today()->addWeek()->format('Y-m-d');
-
-            return view('admin.providers.statement', compact('rides', 'cancel_rides', 'revenue', 'pagination', 'dates', 'id', 'statement_for'))
-                ->with('page', "Receita de " . $fleet->name . " " . $Joined)->with('listname', $listname);
-
-        } catch (Exception $e) {
-            return back()->with('flash_error', trans('admin.something_wrong'));
-        }
-    }
 
     public function Accountstatement($id)
     {
@@ -677,6 +588,6 @@ class ProviderResource extends Controller
 
         $provider->update(['password' => bcrypt($request->get('password'))]);
 
-        return redirect()->route('admin.provider.index')->with('flash_success', 'Senha atualizada com sucesso');
+        return redirect()->route('admin.provider.index')->with('flash_success', 'Password updated successfully');
     }
 }

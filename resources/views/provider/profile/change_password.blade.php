@@ -25,16 +25,16 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>@lang('user.profile.old_password')</label>
-                            <input type="password" name="old_password" class="form-control" placeholder="@lang('user.profile.old_password')">
+                            <input type="password" name="old_password" class="form-control" placehold="@lang('user.profile.old_password')">
                         </div>
                         <div class="form-group">
                             <label>@lang('user.profile.password')</label>
-                            <input type="password" name="password" class="form-control" placeholder="@lang('user.profile.password')">
+                            <input type="password" name="password" class="form-control" placehold="@lang('user.profile.password')">
                         </div>
 
                         <div class="form-group">
                             <label>@lang('user.profile.confirm_password')</label>
-                            <input type="password" name="password_confirmation" class="form-control" placeholder="@lang('user.profile.confirm_password')">
+                            <input type="password" name="password_confirmation" class="form-control" placehold="@lang('user.profile.confirm_password')">
                         </div>
                       
                         <div>

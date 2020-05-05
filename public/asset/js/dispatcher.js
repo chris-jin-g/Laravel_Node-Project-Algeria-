@@ -123,7 +123,7 @@ class DispatcherNavbar extends React.Component {
 
     render() {
         return (
-            <nav className="navbar navbar-light bg-white b-a mb-2">
+            <nav className="navbar b-a mb-2">
                 <button className="navbar-toggler hidden-md-up" 
                     data-toggle="collapse"
                     data-target="#process-filters"
@@ -171,14 +171,14 @@ class DispatcherList extends React.Component {
         window.worldMapInitialize();
 
         // Refresh trip details
-        window.Moob.TripTimer = setInterval(
+        window.Thinkin.TripTimer = setInterval(
             () => this.getTripsUpdate(),
             1000
         );
     }
 
     componentWillUnmount() {
-        clearInterval(window.Moob.TripTimer);
+        clearInterval(window.Thinkin.TripTimer);
     }
 
     getTripsUpdate() {
@@ -279,8 +279,8 @@ class DispatcherRequest extends React.Component {
         
         // Schedule Time Datepicker
         $('#schedule_time').datetimepicker({
-            minDate: window.Moob.minDate,
-            maxDate: window.Moob.maxDate,
+            minDate: window.Thinkin.minDate,
+            maxDate: window.Thinkin.maxDate,
         });
 
         // Get Service Type List
@@ -334,25 +334,25 @@ class DispatcherRequest extends React.Component {
                         <div className="col-xs-6">
                             <div className="form-group">
                                 <label htmlFor="first_name">First Name</label>
-                                <input type="text" className="form-control" name="first_name" id="first_name" placeholder="First Name" required />
+                                <input type="text" className="form-control" name="first_name" id="first_name" placehold="First Name" required />
                             </div>
                         </div>
                         <div className="col-xs-6">
                             <div className="form-group">
                                 <label htmlFor="last_name">Last Name</label>
-                                <input type="text" className="form-control" name="last_name" id="last_name" placeholder="Last Name" required />
+                                <input type="text" className="form-control" name="last_name" id="last_name" placehold="Last Name" required />
                             </div>
                         </div>
                         <div className="col-xs-6">
                             <div className="form-group">
                                 <label htmlFor="email">Email</label>
-                                <input type="email" className="form-control" name="email" id="email" placeholder="Email" required/>
+                                <input type="email" className="form-control" name="email" id="email" placehold="Email" required/>
                             </div>
                         </div>
                         <div className="col-xs-6">
                             <div className="form-group">
                                 <label htmlFor="mobile">Phone</label>
-                                <input type="text" className="form-control numbers" name="mobile" id="mobile" placeholder="Phone" required />
+                                <input type="text" className="form-control numbers" name="mobile" id="mobile" placehold="Phone" required />
                             </div>
                         </div>
                         <div className="col-xs-12">
@@ -363,7 +363,7 @@ class DispatcherRequest extends React.Component {
                                     name="s_address"
                                     className="form-control"
                                     id="s_address"
-                                    placeholder="Pickup Address"
+                                    placehold="Pickup Address"
                                     required></input>
 
                                 <input type="hidden" name="s_latitude" id="s_latitude"></input>
@@ -376,7 +376,7 @@ class DispatcherRequest extends React.Component {
                                     name="d_address"
                                     className="form-control"
                                     id="d_address"
-                                    placeholder="Dropoff Address"
+                                    placehold="Dropoff Address"
                                     required></input>
 
                                 <input type="hidden" name="d_latitude" id="d_latitude"></input>
@@ -385,7 +385,7 @@ class DispatcherRequest extends React.Component {
                             </div>
                             <div className="form-group">
                                 <label htmlFor="schedule_time">Schedule Time</label>
-                                <input type="text" className="form-control" name="schedule_time" id="schedule_time" placeholder="Date" />
+                                <input type="text" className="form-control" name="schedule_time" id="schedule_time" placehold="Date" />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="service_types">Service Type</label>

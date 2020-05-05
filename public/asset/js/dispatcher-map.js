@@ -9,7 +9,7 @@ var d_latitude, d_longitude;
 var distance;
 
 function initMap() {
-    window.Moob.map = true;
+    window.Thinkin.map = true;
 }
 
 function createRideInitialize() {

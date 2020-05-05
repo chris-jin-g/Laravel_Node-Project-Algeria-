@@ -15,7 +15,7 @@
                 <input type="hidden" name="token" value="{{ $token }}">
 
                     <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
-                        <input type="email" name="email" value="{{ $email or old('email') }}" autofocus required="true" class="form-control" id="email" placeholder="Email">
+                        <input type="email" name="email" value="{{ $email or old('email') }}" autofocus required="true" class="form-control" id="email" placehold="Email">
                         @if ($errors->has('email'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('email') }}</strong>
@@ -24,7 +24,7 @@
                     </div>
 
                     <div class="form-group {{ $errors->has('password') ? ' has-error' : '' }}">
-                        <input type="password" name="password" required="true" class="form-control" id="password" placeholder="Password">
+                        <input type="password" name="password" required="true" class="form-control" id="password" placehold="Password">
                         @if ($errors->has('password'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('password') }}</strong>
@@ -33,7 +33,7 @@
                     </div>
 
                     <div class="form-group {{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                        <input type="password" name="password_confirmation" required="true" class="form-control" id="password_confirmation" placeholder="Password">
+                        <input type="password" name="password_confirmation" required="true" class="form-control" id="password_confirmation" placehold="Password">
                         @if ($errors->has('password_confirmation'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('password_confirmation') }}</strong>

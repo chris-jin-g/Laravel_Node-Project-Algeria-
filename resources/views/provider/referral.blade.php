@@ -63,13 +63,13 @@
                                 <div class="clearfix form-row">
                                     <div class="form-group col-md-10">
                                         <label for="exampleInputEmail1">Email address</label>
-                                        <input type="email" class="form-control" id="inviteEmail" aria-describedby="emailHelp" placeholder="Enter email">
+                                        <input type="email" class="form-control" id="inviteEmail" aria-describedby="emailHelp" placehold="Enter email">
                                     </div>
                                 </div>
                                 <div class="form-row clearfix">
                                     <div class="form-group col-md-4">
                                         <label for="exampleInputEmail1"></label>
-                                        <a id="invite" href="mailto:testmail?subject=Conheça o {{config('constants.site_title','Moob Urban')}}&body=Hi,%0A%0A I found this website and thought you might like it. Use my referral code({{\Auth::guard('provider')->user()->referral_unique_id}}) on registering in the application.%0A%0AWebsite: {{url('/')}}/provider/login %0AReferral Code: {{\Auth::guard('provider')->user()->referral_unique_id}}" class="btn btn-invite">Invite</a> 
+                                        <a id="invite" href="mailto:testmail?subject=Conheça o {{config('constants.site_title','Thinkin Cab')}}&body=Hi,%0A%0A I found this website and thought you might like it. Use my referral code({{\Auth::guard('provider')->user()->referral_unique_id}}) on registering in the application.%0A%0AWebsite: {{url('/')}}/provider/login %0AReferral Code: {{\Auth::guard('provider')->user()->referral_unique_id}}" class="btn btn-invite">Invite</a> 
                                     </div>
                                 </div>
                             </form>

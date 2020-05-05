@@ -130,7 +130,7 @@
     <?php if($group): ?>
         <form action="<?= action('\Barryvdh\TranslationManager\Controller@postAdd', array($group)) ?>" method="POST"  role="form">
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-            <textarea class="form-control" rows="3" name="keys" placeholder="Add 1 key per line, without the group prefix"></textarea>
+            <textarea class="form-control" rows="3" name="keys" placehold="Add 1 key per line, without the group prefix"></textarea>
             <p></p>
             <input type="submit" value="Add keys" class="btn btn-primary">
         </form>

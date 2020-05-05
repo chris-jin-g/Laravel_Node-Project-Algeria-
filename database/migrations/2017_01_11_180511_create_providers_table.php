@@ -27,7 +27,6 @@ class CreateProvidersTable extends Migration
             $table->string('avatar')->nullable();
             $table->decimal('rating', 4, 2)->default(5);
             $table->enum('status', ['document','card','onboarding', 'approved', 'banned', 'balance'])->default('document');
-            $table->integer('fleet')->default(0);
             $table->double('latitude', 15, 8)->nullable();
             $table->double('longitude', 15, 8)->nullable();
             $table->string('stripe_acc_id')->nullable();

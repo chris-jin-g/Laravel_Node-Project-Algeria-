@@ -5,8 +5,7 @@
     <div class="banner-overlay"></div>
     <div class="container pad-60">
         <div class="col-md-8">
-            <h2 class="banner-head"><span class="strong">Trabalho ou renda extra?</span><br>Seja um motorista e aumente seus ganhos</h2>
-        </div>
+            <h2 class = "banner-head"> <span class = "strong"> Work or extra income? </span> <br> Be a driver and increase your earnings </h2></div>
         <div class="col-md-4">
             <div class="banner-form">
                 <div class="row no-margin fields">
@@ -15,8 +14,8 @@
                     </div>
                     <div class="right">
                         <a href="{{url('provider/login')}}">
-                            <h3>Quero ser Motorista</h3>
-                            <h5>CADASTRE-SE <i class="fa fa-chevron-right"></i></h5>
+                            <h3> I want to be a Driver </h3>
+                             <h5> SIGN UP <i class = "fa fa-chevron-right"> </i> </h5>
                         </a>
                     </div>
                 </div>
@@ -27,8 +26,8 @@
                     </div>
                     <div class="right">
                         <a href="{{url('login')}}">
-                            <h3>Sou Passageiro</h3>
-                            <h5>CADASTRE-SE <i class="fa fa-chevron-right"></i></h5>
+                            <h3> I'm a passenger </h3>
+                            <h5> SIGN UP <i class = "fa fa-chevron-right"> </i> </h5>
                         </a>
                     </div>
                 </div>
@@ -41,31 +40,31 @@
 <div class="row white-section pad-60 no-margin">
     <div class="container">
         
-        <div class="col-md-4 content-block small">
-             <div class="box-shadow">
-                <div class="icon"><img src="{{asset('asset/img/driving-license.png')}}"></div>
-            <h2>Você dono é seu tempo</h2>
-            <div class="title-divider"></div>
-            <p>Você pode dirigir com o {{ config('constants.site_title', 'Moob Urban') }} a qualquer hora, dia ou noite, 365 dias por ano. As viagens não interferem na sua rotina, você faz seus horários, fique offline a qualquer momento.</p>
-        </div>
-    </div>
+        <div class = "col-md-4 content-block small">
+                         <div class = "box-shadow">
+                            <div class = "icon"> <img src = "{{asset ('asset / img / driving-license.png')}}"> </div>
+                        <h2> You own your time </h2>
+                        <div class = "title-divider"> </div>
+                        <p> You can drive with {{config ('constants.site_title', 'Thinkin Cab')}} anytime, day or night, 365 days a year. Travel does not interfere with your routine, you make your schedules, go offline at any time. </p>
+                    </div>
+                </div>
+            
+                    <div class = "col-md-4 content-block small">
+                         <div class = "box-shadow">
+                            <div class = "icon"> <img src = "{{asset ('asset / img / destination.png')}}"> </div>
+                        <h2> Do more each shift </h2>
+                        <div class = "title-divider"> </div>
+                        <p> Travel fares start at a base value and increase over time and distance. And when demand is higher than normal, drivers earn more. </p>
+                    </div>
+                </div>
 
-        <div class="col-md-4 content-block small">
-             <div class="box-shadow">
-                <div class="icon"><img src="{{asset('asset/img/destination.png')}}"></div>
-            <h2>Faça mais em cada turno</h2>
-            <div class="title-divider"></div>
-            <p>As tarifas de viagem começam com um valor base e aumentam com o tempo e a distância. E quando a demanda é maior que o normal, os motoristas ganham mais.</p>
-        </div>
-    </div>
-
-        <div class="col-md-4 content-block small">
-             <div class="box-shadow">
-                <div class="icon"><img src="{{asset('asset/img/taxi-app.png')}}"></div>
-            <h2>Baixe o app e desfrute</h2>
-            <div class="title-divider"></div>
-            <p>Você receberá instruções passo-a-passo, ferramentas para ajudar você a ganhar mais e suporte 24 horas por dia, 7 dias por semana, tudo disponível diretamente no aplicativo.</p>
-        </div>
+    <div class = "col-md-4 content-block small">
+                      <div class = "box-shadow">
+                         <div class = "icon"> <img src = "{{asset ('asset / img / taxi-app.png')}}"> </div>
+                     <h2> Download the app and enjoy </h2>
+                     <div class = "title-divider"> </div>
+                     <p> You'll get step-by-step instructions, tools to help you earn more, and 24/7 support, all available right in the app. </p>
+                 </div>
     </div>
 
     </div>
@@ -74,12 +73,12 @@
 <div class="row gray-section no-margin full-section">
     <div class="container">                
         <div class="col-md-6 content-block">
-            <div class="icon"><img src="{{asset('asset/img/taxi-car.png')}}"></div>
-            <h3>Sobre o aplicativo</h3>
-            <h2>Projetado para motoristas</h2>
-            <div class="title-divider"></div>
-            <p>Quando você quiser ganhar dinheiro, basta abrir o aplicativo, fica online e começará a receber solicitações de viagem. Você receberá informações sobre o passageiro e as rotas para a localização e o destino deles. Quando a viagem terminar, você pode receber uma outra solicitação próxima. Quando querer descansar, você pode se desconectar a qualquer momento.</p>
-            <a class="content-more more-btn" href="{{url('login')}}">BAIXE O APP E COMECE AGORA <i class="fa fa-chevron-right"></i></a>
+            <div class = "icon"> <img src = "{{asset ('asset / img / taxi-car.png')}}"> </div>
+             <h3> About the app </h3>
+             <h2> Designed for drivers </h2>
+             <div class = "title-divider"> </div>
+             <p> When you want to make money, just open the app, go online and start receiving travel requests. You will receive passenger information and directions to their location and destination. When the trip is over, you may receive another request nearby. When you want to rest, you can log out at any time. </p>
+             <a class="content-more more-btn" href="{{url('login')}}"> DOWNLOAD THE APP AND START NOW <i class = "fa fa-chevron-right"> </i> </a>
         </div>
         <div class="col-md-6 full-img text-center" style="background-image: url({{ asset('asset/img/driver-car.jpg') }});"> 
             <!-- <img src="img/anywhere.png"> -->
@@ -95,7 +94,7 @@
                 <div class="icon"><img src="{{asset('asset/img/budget.png')}}"></div>
             <h2>Recompensas</h2>
             <div class="title-divider"></div>
-            <p>Você está no banco do motorista. Então, recompense-se com descontos em combustível, manutenção de veículos, contas de telefone celular e muito mais. Reduza suas despesas diárias e leve mais dinheiro para casa.</p>
+            <p>You are in the driver's seat. So reward yourself with discounts on fuel, vehicle maintenance, cell phone bills and more. Reduce your daily expenses and bring more money home.</p>
         </div></div>
 
         <div class="col-md-4 content-block small">
@@ -103,7 +102,7 @@
                 <div class="icon"><img src="{{asset('asset/img/driving-license.png')}}"></div>
             <h2>Requisitos</h2>
             <div class="title-divider"></div>
-            <p>Saiba que você está pronto para dirigir. Não importa se você está dirigindo seu próprio veículo ou um licenciado comercialmente, é necessário atender aos requisitos mínimos e realizar uma triagem de segurança on-line.</p>
+            <p>Know that you are ready to drive. Whether you are driving your own vehicle or a commercially licensed vehicle, you must meet the minimum requirements and conduct an online safety screening.</p>
         </div></div>
 
         <div class="col-md-4 content-block small">
@@ -111,7 +110,7 @@
                 <div class="icon"><img src="{{asset('asset/img/seat-belt.png')}}"></div>
             <h2>Segurança</h2>
             <div class="title-divider"></div>
-            <p>Quando você dirige com {{ config('constants.site_title', 'Moob Urban') }}, você obtém suporte 24/7. Todos os corredores são verificados com suas informações pessoais e número de telefone. Assim, você saberá quem está viajando e nós também.</p>
+            <p>When you drive with {{config ('constants.site_title', 'Thinkin Cab')}}, you get 24/7 support. All runners are verified with their personal information and phone number. That way you will know who is traveling and so will we. </p>
         </div></div>
 
     </div>

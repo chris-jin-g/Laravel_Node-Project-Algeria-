@@ -3,12 +3,15 @@
 @section('title', 'Provider Documents ')
 
 @section('content')
-<div class="content-area py-1">
+<div>
     <div class="container-fluid">
 
-        <div class="box box-block bg-white">
-            <h5 class="mb-1">@lang('admin.provides.provider_name'): {{ $Document->provider->first_name }} {{ $Document->provider->last_name }}</h5>
-            <h5 class="mb-1">@lang('admin.document.document_name'): {{ $Document->document->name }}</h5>
+        <div class="card">
+            <div class="card-header card-header-primary">
+            <h5 class="card-title">@lang('admin.provides.provider_name'): {{ $Document->provider->first_name }} {{ $Document->provider->last_name }}</h5>
+            <h5 class="card-category">@lang('admin.document.document_name'): {{ $Document->document->name }}</h5>
+        </div>
+        <div class="card-body">
             <embed src="{{ $Document->url!='' ? asset('storage/'.$Document->url): asset('asset/img/semfoto.jpg') }}" width="100%" height="100%" />
 
             <div class="row">
